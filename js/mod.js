@@ -1,9 +1,9 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Omega Tree",
+	id: "2",
+	author: "Omega",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,14 +13,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "1.0.0: Release",
+	name: "Release",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+<h3>v1.0.0: Release (28/02/2024)</h3><br>
+		- The Omega Tree is finally out!<br>
+		- Endgame: 1.80e308 Points.<br><br>
+	<h3>v0.0.0 (23/02/2024)</h3><br>
+		- The Omega Tree has been made.<br>
+		- It's like The Pro Tree 2.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -40,23 +43,152 @@ function canGenPoints(){
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
-		return new Decimal(0)
+		return new Decimal(1)
 
 	let gain = new Decimal(1)
+	if (hasUpgrade('p', 12)) gain = gain.times("2")
+	if (hasUpgrade('p', 13)) gain = gain.times("3")
+	if (hasUpgrade('p', 14)) gain = gain.times(upgradeEffect('p', 14))
+	if (hasUpgrade('p', 15)) gain = gain.times("2.2")
+	if (hasUpgrade('p', 21)) gain = gain.times("3")
+	if (hasUpgrade('p', 22)) gain = gain.times("3.14")
+	if (hasUpgrade('p', 23)) gain = gain.times("1.5")
+	if (hasUpgrade('p', 24)) gain = gain.times("1.01")
+	if (hasUpgrade('p', 25)) gain = gain.times(upgradeEffect('p', 25))
+	if (hasAchievement('a', 15)) gain = gain.times("2")
+	if (hasUpgrade('p', 31)) gain = gain.times(upgradeEffect('p', 31))
+	if (hasUpgrade('sp', 11)) gain = gain.times("6")
+	if (hasUpgrade('sp', 12)) gain = gain.times("3")
+	if (hasUpgrade('p', 32)) gain = gain.times("5")
+	if (hasUpgrade('p', 33)) gain = gain.times("4")
+	if (hasUpgrade('p', 34)) gain = gain.times("5")
+	if (hasUpgrade('sp', 14)) gain = gain.times(upgradeEffect('sp', 14))
+	if (hasUpgrade('sp', 15)) gain = gain.times("10")
+	if (hasUpgrade('sp', 22)) gain = gain.times("3")
+	if (hasUpgrade('p', 45)) gain = gain.times(upgradeEffect('p', 45))
+	if (hasAchievement('a', 25)) gain = gain.times("2")
+	if (hasUpgrade('pb', 11)) gain = gain.times(upgradeEffect('pb', 11))
+	if (hasUpgrade('pb2', 11)) gain = gain.times(upgradeEffect('pb2', 11))
+	if (hasUpgrade('sp', 31)) gain = gain.times("2")
+	if (hasUpgrade('sp', 32)) gain = gain.times("5")
+	if (hasUpgrade('up', 13)) gain = gain.times("7.5")
+	if (hasUpgrade('up', 15)) gain = gain.times(upgradeEffect('up', 15))
+	if (hasUpgrade('sp', 33)) gain = gain.times("3")
+	if (hasUpgrade('p', 51)) gain = gain.times("4")
+	if (hasUpgrade('sp', 34)) gain = gain.times("2")
+	if (hasUpgrade('p', 52)) gain = gain.times("7")
+	if (hasUpgrade('sp', 35)) gain = gain.times("4")
+	if (hasUpgrade('pb3', 11)) gain = gain.times(upgradeEffect('pb3', 11))
+	if (hasAchievement('a', 35)) gain = gain.times("2")
+	if (hasUpgrade('up', 23)) gain = gain.times("2")
+	if (hasUpgrade('p', 53)) gain = gain.times("2")
+	if (hasUpgrade('p', 54)) gain = gain.times("10")
+	if (hasUpgrade('up', 31)) gain = gain.times("3")
+	if (hasUpgrade('sp', 42)) gain = gain.times("2.5")
+	if (hasUpgrade('up', 32)) gain = gain.times("3")
+	if (hasUpgrade('p', 61)) gain = gain.times("50")
+	if (hasUpgrade('hp', 11)) gain = gain.times(upgradeEffect('hp', 11))
+	if (hasUpgrade('sp', 44)) gain = gain.times("2")
+	if (hasAchievement('a', 45)) gain = gain.times("2")
+	if (hasUpgrade('hp', 24)) gain = gain.times(upgradeEffect('hp', 24))
+	if (hasUpgrade('hp', 32)) gain = gain.times(upgradeEffect('hp', 32))
+	if (hasUpgrade('up', 41)) gain = gain.times("10")
+	if (hasUpgrade('hp', 34)) gain = gain.times(upgradeEffect('hp', 34))
+	if (hasUpgrade('sp', 51)) gain = gain.times("10")
+	if (hasUpgrade('sp', 52)) gain = gain.times(upgradeEffect('sp', 52))
+	if (hasAchievement('a', 55)) gain = gain.times("2")
+	if (hasUpgrade('up', 43)) gain = gain.times("10")
+	if (hasUpgrade('hp', 42)) gain = gain.times(upgradeEffect('hp', 42))
+	if (hasUpgrade('p', 62)) gain = gain.times("15")
+	if (hasUpgrade('p', 63)) gain = gain.times("10")
+	if (hasUpgrade('hp', 43)) gain = gain.times("50000")
+	if (hasUpgrade('p', 65)) gain = gain.times("2")
+	if (hasUpgrade('up', 44)) gain = gain.times("3")
+	if (hasUpgrade('sp', 54)) gain = gain.times("25")
+	if (hasUpgrade('sp', 55)) gain = gain.times("10")
+	if (hasUpgrade('sp', 61)) gain = gain.times("210")
+	if (hasAchievement('a', 65)) gain = gain.times("2")
+	if (hasUpgrade('up', 45)) gain = gain.times("150")
+	if (hasUpgrade('sp', 62)) gain = gain.times("5")
+	if (hasUpgrade('p', 71)) gain = gain.times("25")
+	if (hasUpgrade('p', 73)) gain = gain.times("3")
+	if (hasUpgrade('up', 51)) gain = gain.times("40")
+	if (hasUpgrade('p', 74)) gain = gain.times("10")
+	if (hasUpgrade('hp', 52)) gain = gain.times(upgradeEffect('hp', 52))
+	if (hasUpgrade('p', 75)) gain = gain.times("100")
+	if (inChallenge("hp", 11)) gain = gain.pow(0.75)
+	if (hasUpgrade('sp', 71)) gain = gain.times("2")
+	if (hasMilestone('hp', 4)) gain = gain.times(milestoneEffect('hp', 4))
+	if (hasMilestone('hp', 5)) gain = gain.times("1e3")
+	if (hasUpgrade('sp', 72)) gain = gain.times("25")
+	if (hasUpgrade('sp', 73)) gain = gain.times(upgradeEffect('sp', 73))
+	if (hasUpgrade('up', 52)) gain = gain.times(upgradeEffect('up', 52))
+	if (hasUpgrade('p', 82)) gain = gain.times(upgradeEffect('p', 82))
+	if (hasUpgrade('p', 83)) gain = gain.times(upgradeEffect('p', 83))
+	if (hasMilestone('hp', 9)) gain = gain.pow(1.01)
+	if (hasUpgrade('p', 84)) gain = gain.times("450")
+	if (hasAchievement('a', 75)) gain = gain.times("2")
+	if (hasUpgrade('up', 53)) gain = gain.times("100")
+	if (hasUpgrade('up', 54)) gain = gain.times("20")
+	if (hasUpgrade('p', 85)) gain = gain.times("20")
+	if (hasUpgrade('p', 91)) gain = gain.times("9")
+	if (hasUpgrade('p', 94)) gain = gain.times("2")
+	if (hasUpgrade('p', 95)) gain = gain.times("3")
+	if (hasUpgrade('p', 101)) gain = gain.times("2")
+	if (hasUpgrade('p', 102)) gain = gain.times("3.5")
+	if (hasUpgrade('p', 103)) gain = gain.times("2")
+	if (hasUpgrade('p', 104)) gain = gain.times("1.1")
 	return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
 }}
-
-// Display extra things at the top of the page
+function convertToB16(n){
+    let codes = {
+            0: "0",
+            1: "1",
+            2: "2",
+            3: "3",
+            4: "4",
+            5: "5",
+            6: "6",
+            7: "7",
+            8: "8",
+            9: "9",
+            10: "A",
+            11: "B",
+            12: "C",
+            13: "D",
+            14: "E",
+            15: "F",
+    }
+    let x = n % 16
+    return codes[(n-x)/16] + codes[x]
+}
+function getUndulatingColor(period = Math.sqrt(760)){
+	let t = new Date().getTime()
+	let a = Math.sin(t / 1e3 / period * 2 * Math.PI + 0) 
+	let b = Math.sin(t / 1e3 / period * 2 * Math.PI + 2)
+	let c = Math.sin(t / 1e3 / period * 2 * Math.PI + 4)
+	a = convertToB16(Math.floor(a*128) + 128)
+	b = convertToB16(Math.floor(b*128) + 128)
+	c = convertToB16(Math.floor(c*128) + 128)
+	return "#"+String(a) + String(b) + String(c)
+}
 var displayThings = [
+	function(){
+		let x = getUndulatingColor()
+		let a = "Current endgame: "+colorText("h2", x,format("1.80e308"))/*"Taeyeon"*/+" Points."
+		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
+		let e = `<br>────────────────────────────────────`
+		return a+d+e
+	},
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.points.gte(new Decimal("1.80e308"))
 }
 
 

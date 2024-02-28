@@ -115,6 +115,9 @@ function getStartChallenges(layer) {
 	}
 	return data;
 }
+function colorText(elem, color, text) {
+	return "<" + elem + " style='color:" + color + ";text-shadow:0px 0px 10px;'>" + text + "</" + elem + ">"
+}
 function getStartGrid(layer) {
 	let data = {};
 	if (! layers[layer].grid) return data

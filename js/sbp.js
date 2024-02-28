@@ -1,0 +1,49 @@
+addLayer("pb", {
+    name: "p", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "P1", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: false,
+		points: new Decimal(0),
+    }},
+      upgrades: {
+        11: {
+            title: "Sub-Points",
+            description: "Every Points-1 you have multiplies point gain by 1.5x compounding.",
+            cost: new Decimal(0),
+            effect() {
+                let effect = Decimal.pow(1.5, player[this.layer].points).min("57.67")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                },
+  },
+    color: "white",
+    requires: new Decimal(1), // Can be a function that takes requirement increases into account
+    resetsNothing() {return hasMilestone("hp", 3)},
+    autoPrestige() {
+        return hasMilestone("hp", 3)
+    },
+    resource: "Points-1", // Name of prestige currency
+    baseResource: "Points", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
+    branches: ["up", "p"],
+    canBuyMax() { return hasMilestone("hp", 2) },
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent() {if (inChallenge("hp", 12)) return new Decimal(3.3)
+    else return new Decimal(3)},      
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        if (hasUpgrade('p', 72)) mult = mult.div(upgradeEffect('p', 72))
+        if (hasUpgrade('p', 81)) mult = mult.div(upgradeEffect('p', 81))
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "b", description: "B: Reset for Points-1", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return (hasUpgrade("up", 11) || player[this.layer].unlocked)},
+})
