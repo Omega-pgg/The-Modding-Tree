@@ -26,7 +26,7 @@ addLayer("p", {
                     content: [
                         ["blank", "15px"],
                         ["raw-html", () => `<h4 style="opacity:.5">Welcome to the Omega Tree!<br> Your goal is to reach the endgame. You can press P to gain Prestige Points.<br> Which is used to buy upgrades.</h4>`],
-                        ["upgrades", [1,2,3,4,5,6,7,8,9,10]]
+                        ["upgrades", [1,2,3,4,5,6,7,8,9,10,11]]
                     ],
                 },
             },
@@ -118,6 +118,7 @@ addLayer("p", {
             if (hasUpgrade('sp', 65)) effect = effect.pow(1.3)
             if (hasUpgrade('hp', 53)) effect = effect.pow(1.1)
             if (hasMilestone('hp', 7)) effect = effect.pow(1.05)
+            if (hasMilestone('hp', 14)) effect = effect.pow(0)
             return effect
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -333,7 +334,7 @@ addLayer("p", {
         effect() {
             return player.points.add(1).pow("0.00986").min("1e3")
         },
-        effectDisplay() { return + format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         unlocked() {
             return hasUpgrade("p", 81)
         }
@@ -434,7 +435,43 @@ addLayer("p", {
             return hasUpgrade("p", 104)
         }
         },
+        111: { title: "Advanced Upgrades II (PU111)",
+        description: "3x Points",
+        cost: new Decimal(1e242),
+        unlocked() {
+            return hasUpgrade("p", 105)
+        }
+        },
+        112: { title: "Advanced Upgrades III (PU112)",
+        description: "Unlock a buyable on Hyper-Points.",
+        cost: new Decimal(1e250),
+        unlocked() {
+            return hasUpgrade("p", 111)
+        }
+        },
+        113: { title: "Advanced Upgrades IV (PU113)",
+        description: "1,000x Points, 10x Super-Points and Ultra-Points.",
+        cost: new Decimal("1e573"),
+        unlocked() {
+            return hasUpgrade("p", 112)
+        }
+        },
+        114: { title: "Advanced Upgrades V (PU114)",
+        description: "^1.05 Points.",
+        cost: new Decimal("1e577"),
+        unlocked() {
+            return hasUpgrade("p", 113)
+        }
+        },
+        115: { title: "Advanced Upgrades VI (PU115)",
+        description: "10x Points, Super-Points, Ultra-Points, +50% Hyper-Points and finally unlock a new layer... (Coming soon)",
+        cost: new Decimal("1e745"),
+        unlocked() {
+            return hasUpgrade("p", 114)
+        }
+        },
     },
+    autoUpgrade() { if (hasMilestone("hp" , 15)) return true},
     color: "blue",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "Prestige Points", // Name of prestige currency
@@ -444,6 +481,7 @@ addLayer("p", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (inChallenge("hp", 22)) mult = mult.pow(0.2)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

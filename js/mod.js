@@ -8,16 +8,26 @@ let modInfo = {
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 24,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.0.0: Release",
-	name: "Release",
+	num: "1.1.0: Update 1",
+	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.1.0: Update 1 (02/03/2024)</h3><br>
+		- The First Update is here!<br>
+		- Added many new upgrades.<br>
+		- Added many new achievements.<br>
+		- Added 1 new mechanic.<br>
+		- Added Challenges.<br>
+		- Added many new milestones.<br>
+		- Added more automation.<br>
+		- Added Buyables.<br>
+		- Endgame: 1.00e1,500 Points.<br><br>
 <h3>v1.0.0: Release (28/02/2024)</h3><br>
 		- The Omega Tree is finally out!<br>
 		- Endgame: 1.80e308 Points.<br><br>
@@ -138,6 +148,38 @@ function getPointGen() {
 	if (hasUpgrade('p', 102)) gain = gain.times("3.5")
 	if (hasUpgrade('p', 103)) gain = gain.times("2")
 	if (hasUpgrade('p', 104)) gain = gain.times("1.1")
+	if (hasUpgrade('sp', 74)) gain = gain.times("10000")
+	if (hasUpgrade('up', 55)) gain = gain.times("10")
+	if (hasUpgrade('hp', 54)) gain = gain.times("5e5")
+	if (hasMilestone('hp', 10)) gain = gain.pow(1.05)
+	if (hasUpgrade('up', 61)) gain = gain.times("10000")
+	if (hasMilestone('hp', 11)) gain = gain.pow(1.05)
+	if (hasUpgrade('up', 62)) gain = gain.times("10")
+	if (hasUpgrade('sp', 81)) gain = gain.div("20")
+	if (hasMilestone('hp', 14)) gain = gain.pow(1.25)
+	if (hasUpgrade('up', 64)) gain = gain.times(1.2e8)
+	if (hasAchievement('a', 85)) gain = gain.times("2")
+	if (hasUpgrade('p', 111)) gain = gain.times("3")
+	if (hasUpgrade('sp', 82)) gain = gain.times("75000")
+	if (hasUpgrade('up', 65)) gain = gain.times("5")
+	if (inChallenge("hp", 21)) gain = gain.pow(0.1)
+	gain = gain.times(buyableEffect('hp', 11))
+	if (hasMilestone('hp', 16)) gain = gain.pow(1.05)
+	if (hasUpgrade('hp', 61)) gain = gain.times(upgradeEffect('hp', 61))
+	if (hasMilestone('hp', 19)) gain = gain.pow(1.1)
+	if (hasUpgrade('sp', 83)) gain = gain.times("400")
+	if (hasAchievement('a', 95)) gain = gain.times("2")
+	if (hasMilestone('hp', 23)) gain = gain.times(milestoneEffect('hp', 23))
+	if (inChallenge("hp", 22)) gain = gain.pow(0.2)
+	if (hasUpgrade('up', 71)) gain = gain.times(10)
+	if (hasMilestone('hp', 25)) gain = gain.pow(1.05)
+	if (hasUpgrade('p', 113)) gain = gain.times("1000")
+	if (hasUpgrade('p', 114)) gain = gain.pow(1.05)
+	if (hasUpgrade('up', 72)) gain = gain.times("1e18")
+	if (hasMilestone('hp', 26)) gain = gain.pow(1.01)
+	if (hasUpgrade('hp', 62)) gain = gain.times(upgradeEffect('hp', 62))
+	if (hasUpgrade('p', 115)) gain = gain.times("10")
+	if (hasAchievement('a', 105)) gain = gain.times("2")
 	return gain
 }
 
@@ -179,7 +221,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("1.80e308"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("1e1500"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -188,7 +230,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1.80e308"))
+	return player.points.gte(new Decimal("1e1500"))
 }
 
 

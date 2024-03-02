@@ -349,12 +349,65 @@ unlocked() {
         cost: new Decimal(1e148),
         effect() {
             let effect = Decimal.pow(1.01, player.pb3.points)
+            if (hasMilestone('hp', 16)) effect = effect.pow(2)
+            if (hasMilestone('hp', 24)) effect = effect.pow(2)
             return effect
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         unlocked() {
             return hasUpgrade("sp", 72)
         }
+        },
+        74: { 
+            title: "Point Reset XX (SP74)",
+                    description: "Double Hyper-Point Gain + GAIN A MASSIVE OF 10,000x ULTRA-POINTS AND POINTS",
+                    cost: new Decimal(1e195),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 73)
+                    
+                    }
+        },
+        75: {
+            title: "Hyper Staked (SP75)",
+        description: "Hyper-Points boosts Ultra-Points.",
+        cost: new Decimal(1e220),
+        unlocked() {
+            return hasUpgrade("sp", 74)
+        },
+        effect() {
+            return player.hp.points.add(1).pow("0.1")
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+        },
+        81: { 
+            title: "Risk (SP81)",
+                    description: "50x Hyper-Points, 20x Super-Points but divide point gain by 20.",
+                    cost: new Decimal(1e271),
+                    unlocked() {
+                        return hasUpgrade("sp", 75)
+                    
+                    }
+        },
+        82: { 
+            title: "Point Reset XXI (SP82)",
+                    description: "75,000x POINTS, 42x Super-Points and Ultra-Points",
+                    cost: new Decimal("1e318"),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 81)
+                    
+                    }
+        },
+        83: { 
+            title: "Point Reset XXII (SP83)",
+                    description: "Triple Hyper-Points, 20x Super-Points, Ultra-Points and 400x Points.",
+                    cost: new Decimal("1e507"),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 82)
+                    
+                    }
         },
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
@@ -412,6 +465,22 @@ unlocked() {
         if (hasUpgrade('p',84)) mult = mult.times(20)
         if (hasAchievement('a', 75)) mult = mult.times(2)
         if (hasUpgrade('p',92)) mult = mult.times(4)
+        if (hasUpgrade('up', 55)) mult = mult.times("10")
+        if (hasUpgrade('hp', 55)) mult = mult.times("1000")
+        if (hasMilestone('hp', 12)) mult = mult.pow(1.2)
+        if (hasUpgrade('sp', 81)) mult = mult.times("20")
+            if (hasUpgrade('up', 64)) mult = mult.times(333)
+            if (hasAchievement('a', 85)) mult = mult.times(2)
+            if (hasUpgrade('sp', 82)) mult = mult.times("42")
+            if (hasUpgrade('up', 65)) mult = mult.times(4)
+            mult = mult.times(buyableEffect('hp', 11))
+            if (hasUpgrade('sp', 83)) mult = mult.times(20)
+            if (hasAchievement('a', 95)) mult = mult.times(2)
+            if (inChallenge("hp", 22)) mult = mult.pow(0.2)
+            if (hasUpgrade('up', 71)) mult = mult.times(10)
+            if (hasUpgrade('p', 113)) mult = mult.times("10")
+            if (hasUpgrade('p', 115)) mult = mult.times("10")
+            if (hasAchievement('a', 105)) mult = mult.times("2")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

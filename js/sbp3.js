@@ -18,6 +18,8 @@ addLayer("pb3", {
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
                 },
   },
+  autoUpgrade() { if (hasMilestone("hp" , 3)) return true},
+
     color: "#e75480",
     requires: new Decimal(1), // Can be a function that takes requirement increases into account
     resource: "Points-3", // Name of prestige currency

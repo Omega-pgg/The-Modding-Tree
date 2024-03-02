@@ -337,6 +337,142 @@ addLayer("a", {
             onComplete() {
             },
         },
+        81: {
+            name: "Boring Part",
+            done() {
+                if (hasUpgrade("hp", 53))
+                return true            },
+            tooltip: "Get the 23rd hyper-point upgrade. (HP53)",
+            onComplete() {
+            },
+        },
+        82: {
+            name: "First Challenge",
+            done() {
+                if (hasChallenge("hp", 11))
+                return true            },
+            tooltip: "Complete the 1st hyper-point challenge.",
+            onComplete() {
+            },
+        },
+        83: {
+            name: "Buyables?",
+            done() {
+                if (hasUpgrade("p", 112))
+                return true
+            },
+            tooltip: "Get the 57th prestige point upgrade. (PU112)",
+            onComplete() {
+            },
+        },
+        84: {
+            name: "Super Scaled",
+            done() {
+                if (hasChallenge("hp", 12))
+                return true            },
+            tooltip: "Complete the 2nd hyper-point challenge.",
+            onComplete() {
+            },
+        },
+        85: {
+            name: "Too many points",
+            done() {
+                return player.sp.points.gte("1.80e308")
+            },
+            tooltip: "Get 1.80e308 Super-Points!<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        91: {
+            name: "Googolizer",
+            done() {
+                return player.up.points.gte(1e100)
+            },
+            tooltip: "Get 1e100 Ultra-Points.",
+            onComplete() {
+            },
+        },
+        92: {
+            name: "Faster!",
+            done() {
+                return player.hp.points.gte(1e33)
+            },
+            tooltip: "Get 1e33 Hyper-Points.",
+            onComplete() {
+            },
+        },
+        93: {
+            name: "Softcap",
+            done() {
+                if (hasChallenge("hp", 21))
+                return true            },
+            tooltip: "Complete the 3rd hyper-point challenge.",
+            onComplete() {
+            },
+        },
+        94: {
+            name: "So many upgrades",
+            done() {
+                if (hasUpgrade("up", 65))
+                return true            },
+            tooltip: "Get the 30th ultra-point upgrade. (UP65)",
+            onComplete() {
+            },
+        },
+        95: {
+            name: "You already know what this is.",
+            done() {
+                return player.p.points.gte("1.80e308")
+            },
+            tooltip: "Get 1.80e308 Prestige Points!<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        101: {
+            name: "Dark",
+            done() {
+                return player.up.points.gte("1e250")
+            },
+            tooltip: "Get 1e250 Ultra-Points.",
+            onComplete() {
+            },
+        },
+        102: {
+            name: "Point-disturb",
+            done() {
+                if (hasChallenge("hp", 22))
+                return true            },
+            tooltip: "Complete the 4th hyper-point challenge.",
+            onComplete() {
+            },
+        },
+        103: {
+            name: "Too super",
+            done() {
+                return player.sp.points.gte("1e600")
+            },
+            tooltip: "Get 1e600 Super-Points.",
+            onComplete() {
+            },
+        },
+        104: {
+            name: "This achievement doesn't exist",
+            done() {
+                return player.points.gte("1e1000")
+            },
+            tooltip: "Get 1e1,000 Points!!",
+            onComplete() {
+            },
+        },
+        105: {
+            name: "Too super+",
+            done() {
+                return player.sp.points.gte("1e900")
+            },
+            tooltip: "Get 1e900 Super-Points.<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

@@ -227,6 +227,7 @@ addLayer("up", {
         cost: new Decimal(1e66),
         effect() {
             let effect = Decimal.pow(1.25, player.pb2.points)
+            if (hasMilestone('hp', 17)) effect = effect.pow(3.1063)
             return effect
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -252,6 +253,79 @@ addLayer("up", {
                                 
                                 }
                                 },
+                                55: { 
+                                    title: "Pointer XIV (UP55)",
+                                            description: "10x Points, Super-Points and Ultra-Points.",
+                                            cost: new Decimal(5e77),
+                                            unlocked() {
+                                                return hasUpgrade("up", 54)
+                                            
+                                            }
+                                            },
+                                            61: { 
+                                                title: "Pointer XV (UP61)",
+                                                        description: "GAIN A HUGE BOOST OF 10,000x POINTS and Double Hyper-Point Gain.",
+                                                        cost: new Decimal(1e100),
+                                                        unlocked() {
+                                                            return hasUpgrade("up", 55)
+                                                        
+                                                        }
+                                                        },
+                                                        62: { 
+                                                            title: "Pointer XVI (UP62)",
+                                                                    description: "10x Points",
+                                                                    cost: new Decimal(1e108),
+                                                                    unlocked() {
+                                                                        return hasUpgrade("up", 61)
+                                                                    
+                                                                    }
+                                                                    },
+                                                                    63: { 
+                                                                        title: "Pointer XVII (UP63)",
+                                                                                description: "Triple Hyper-Points Gain",
+                                                                                cost: new Decimal(1e133),
+                                                                                unlocked() {
+                                                                                    return hasUpgrade("up", 62)
+                                                                                
+                                                                                }
+                                                                                },
+                                                                                64: { 
+                                                                                    title: "Pointer XVIII (UP64)",
+                                                                                            description: "Triple Hyper-Point Gain again, 33x Ultra-Points, 333x Super-Points and A INSANITY BOOST OF 120,000,000x POINTS!!!!!",
+                                                                                            cost: new Decimal(1e144),
+                                                                                            unlocked() {
+                                                                                                return hasUpgrade("up", 63)
+                                                                                            
+                                                                                            }
+                                                                                            },
+                                                                                            65: { 
+                                                                                                title: "Pointer XIX (UP65)",
+                                                                                                        description: "Double Hyper-Point, Triple Ultra-Points, 4x Super-Points and 5x Points",
+                                                                                                        cost: new Decimal(5e155),
+                                                                                                        unlocked() {
+                                                                                                            return hasUpgrade("up", 64)
+                                                                                                        
+                                                                                                        }
+                                                                                                        },
+                                                                                                        71: { 
+                                                                                                            title: "Pointer XX (UP71)",
+                                                                                                                    description: "Double Hyper-Point again, 10x Ultra-Points, Super-Points and Points",
+                                                                                                                    cost: new Decimal(1e298),
+                                                                                                                    unlocked() {
+                                                                                                                        return hasUpgrade("up", 65)
+                                                                                                                    
+                                                                                                                    }
+                                                                                                                    },
+                                                                                                                    72: { 
+                                                                                                                        title: "Pointer XXI (UP72)",
+                                                                                                                                description: "GAIN A ULTIMATE BOOST OF 1e18x POINTS!!!",
+                                                                                                                                cost: new Decimal("1e402"),
+                                                                                                                                unlocked() {
+                                                                                                                                    return hasUpgrade("up", 71)
+                                                                                                                                
+                                                                                                                                }
+                                                                                                                                },
+                                                        
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "pink",
@@ -294,6 +368,21 @@ addLayer("up", {
         if (hasUpgrade('sp', 72)) mult = mult.times(5)
         if (hasUpgrade('p',84)) mult = mult.times(2)
         if (hasUpgrade('p',93)) mult = mult.times(5)
+        if (hasUpgrade('sp', 74)) mult = mult.times("10000")
+        if (hasUpgrade('up', 55)) mult = mult.times("10")
+        if (hasUpgrade('sp', 75)) mult = mult.times(upgradeEffect('sp', 75))
+        if (hasUpgrade('sp', 81)) mult = mult.times("50")
+        if (hasMilestone('hp', 13)) mult = mult.pow(1.25)
+        if (hasUpgrade('up', 64)) mult = mult.times(33)
+        if (hasUpgrade('sp', 82)) mult = mult.times("42")
+        if (hasUpgrade('up', 65)) mult = mult.times(3)
+        mult = mult.times(buyableEffect('hp', 11))
+        if (hasUpgrade('sp', 83)) mult = mult.times(20)
+        if (hasMilestone('hp', 21)) mult = mult.times(milestoneEffect('hp', 21))
+        if (inChallenge("hp", 22)) mult = mult.pow(0.2)
+        if (hasUpgrade('up', 71)) mult = mult.times(10)
+        if (hasUpgrade('p', 113)) mult = mult.times("10")
+        if (hasUpgrade('p', 115)) mult = mult.times("10")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

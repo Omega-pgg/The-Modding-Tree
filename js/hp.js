@@ -33,11 +33,18 @@ addLayer("hp", {
                     unlocked() {return (hasUpgrade("hp", 52))},
             content: [
                 ["blank", "15px"],
-                ["challenges", [1]]
+                ["challenges", [1,2]]
                 
             ]
                 },
-                },
+                "Buyables": {
+                unlocked() {return (hasUpgrade("p", 112))},
+                        content: [
+                    ["blank", "15px"],
+                    "buyables"
+                        ]
+        },
+    },
         },
         challenges: {
             11: {
@@ -56,6 +63,22 @@ addLayer("hp", {
                 canComplete: function() {return player.pb3.points.gte("130")},
                 unlocked() { return (hasChallenge('hp', 11)) },
         },
+        21: {
+            name: "Point-less",
+            challengeDescription: "Points gain is decreased to ^0.1!",
+            goalDescription: "1e24 Ultra-Points",
+            rewardDescription: "Double Hyper-Point Gain and reach a milestone again.",
+            canComplete: function() {return player.up.points.gte("1e24")},
+            unlocked() { return (hasChallenge('hp', 12)) },
+    },
+    22: {
+        name: "Point-fall",
+        challengeDescription: "Every normal resource below Hyper-Points is reduced to ^0.2.",
+        goalDescription: "1e33 Points",
+        rewardDescription: "Double Hyper-Point Gain and reach a milestone.",
+        canComplete: function() {return player.points.gte("1e33")},
+        unlocked() { return (hasChallenge('hp', 21)) },
+},
         },
     upgrades: {
         11: { title: "Cells (HP11)",
@@ -234,6 +257,7 @@ addLayer("hp", {
             if (hasUpgrade('sp', 65)) effect = effect.pow(1.584962500721)
             if (hasUpgrade('hp', 53)) effect = effect.pow(1.4649735207)
             if (hasMilestone('hp', 7)) effect = effect.pow(1.113282)
+            if (hasMilestone('hp', 14)) effect = effect.pow(0)
             return effect
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -297,6 +321,47 @@ addLayer("hp", {
                                                     
                                                     }    
                                                 },
+                                                54: { 
+                                                    title: "Points of Power IV (HP54)",
+                                                            description: "GAIN A ULTIMATE BOOST OF 500,000x POINTS!!!",
+                                                            cost: new Decimal(1e13),
+                                                            unlocked() {
+                                                                return hasUpgrade("hp", 53)
+                                                            
+                                                            }    
+                                                        },
+                                                        55: { 
+                                                            title: "Points of Power V (HP55)",
+                                                                    description: "Gain a Big BOOST OF 1,000x Super-Points!",
+                                                                    cost: new Decimal(1e16),
+                                                                    unlocked() {
+                                                                        return hasUpgrade("hp", 54)
+                                                                    
+                                                                    }    
+                                                                },
+                                                                61: { title: "Point Upgrader IV (HP61)",
+        description: "Every Points-1 boosts point gain by 3.5x",
+        cost: new Decimal("2e26"),
+        effect() {
+            let effect = Decimal.pow(3.5, player.pb.points)
+            return effect
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("hp", 55)
+        }
+        },
+        62: { title: "Cells IV (HP62)",
+                                        description: "Points boosts itself at a very reduced rate.",
+                                        cost: new Decimal(5e59),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 61)
+                                        },
+                                        effect() {
+                                            return player.points.add(1).pow("0.002").min("1e3")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
     },
     color: "white",
     requires: new Decimal(2e22), // Can be a function that takes requirement increases into account
@@ -314,6 +379,16 @@ addLayer("hp", {
         if (hasChallenge('hp', 11)) mult = mult.times(2)
         if (hasChallenge('hp', 12)) mult = mult.times(2)
         if (hasUpgrade('p', 105)) mult = mult.times(4.2)
+        if (hasUpgrade('sp', 74)) mult = mult.times(2)
+        if (hasUpgrade('up', 61)) mult = mult.times(2)
+        if (hasUpgrade('up', 63)) mult = mult.times(3)
+        if (hasUpgrade('up', 64)) mult = mult.times(3)
+        if (hasUpgrade('up', 65)) mult = mult.times(2)
+        if (hasChallenge('hp', 21)) mult = mult.times(2)
+        if (hasUpgrade('sp', 83)) mult = mult.times(3)
+        if (hasChallenge('hp', 22)) mult = mult.times(2)
+        if (hasUpgrade('up', 71)) mult = mult.times(2)
+        if (hasUpgrade('p', 115)) mult = mult.times("1.5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -378,5 +453,129 @@ addLayer("hp", {
             effectDescription: "^1.01 Points",
             done() { return player.hp.points.gte(7.5e10) }
         },
+        10: {
+            requirementDescription: "4e13 Hyper-Points (HPM10)",
+            effectDescription: "^1.05 Points!",
+            done() { return player.hp.points.gte(3e13) }
+        },
+        11: {
+            requirementDescription: "2e15 Hyper-Points (HPM11)",
+            effectDescription: "^1.05 Points again",
+            done() { return player.hp.points.gte(2e15) }
+        },
+        12: {
+            requirementDescription: "5e16 Hyper-Points (HPM12)",
+            effectDescription: "^1.2 Super-Points!!",
+            done() { return player.hp.points.gte(5e16) }
+        },
+        13: {
+            requirementDescription: "2e18 Hyper-Points (HPM13)",
+            effectDescription: "^1.25 Ultra-Points!!",
+            done() { return player.hp.points.gte(2e18) }
+        },
+        14: {
+            requirementDescription: "1e19 Hyper-Points (HPM14)",
+            effectDescription: "Gain ^1.25 Points but nullify PU25 & HP42 effects.",
+            done() { return player.hp.points.gte(1e19) }
+        },
+        15: {
+            requirementDescription: "1e500 Points (HPM15)",
+            effectDescription: "Automatically buys prestige point upgrades",
+            done() { return player.points.gte("1e500") }
+    },
+    16: {
+        requirementDescription: "1e23 Hyper-Points (HPM16)",
+        effectDescription: "SP73 Effect is better and ^1.05 Points.",
+        done() { return player.hp.points.gte(1e23) }
+    },
+    17: {requirementDescription: "Finish Hyper Challenge 21 (HPM17)",
+             effectDescription: "UP52 Effect is better",
+                done() {return hasChallenge("hp",21)}},
+18: {
+    requirementDescription: "1e27 Hyper-Points (HPM18)",
+    effectDescription: "HB11 Effect is doubled",
+    done() { return player.hp.points.gte(1e27) }
+},
+19: {
+    requirementDescription: "1e620 Points (HPM19)",
+    effectDescription: "^1.1 Points",
+    done() { return player.points.gte("1e620") }
+},
+20: {
+requirementDescription: "1e36 Hyper-Points (HPM20)",
+effectDescription: "HB11 Effect is increased by +50%",
+done() { return player.hp.points.gte(1e36) }
+},
+21: {
+    requirementDescription: "1e37 Hyper-Points (HPM21)",
+    effect() {
+        let eff = player.hp.points.add(1).pow(0.2)
+        return eff
+    },
+    effectDescription() {
+        return "Hyper-Points boosts Ultra-Points.<br>Currently: " + format(milestoneEffect("hp",21))+"x"}
+        ,    done() { return player.hp.points.gte("1e37")}
+        
+    },
+    22: {
+        requirementDescription: "1e38 Hyper-Points (HPM22)",
+        effectDescription: "Reduce the cost scaling of HB11",
+        done() { return player.hp.points.gte(1e38) }
+    },
+    23: {
+        requirementDescription: "2e38 Hyper-Points (HPM23)",
+        effect() {
+            let eff = player.hp.points.add(1).pow(0.333333333333333333333)
+            return eff
+        },
+        effectDescription() {
+            return "Hyper-Points boosts Points again.<br>Currently: " + format(milestoneEffect("hp",23))+"x"}
+            ,    done() { return player.hp.points.gte("2e38")}
+            
+        },
+        24: {requirementDescription: "Finish Hyper Challenge 22 (HPM24)",
+             effectDescription: "SP73 Effect is better again",
+                done() {return hasChallenge("hp",22)}},
+                25: {
+                    requirementDescription: "1e42 Hyper-Points (HPM25)",
+                    effectDescription: "^1.05 Points",
+                    done() { return player.hp.points.gte("1e42") }
+                },
+                26: {
+                    requirementDescription: "5e57 Hyper-Points (HPM26)",
+                    effectDescription: "^1.01 Points",
+                    done() { return player.hp.points.gte("5e57") }
+                },
+    },
+buyables: {
+    11: {
+        title: "Point Buyable 1: Point Repetable I",
+        unlocked() { return hasUpgrade("p", 112) },
+        cost(x) {
+            let exp2 = 1.1
+            if (hasMilestone('hp', 22)) exp2 = 1.001
+            return new Decimal("1e500").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
+        },
+        display() {
+            return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Points, Super-Points and Ultra-Points by x" + format(buyableEffect(this.layer, this.id))
+        },
+        canAfford() {
+            return player.points.gte(this.cost())
+        },
+        buy() {
+            let cost = new Decimal ("1e500")
+            player.points = player.points.sub(this.cost().mul(cost))
+            setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+        },
+        effect(x) {
+            let base1 = new Decimal(2)
+            let base2 = x
+            if (hasMilestone('hp', 18)) base2 = x.mul(new Decimal(2))
+            if (hasMilestone('hp', 20)) base2 = x.mul(new Decimal(3))
+            let expo = new Decimal(1.000)
+            let eff = base1.pow(Decimal.pow(base2, expo))
+            return eff
+        },
+    },
 },
 })
