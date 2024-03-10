@@ -6,12 +6,18 @@ addLayer("up", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    passiveGeneration() {
+        if (hasMilestone("mp", 4)) return (hasMilestone("mp", 4)?1:0)
+        },
     tabFormat: [
         "main-display",
         "prestige-button",
         ["microtabs", "stuff"],
         ["blank", "25px"],
     ],
+    tooltip(){
+        return "<h3>Ultra</h3><br>" + format(player.up.points) + " UP"
+      },
     microtabs: {
         stuff: {
                         "Upgrades": {
@@ -325,6 +331,33 @@ addLayer("up", {
                                                                                                                                 
                                                                                                                                 }
                                                                                                                                 },
+                                                                                                                                73: { 
+                                                                                                                                    title: "Pointer XXII (UP73)",
+                                                                                                                                            description: "GAIN A ULTIMATE BOOST OF 1,000,000,000x SUPER-POINTS AND ULTRA-POINTS!!!",
+                                                                                                                                            cost: new Decimal("1e544"),
+                                                                                                                                            unlocked() {
+                                                                                                                                                return hasUpgrade("up", 72)
+                                                                                                                                            
+                                                                                                                                            }
+                                                                                                                                            },
+                                                                                                                                            74: { 
+                                                                                                                                                title: "Pointer XXIII (UP74)",
+                                                                                                                                                        description: "Gain a big boost of 100,000x Points, Super-Points and Ultra-Points.",
+                                                                                                                                                        cost: new Decimal("1e565"),
+                                                                                                                                                        unlocked() {
+                                                                                                                                                            return hasUpgrade("up", 73)
+                                                                                                                                                        
+                                                                                                                                                        }
+                                                                                                                                                        },  
+                                                                                                                                                        75: { 
+                                                                                                                                                            title: "Buy (UP75)",
+                                                                                                                                                                    description: "Unlock a new buyable on hyper-points.",
+                                                                                                                                                                    cost: new Decimal("1e710"),
+                                                                                                                                                                    unlocked() {
+                                                                                                                                                                        return hasUpgrade("up", 74)
+                                                                                                                                                                    
+                                                                                                                                                                    }
+                                                                                                                                                                    },                                                                                                                                             
                                                         
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
@@ -383,6 +416,19 @@ addLayer("up", {
         if (hasUpgrade('up', 71)) mult = mult.times(10)
         if (hasUpgrade('p', 113)) mult = mult.times("10")
         if (hasUpgrade('p', 115)) mult = mult.times("10")
+        if (hasUpgrade('p', 16)) mult = mult.times("20")
+        if (hasUpgrade('p', 56)) mult = mult.times("1e10")
+        if (hasMilestone('p', 76)) mult = mult.times(milestoneEffect('p', 76))
+        if (hasUpgrade('up', 73)) mult = mult.times(1e9)
+        if (hasUpgrade('up', 74)) mult = mult.times("100000")
+        mult = mult.times(buyableEffect('hp', 13))
+        if (hasUpgrade('p', 86)) mult = mult.times("1000")
+        if (hasUpgrade('pb4', 11)) mult = mult.div(upgradeEffect('pb4', 11))
+        if (inChallenge("mp", 11)) mult = mult.div("1e123123")
+        if (hasChallenge('hp', 31)) mult = mult.times(1e6)
+        if (hasChallenge('hp', 32)) mult = mult.times(1e6)
+        if (hasUpgrade('mp', 33)) mult = mult.times(1e10)
+        if (hasUpgrade('sp', 84)) mult = mult.times("2")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

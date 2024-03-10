@@ -6,6 +6,9 @@ addLayer("pb3", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    tooltip(){
+        return "<h3>Points-3</h3><br>" + format(player.pb3.points) + " P-3"
+      },
       upgrades: {
         11: {
             title: "Sub-Points^3",
@@ -33,6 +36,9 @@ addLayer("pb3", {
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     canBuyMax() { return hasMilestone("hp", 2) },
     exponent() {if (inChallenge("hp", 12)) return new Decimal(1.1)
+    else if (inChallenge("hp", 32)) return new Decimal("1.4")
+    else if (inChallenge("hp", 31)) return new Decimal("1.2")
+    else if (inChallenge("mp", 11)) return new Decimal("20")
     else return new Decimal(1)},  
         gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -43,7 +49,7 @@ addLayer("pb3", {
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "-", description: "-: Reset for Points-3", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "3", description: "3: Reset for Points-3", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return (hasUpgrade("up", 21) || player[this.layer].unlocked)},
 })

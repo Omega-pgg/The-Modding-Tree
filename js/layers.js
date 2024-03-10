@@ -10,6 +10,9 @@ addLayer("p", {
 		points: new Decimal(0),
         auto: false,
     }},
+    tooltip(){
+        return "<h3>Prestige</h3><br>" + format(player.p.points) + " PP"
+      },
     passiveGeneration() {
         if (hasMilestone("hp", 6)) return (hasMilestone("hp", 6)?1:0)
         },
@@ -73,6 +76,14 @@ addLayer("p", {
                 
                 }
                 },
+                16: { title: "Point Expansion (PU16)",
+                description: "20x Points, Super-Points and Ultra-Points",
+                cost: new Decimal(1e9),
+                unlocked() {
+                    return hasUpgrade("mp", 11)
+                
+                }
+                },
                 21: { title: "Point IV (PU21)",
                 description: "3x Points",
                 cost: new Decimal(100),
@@ -126,6 +137,18 @@ addLayer("p", {
             return hasUpgrade("p", 24)
         }
         },
+        26: { title: "Point Expansion II (PU26)",
+                description: "Points gain are boosted based on Ultra-Points at a very reduced rate.",
+                cost: new Decimal(1e30),
+                effect() {
+                    return player.up.points.add(1).pow("0.02").min("1e12")
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                unlocked() {
+                    return hasUpgrade("p", 16)
+                
+                }
+                },
     31: { title: "Self-Point (PU31)",
     description: "Points boosts itself at a very reduced rate and unlock a new layer.",
     cost: new Decimal(2500),
@@ -165,6 +188,14 @@ addLayer("p", {
             return hasUpgrade("p", 34)
         }
         },
+        36: { title: "Point Expansion III (PU36)",
+                description: "Triple Hyper-Point Gain",
+                cost: new Decimal(1e33),
+                unlocked() {
+                    return hasUpgrade("p", 26)
+                
+                }
+                },
         41: { title: "Point XI (PU41)",
         description: "+1% Points",
         cost: new Decimal(1e6),
@@ -208,6 +239,14 @@ addLayer("p", {
             return hasUpgrade("p", 44)
         }
         },
+        46: { title: "Point Expansion IV (PU46)",
+                description: "1,000,000x POINTS!",
+                cost: new Decimal(1e75),
+                unlocked() {
+                    return hasUpgrade("p", 36)
+                
+                }
+                },
         51: { title: "Point XII (PU51)",
         description: "4x Points and Super-Points",
         cost: new Decimal(1e15),
@@ -243,6 +282,14 @@ addLayer("p", {
             return hasUpgrade("p", 54)
         }
         },
+        56: { title: "Point Expansion V (PU56)",
+                description: "10,000,000,000x POINTS, SUPER-POINTS AND ULTRA-POINTS!",
+                cost: new Decimal("1e750"),
+                unlocked() {
+                    return hasUpgrade("p", 46)
+                
+                }
+                },
         61: { title: "Super Points II (PU61)",
         description: "Gain a 5x Ultra-Points, 15x Super-Points and over a 50x Points + unlock a new layer.",
         cost: new Decimal(1e23),
@@ -278,6 +325,14 @@ addLayer("p", {
             return hasUpgrade("p", 64)
         }
         },
+        66: { title: "Point Expansion VI (PU66)",
+                description: "^1.05 Hyper-Points",
+                cost: new Decimal("1e800"),
+                unlocked() {
+                    return hasUpgrade("p", 56)
+                
+                }
+                },
         71: { title: "Super Points IV (PU71)",
         description: "25x Points, 3x Super-Points and 2x Ultra-Points",
         cost: new Decimal(5e70),
@@ -317,6 +372,18 @@ addLayer("p", {
             return hasUpgrade("p", 74)
         }
         },
+        76: { title: "Point Expansion VII (PU76)",
+                description: "Ultra-Points gain is boosted based on Hyper-Points at a very reduced rate.",
+                cost: new Decimal("1e875"),
+                effect() {
+                    return player.hp.points.add(1).pow("0.1").min("1e12")
+                },
+                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                unlocked() {
+                    return hasUpgrade("p", 66)
+                
+                }
+                },
         81: { title: "Discount III (PU81)",
         description: "Points-1 is even cheaper based on points. (Stronger)",
         cost: new Decimal(1e114),
@@ -365,6 +432,14 @@ addLayer("p", {
             return hasUpgrade("p", 84)
         }
         },
+        86: { title: "Point Expansion VIII (PU86)",
+        description: "1,000,000x Points, 1,000x Super-Points and Ultra-Points + 5x Hyper-Points",
+        cost: new Decimal("1e1500"),
+        unlocked() {
+            return hasUpgrade("p", 76)
+        
+        }
+        },
         91: { title: "Point XVIII (PU91)",
         description: "9x Points",
         cost: new Decimal(1e147),
@@ -400,6 +475,18 @@ addLayer("p", {
             return hasUpgrade("p", 94)
         }
         },
+        96: { title: "Point Expansion IX (PU96)",
+        description: "Super-Points gain is boosted based on Hyper-Points at a very reduced rate.",
+        cost: new Decimal("1e1740"),
+        effect() {
+            return player.hp.points.add(1).pow("0.2").min("1e1000")
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("p", 86)
+        
+        }
+    },
         101: { title: "Point XXIII (PU101)",
         description: "2x Points",
         cost: new Decimal(1e152),
@@ -435,6 +522,18 @@ addLayer("p", {
             return hasUpgrade("p", 104)
         }
         },
+        106: { title: "Point Expansion X (PU106)",
+        description: "Points gain is boosted based on Hyper-Points at reduced rate.",
+        cost: new Decimal("1e1760"),
+        effect() {
+            return player.hp.points.add(1).pow("0.3").min("1e1000")
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("p", 96)
+        
+        }
+    },
         111: { title: "Advanced Upgrades II (PU111)",
         description: "3x Points",
         cost: new Decimal(1e242),
@@ -464,13 +563,31 @@ addLayer("p", {
         }
         },
         115: { title: "Advanced Upgrades VI (PU115)",
-        description: "10x Points, Super-Points, Ultra-Points, +50% Hyper-Points and finally unlock a new layer... (Coming soon)",
+        description: "10x Points, Super-Points, Ultra-Points, +50% Hyper-Points and finally unlock a new layer + a new buyable...",
         cost: new Decimal("1e745"),
         unlocked() {
             return hasUpgrade("p", 114)
         }
         },
     },
+    doReset(mp) {
+        // Stage 1, almost always needed, makes resetting this layer not delete your progress
+        if (layers[mp].row <= this.row) return;
+    
+        // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+        let keptUpgrades = [];
+        if (hasMilestone('mp', 2)) keptUpgrades.push(112, 115);
+    
+        // Stage 3, track which main features you want to keep - milestones
+        let keep = [];
+        if (hasMilestone('mp', 10)) keep.push("milestones");
+    
+        // Stage 4, do the actual data reset
+        layerDataReset(this.layer, keep);
+    
+        // Stage 5, add back in the specific subfeatures you saved earlier
+        player[this.layer].upgrades.push(...keptUpgrades);
+    },  
     autoUpgrade() { if (hasMilestone("hp" , 15)) return true},
     color: "blue",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account

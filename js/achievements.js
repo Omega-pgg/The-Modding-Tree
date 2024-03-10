@@ -12,9 +12,9 @@ addLayer("a", {
     layerShown() {
         return true
     },
-    tooltip() {
-        return ("Achievements")
-    },
+    tooltip(){
+        return "<h3>Achievements</h3><br>"  + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"
+      },
     achievements: {
         11: {
             name: "A new beginning",
@@ -361,7 +361,7 @@ addLayer("a", {
                 if (hasUpgrade("p", 112))
                 return true
             },
-            tooltip: "Get the 57th prestige point upgrade. (PU112)",
+            tooltip: "Unlock the first hyper-point buyable. (PU112)",
             onComplete() {
             },
         },
@@ -465,11 +465,236 @@ addLayer("a", {
             },
         },
         105: {
-            name: "Too super+",
+            name: "Buyable Power!",
             done() {
-                return player.sp.points.gte("1e900")
+                if (hasUpgrade("p", 115))
+                return true                },
+            tooltip: "Unlock the 2nd hyper-point buyable. (PU115)<br> Reward: 2x Points and Super-Points",
+            onComplete() {
             },
-            tooltip: "Get 1e900 Super-Points.<br> Reward: 2x Points and Super-Points",
+        },
+        111: {
+            name: "Too many Infinites",
+            done() {
+                return player.up.points.gte("1.80e308")
+            },
+            tooltip: "Get 1.80e308 Ultra-Points!",
+            onComplete() {
+            },
+        },
+        112: {
+            name: "Overflate",
+            done() {
+                return player.hp.points.gte("1e50")
+            },
+            tooltip: "Get 1e50 Hyper-Points.",
+            onComplete() {
+            },
+        },
+        113: {
+            name: "The scaling is too big",
+            done() {
+                return player.pb.points.gte("20")
+            },
+            tooltip: "Get 20 Points-1.",
+            onComplete() {
+            },
+        },
+        114: {
+            name: "Points takeover",
+            done() {
+                return player.points.gte("1e1600")
+            },
+            tooltip: "Get 1e1,600 Points.",
+            onComplete() {
+            },
+        },
+        115: {
+            name: "Points Overload",
+            done() {
+                return player.sp.points.gte("1e1000")
+            },
+            tooltip: "Get 1e1,000 Super-Points!<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        121: {
+            name: "A new reset!",
+            done() {
+                return player.mp.points.gte("1")
+            },
+            tooltip: "Get 1 Mega-Point.",
+            onComplete() {
+            },
+        },
+        122: {
+            name: "A new reset... Again!",
+            done() {
+                return player.mp.total.gte("2")
+            },
+            tooltip: "Get 2 Mega-Points in total.",
+            onComplete() {
+            },
+        },
+        123: {
+            name: "The scaling is okay",
+            done() {
+                return player.pb2.points.gte("40")
+            },
+            tooltip: "Get 40 Points-2.",
+            onComplete() {
+            },
+        },
+        124: {
+            name: "Googolize",
+            done() {
+                return player.hp.points.gte("1e100")
+            },
+            tooltip: "Get 1e100 Hyper-Points.",
+            onComplete() {
+            },
+        },
+        125: {
+            name: "Buyable Repeat Power!",
+            done() {
+                if (hasUpgrade("up", 75))
+                return true                },
+            tooltip: "Unlock the 3rd hyper-point buyable. (UP75)<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        131: {
+            name: "Op Upgrade",
+            done() {
+                if (hasUpgrade("mp", 15))
+                return true                },
+            tooltip: "Get the 5th mega-point upgrade.",
+            onComplete() {
+            },
+        },
+        132: {
+            name: "This is too many...",
+            done() {
+                return player.up.points.gte("1e800")
+                       },
+            tooltip: "Get 1e800 Ultra-Points",
+            onComplete() {
+            },
+        },
+        133: {
+            name: "Universal Points",
+            done() {
+                return player.points.gte("1e2500")
+            },
+            tooltip: "Get 1e2,500 Points.",
+            onComplete() {
+            },
+        },
+        134: {
+            name: "Breaking Point",
+            done() {
+                return player.pb3.points.gte("3000")
+            },
+            tooltip: "Get 3,000 Points-3.",
+            onComplete() {
+            },
+        },
+        135: {
+            name: "Finally no more challenging.",
+            done() {
+                if (hasMilestone("mp", 3))
+                return true                },
+            tooltip: "Get the 3rd mega-point milestone.<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        141: {
+            name: "Megalize",
+            done() {
+                return player.mp.total.gte("100")
+            },
+            tooltip: "Get 100 Mega-Points in total.",
+            onComplete() {
+            },
+        },
+        142: {
+            name: "Super-lize?",
+            done() {
+                return player.sp.total.gte("1e2000")
+            },
+            tooltip: "Get 1e2,000 Super-Points.",
+            onComplete() {
+            },
+        },
+        143: {
+            name: "More Sub-Points?",
+            done() {
+                if (hasUpgrade("mp", 24))
+                return true                },
+            tooltip: "Get the 9th mega-point upgrade. (MP24)",
+            onComplete() {
+            },
+        },
+        144: {
+            name: "Millinillion",
+            done() {
+                return player.points.gte("1e3003")
+            },
+            tooltip: "Get 1e3,003 Points!",
+            onComplete() {
+            },
+        },
+        145: {
+            name: "This achievement doesn't exist II",
+            done() {
+                return player.up.points.gte("1e1000")
+            },
+            tooltip: "Get 1e1,000 Ultra-Points!!<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        151: {
+            name: "More Mega",
+            done() {
+                if (hasUpgrade("mp", 25))
+                return true                },
+            tooltip: "Get the 10th mega-point upgrade. (MP25)",
+            onComplete() {
+            },
+        },
+        152: {
+            name: "Again? More challenging!!!!",
+            done() {
+                if (hasUpgrade("mp", 31))
+                return true                },
+            tooltip: "Get the 11th mega-point upgrade. (MP31)",
+            onComplete() {
+            },
+        },
+        153: {
+            name: "Ultra-Points and Points-3 was useless!",
+            done() {
+                if (hasChallenge("mp", 11))
+                return true            },
+            tooltip: "Complete the 1st mega-point challenge. (Wait why did the numbers went down a lot)",
+            onComplete() {
+            },
+        },
+        154: {
+            name: "Such a useless upgrade",
+            done() {
+                if (hasUpgrade("mp", 41))
+                return true                },
+            tooltip: "Get the 16th mega-point upgrade. (MP41)",
+            onComplete() {
+            },
+        },
+        155: {
+            name: "Stable Hyper",
+            done() {
+                return player.hp.points.gte("1e170")
+            },
+            tooltip: "Get 1e170 Hyper-Points<br> Reward: 2x Points and Super-Points",
             onComplete() {
             },
         },

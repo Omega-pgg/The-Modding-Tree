@@ -6,13 +6,15 @@ addLayer("hp", {
         unlocked: false,
 		points: new Decimal(0),
     }},
-
     tabFormat: [
         "main-display",
         "prestige-button",
         ["microtabs", "stuff"],
         ["blank", "25px"],
     ],
+    tooltip(){
+        return "<h3>Hyper</h3><br>" + format(player.hp.points) + " HP"
+      },
     microtabs: {
         stuff: {
                         "Upgrades": {
@@ -33,7 +35,7 @@ addLayer("hp", {
                     unlocked() {return (hasUpgrade("hp", 52))},
             content: [
                 ["blank", "15px"],
-                ["challenges", [1,2]]
+                ["challenges", [1,2,3,4]]
                 
             ]
                 },
@@ -46,6 +48,7 @@ addLayer("hp", {
         },
     },
         },
+        
         challenges: {
             11: {
                     name: "Harder",
@@ -78,6 +81,30 @@ addLayer("hp", {
         rewardDescription: "Double Hyper-Point Gain and reach a milestone.",
         canComplete: function() {return player.points.gte("1e33")},
         unlocked() { return (hasChallenge('hp', 21)) },
+},
+31: {
+    name: "Less Sub-Points 2",
+    challengeDescription: "Points-1, Points-2 and Points-3 cost scaling is 20% higher",
+    goalDescription: "560 Points-3",
+    rewardDescription: "4x Hyper-Point Gain, 1,000,000x Super-Points and Ultra-Points and ^1.01 Points.",
+    canComplete: function() {return player.pb3.points.gte("560")},
+    unlocked() { return (hasChallenge('mp', 11)) },
+},
+32: {
+    name: "Less Sub-Points 3",
+    challengeDescription: "Points-1, Points-2 and Points-3 cost scaling is 40% higher",
+    goalDescription: "229 Points-3",
+    rewardDescription: "8x Hyper-Point Gain, 1,000,000x Super-Points and Ultra-Points and ^1.01 Points again.",
+    canComplete: function() {return player.pb3.points.gte("229")},
+    unlocked() { return (hasChallenge('hp', 31)) },
+},
+41: {
+    name: "Point-less 2",
+    challengeDescription: "Points gain is decreased to ^0.01!",
+    goalDescription: "250,000 Points",
+    rewardDescription: "4x Hyper-Point Gain, ^1.02 Super-Points",
+    canComplete: function() {return player.points.gte("250000")},
+    unlocked() { return (hasChallenge('hp', 32)) },
 },
         },
     upgrades: {
@@ -362,7 +389,59 @@ addLayer("hp", {
                                         },
                                         effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
                                         },
+                                        63: { title: "Point Upgrader V (HP63)",
+                                        description: "Every Points-2 boosts point gain by 2.5x",
+                                        cost: new Decimal("1e78"),
+                                        effect() {
+                                            let effect = Decimal.pow(2.5, player.pb2.points)
+                                            return effect
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                        unlocked() {
+                                            return hasUpgrade("hp", 62)
+                                        }
+                                        },
+                                        64: { 
+                                            title: "Points of Mega (HP64)",
+                                                    description: "+15% Mega-Points",
+                                                    cost: new Decimal(1e96),
+                                                    unlocked() {
+                                                        return hasUpgrade("hp", 63)
+                                                    
+                                                    }    
+                                                },
+                                                65: { title: "Discount IV (HP65)",
+        description: "Points-1 cost is divided by once more based on Ultra-Points",
+        cost: new Decimal(1e134),
+        effect() {
+            return player.up.points.add(1).pow("1")
+        },
+        effectDisplay() { return  "/" + format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("hp", 64)
+        }
+        },
     },
+    doReset(mp) {
+        // Stage 1, almost always needed, makes resetting this layer not delete your progress
+        if (layers[mp].row <= this.row) return;
+    
+        // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+        let keptUpgrades = [];
+        if (hasMilestone('mp', 1)) keptUpgrades.push(11);
+    
+        // Stage 3, track which main features you want to keep - milestones
+        let keep = [];
+        if (hasMilestone('mp', 10)) keep.push("milestones");
+        if (hasMilestone('mp', 3)) keep.push("challenges");
+    
+        // Stage 4, do the actual data reset
+        layerDataReset(this.layer, keep);
+    
+        // Stage 5, add back in the specific subfeatures you saved earlier
+        player[this.layer].upgrades.push(...keptUpgrades);
+    },  
+    autoUpgrade() { if (hasMilestone("mp" , 5)) return true},
     color: "white",
     requires: new Decimal(2e22), // Can be a function that takes requirement increases into account
     resource: "Hyper-Points", // Name of prestige currency
@@ -389,6 +468,18 @@ addLayer("hp", {
         if (hasChallenge('hp', 22)) mult = mult.times(2)
         if (hasUpgrade('up', 71)) mult = mult.times(2)
         if (hasUpgrade('p', 115)) mult = mult.times("1.5")
+        if (hasUpgrade('p', 36)) mult = mult.times(3)
+        if (hasUpgrade('p', 66)) mult = mult.pow(1.05)
+        if (hasUpgrade('mp', 13)) mult = mult.times(upgradeEffect('mp', 13))
+        if (hasUpgrade('p', 86)) mult = mult.times("5")
+        if (hasUpgrade('mp', 23)) mult = mult.times(50)
+        if (hasUpgrade('pb4', 11)) mult = mult.times(upgradeEffect('pb4', 11))
+        if (hasChallenge('hp', 31)) mult = mult.times(4)
+        if (hasChallenge('hp', 32)) mult = mult.times(8)
+        if (hasUpgrade('mp', 35)) mult = mult.times(100)
+        if (hasUpgrade('sp', 84)) mult = mult.times("2")
+        if (hasUpgrade('mp', 41)) mult = mult.times(2)
+        if (hasChallenge('hp', 41)) mult = mult.times(4)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -519,7 +610,7 @@ done() { return player.hp.points.gte(1e36) }
     },
     22: {
         requirementDescription: "1e38 Hyper-Points (HPM22)",
-        effectDescription: "Reduce the cost scaling of HB11",
+        effectDescription: "+1% Point Gain",
         done() { return player.hp.points.gte(1e38) }
     },
     23: {
@@ -553,7 +644,8 @@ buyables: {
         unlocked() { return hasUpgrade("p", 112) },
         cost(x) {
             let exp2 = 1.1
-            if (hasMilestone('hp', 22)) exp2 = 1.001
+            if (hasMilestone('hp', 22)) exp2 = 1.1
+            if (hasMilestone('mp', 4)) exp2 = 1e308
             return new Decimal("1e500").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
         },
         display() {
@@ -572,6 +664,68 @@ buyables: {
             let base2 = x
             if (hasMilestone('hp', 18)) base2 = x.mul(new Decimal(2))
             if (hasMilestone('hp', 20)) base2 = x.mul(new Decimal(3))
+            if (hasUpgrade('mp', 12)) base2 = x.mul(new Decimal(4))
+            if (hasUpgrade('mp', 21)) base2 = x.mul(new Decimal(5))
+            if (hasMilestone('mp', 4)) base2 = x.mul(new Decimal(0))
+            let expo = new Decimal(1.000)
+            let eff = base1.pow(Decimal.pow(base2, expo))
+            return eff
+        },
+    },
+    12: {
+        title: "Point Buyable 2: Point Repetable II",
+        unlocked() { return hasUpgrade("p", 115) },
+        cost(x) {
+            let exp2 = 1.1
+            if (hasUpgrade('mp', 14)) exp2 = 1.1
+            if (hasMilestone('mp', 4)) exp2 = 1e308
+            return new Decimal("1e900").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
+        },
+        display() {
+            return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Super-Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Points by x" + format(buyableEffect(this.layer, this.id))
+        },
+        canAfford() {
+            return player.sp.points.gte(this.cost())
+        },
+        buy() {
+            let cost = new Decimal ("1e900")
+            player.sp.points = player.sp.points.sub(this.cost().mul(cost))
+            setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+        },
+        effect(x) {
+            let base1 = new Decimal(50)
+            
+            let base2 = x
+            if (hasMilestone('mp', 4)) base2 = x.mul(new Decimal(0))
+            let expo = new Decimal(1.000)
+            let eff = base1.pow(Decimal.pow(base2, expo))
+            return eff
+        },
+    },
+    13: {
+        title: "Point Buyable 3: Point Repetable III",
+        unlocked() { return hasUpgrade("up", 75) },
+        cost(x) {
+            let exp2 = 1.025
+            if (hasMilestone('mp', 4)) exp2 = 1e308
+            return new Decimal("1e2000").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
+        },
+        display() {
+            return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Points, Super-Points and Ultra-Points by x" + format(buyableEffect(this.layer, this.id))
+        },
+        canAfford() {
+            return player.points.gte(this.cost())
+        },
+        buy() {
+            let cost = new Decimal ("1e2000")
+            player.points = player.points.sub(this.cost().mul(cost))
+            setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+        },
+        effect(x) {
+            let base1 = new Decimal(10)
+            let base2 = x
+            if (hasUpgrade('mp', 21)) base2 = x.mul(new Decimal(2))
+            if (hasMilestone('mp', 4)) base2 = x.mul(new Decimal(0))
             let expo = new Decimal(1.000)
             let eff = base1.pow(Decimal.pow(base2, expo))
             return eff

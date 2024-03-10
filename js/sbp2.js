@@ -6,6 +6,9 @@ addLayer("pb2", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    tooltip(){
+        return "<h3>Points-2</h3><br>" + format(player.pb2.points) + " P-2"
+      },
       upgrades: {
         11: {
             title: "Sub-Points^2",
@@ -33,6 +36,9 @@ addLayer("pb2", {
     canBuyMax() { return hasMilestone("hp", 2) },
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent() {if (inChallenge("hp", 12)) return new Decimal(2.5)
+    else if (inChallenge("hp", 32)) return new Decimal("3.25")
+    else if (inChallenge("hp", 31)) return new Decimal("2.75")
+    else if (inChallenge("mp", 11)) return new Decimal("20")
     else return new Decimal(2.25)},      
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -44,7 +50,7 @@ addLayer("pb2", {
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "^", description: "^: Reset for Points-2", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "2", description: "2: Reset for Points-2", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return (hasUpgrade("up", 12) || player[this.layer].unlocked)},
 })

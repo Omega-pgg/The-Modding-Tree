@@ -6,6 +6,9 @@ addLayer("pb", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    tooltip(){
+        return "<h3>Points-1</h3><br>" + format(player.pb.points) + " P-1"
+      },
       upgrades: {
         11: {
             title: "Sub-Points",
@@ -32,11 +35,15 @@ addLayer("pb", {
     canBuyMax() { return hasMilestone("hp", 2) },
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent() {if (inChallenge("hp", 12)) return new Decimal(3.3)
+    else if (inChallenge("hp", 32)) return new Decimal("4.2")
+    else if (inChallenge("hp", 31)) return new Decimal("3.6")
+    else if (inChallenge("mp", 11)) return new Decimal("20")
     else return new Decimal(3)},      
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('p', 72)) mult = mult.div(upgradeEffect('p', 72))
         if (hasUpgrade('p', 81)) mult = mult.div(upgradeEffect('p', 81))
+        if (hasUpgrade('hp', 65)) mult = mult.div(upgradeEffect('hp', 65))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -44,7 +51,7 @@ addLayer("pb", {
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "b", description: "B: Reset for Points-1", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "1", description: "1: Reset for Points-1", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return (hasUpgrade("up", 11) || player[this.layer].unlocked)},
 })

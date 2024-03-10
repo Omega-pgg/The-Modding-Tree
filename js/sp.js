@@ -16,6 +16,9 @@ addLayer("sp", {
         ["microtabs", "stuff"],
         ["blank", "25px"],
     ],
+    tooltip(){
+        return "<h3>Super</h3><br>" + format(player.sp.points) + " SP"
+      },
     microtabs: {
         stuff: {
                         "Upgrades": {
@@ -409,6 +412,16 @@ unlocked() {
                     
                     }
         },
+        84: { 
+            title: "Point Reset XXIII (SP84)",
+                    description: "Been a while. 2x Everything except PP and MP.",
+                    cost: new Decimal("1e1953"),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 83)
+                    
+                    }
+        },
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "red",
@@ -481,6 +494,23 @@ unlocked() {
             if (hasUpgrade('p', 113)) mult = mult.times("10")
             if (hasUpgrade('p', 115)) mult = mult.times("10")
             if (hasAchievement('a', 105)) mult = mult.times("2")
+            if (hasUpgrade('p', 16)) mult = mult.times("20")
+            if (hasUpgrade('p', 56)) mult = mult.times("1e10")
+            if (hasUpgrade('up', 73)) mult = mult.times(1e9)
+            if (hasUpgrade('up', 74)) mult = mult.times("100000")
+            if (hasAchievement('a', 115)) mult = mult.times("2")
+            mult = mult.times(buyableEffect('hp', 13))
+            if (hasAchievement('a', 125)) mult = mult.times("2")
+            if (hasUpgrade('p', 86)) mult = mult.times("1000")
+            if (hasAchievement('a', 135)) mult = mult.times("2")
+            if (hasChallenge('hp', 31)) mult = mult.times(1e6)
+            if (hasChallenge('hp', 32)) mult = mult.times(1e6)
+            if (hasUpgrade('mp', 32)) mult = mult.times(1e18)
+            if (hasUpgrade('sp', 84)) mult = mult.times("2")
+            if (hasUpgrade('p', 96)) mult = mult.times(upgradeEffect('p', 96))
+            if (hasAchievement('a', 145)) mult = mult.times("2")
+            if (hasChallenge('hp', 41)) mult = mult.pow(1.02)
+            if (hasAchievement('a', 155)) mult = mult.times("2")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
