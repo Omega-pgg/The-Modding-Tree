@@ -99,7 +99,7 @@ addLayer("mp", {
                                                                 }
                                                                 },
                                                                 22: { title: "Mega Based? (MP22)",
-                                                                description: "Point gain is boosted based on Mega Points (Total).",
+                                                                description: "Total Mega-Points boosts Point gain.",
                                                                 cost: new Decimal("10"),
                                                                 effect() {
                                                                     return player.mp.total.add(1).pow("20")
@@ -209,6 +209,232 @@ addLayer("mp", {
                                                                             
                                                                             }
                                                                             },
+                                                                            44: { 
+                                                                                title: "Mega Booster III (MP44)",
+                                                                                        description: "+75% Mega-Points again",
+                                                                                        cost: new Decimal(3500),
+                                                                                        unlocked() {
+                                                                                            return hasUpgrade("mp", 43)
+                                                                                        
+                                                                                        }
+                                                                                        },
+                                                                                        45: { 
+                                                                                            title: "Unstable Points VII (MP45)",
+                                                                                                    description: "^1.02 Super-Points",
+                                                                                                    cost: new Decimal(7500),
+                                                                                                    unlocked() {
+                                                                                                        return hasUpgrade("mp", 44)
+                                                                                                    
+                                                                                                    }
+                                                                                                    },
+                                                                                                    51: { 
+                                                                                                        title: "Mega of Sub-Points II (MP51)",
+                                                                                                                description: "Unlock Points-5",
+                                                                                                                cost: new Decimal(7500),
+                                                                                                                unlocked() {
+                                                                                                                    return hasUpgrade("mp", 45)
+                                                                                                                
+                                                                                                                }
+                                                                                                                },
+                                                                                                                52: { 
+                                                                                                                    title: "Unstable Points VIII (MP52)",
+                                                                                                                            description: "1e150x Points!",
+                                                                                                                            cost: new Decimal(15000),
+                                                                                                                            unlocked() {
+                                                                                                                                return hasUpgrade("mp", 51)
+                                                                                                                            
+                                                                                                                            }
+                                                                                                                            },
+                                                                                                                            53: { 
+                                                                                                                                title: "Split of Points (MP53)",
+                                                                                                                                        description: "Total Mega-Points boosts Hyper-Points",
+                                                                                                                                        cost: new Decimal(30000),
+                                                                                                                                        effect() {
+                                                                                                                                            return player.mp.total.add(1).pow("1.5")
+                                                                                                                                        },
+                                                                                                                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                        unlocked() {
+                                                                                                                                            return hasUpgrade("mp", 52)
+                                                                                                                                        
+                                                                                                                                        }
+                                                                                                                                        },
+                                                                                                                                        54: { 
+                                                                                                                                            title: "Unstable Points IX (MP54)",
+                                                                                                                                                    description: "^1.02 Ultra-Points",
+                                                                                                                                                    cost: new Decimal(75000),
+                                                                                                                                                    unlocked() {
+                                                                                                                                                        return hasUpgrade("mp", 53)
+                                                                                                                                                    
+                                                                                                                                                    }
+                                                                                                                                                    },
+                                                                                                                                                    55: { 
+                                                                                                                                                        title: "Split of Points II (MP55)",
+                                                                                                                                                                description: "Total Mega-Points boosts Ultra-Points",
+                                                                                                                                                                cost: new Decimal(90000),
+                                                                                                                                                                effect() {
+                                                                                                                                                                    return player.mp.total.add(1).pow("7")
+                                                                                                                                                                },
+                                                                                                                                                                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                                                unlocked() {
+                                                                                                                                                                    return hasUpgrade("mp", 54)
+                                                                                                                                                                
+                                                                                                                                                                }
+                                                                                                                                                                },
+                                                                                                                                                                 61: { 
+                                                                                                                                            title: "The Producer (MP61)",
+                                                                                                                                                    description: "Unlocks 3 sub-layers.",
+                                                                                                                                                    cost: new Decimal(150000),
+                                                                                                                                                    unlocked() {
+                                                                                                                                                        return hasUpgrade("mp", 55)
+                                                                                                                                                    
+                                                                                                                                                    }
+                                                                                                                                                    },
+                                                                                                                                                    62: { 
+                                                                                                                                                        title: "Split of Points III (MP62)",
+                                                                                                                                                                description: "Total Mega-Points boosts Super-Points",
+                                                                                                                                                                cost: new Decimal(270000),
+                                                                                                                                                                effect() {
+                                                                                                                                                                    return player.mp.total.add(1).pow("10")
+                                                                                                                                                                },
+                                                                                                                                                                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                                                unlocked() {
+                                                                                                                                                                    return hasUpgrade("mp", 61)
+                                                                                                                                                                
+                                                                                                                                                                }
+                                                                                                                                                                },
+                                                                                                                                                                63: {
+                                                                                                                                                                    title: "Air Mega Booster (MP63)",
+                                                                                                                                                                    description: "Every Air you have also boosts mega-point gain by 1.1x",
+                                                                                                                                                                    cost: new Decimal(270000),
+                                                                                                                                                                    effect() {
+                                                                                                                                                                        let effect = Decimal.pow(1.1, player.ai.points).min("10000")
+                                                                                                                                                                        return effect
+                                                                                                                                                                    },
+                                                                                                                                                                    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                                                    unlocked() {
+                                                                                                                                                                        return hasUpgrade("mp", 62)
+                                                                                                                                                                    
+                                                                                                                                                                    }        
+                                                                                                                                                                },
+                                                                                                                                                                        64: {
+                                                                                                                                                                            title: "Air Energy Booster (MP64)",
+                                                                                                                                                                            description: "Every Air you have boosts energy gain by 10x",
+                                                                                                                                                                            cost: new Decimal(300000),
+                                                                                                                                                                            effect() {
+                                                                                                                                                                                let effect = Decimal.pow(10, player.ai.points).div(10)
+                                                                                                                                                                                return effect
+                                                                                                                                                                            },
+                                                                                                                                                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                                                            unlocked() {
+                                                                                                                                                                                return hasUpgrade("mp", 63)
+                                                                                                                                                                            
+                                                                                                                                                                            }      
+                                                                                                                                                                        },
+                                                                                                                                                                        65: { title: "Discount VI (MP65)",
+        description: "Energy will also divide the cost of Points-1, Points-2 and Points-3",
+        cost: new Decimal(2500000),
+        effect() {
+            return player.e.points.add(1).pow("3")
+        },
+        effectDisplay() { return  "/" + format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("mp", 64)
+        }
+        },
+        71: { 
+            title: "Split of Points IV (MP71)",
+                    description: "Energy boosts Ultra-Points",
+                    cost: new Decimal(3000000),
+                    effect() {
+                        return player.e.points.add(1).pow("3")
+                    },
+                    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                    unlocked() {
+                        return hasUpgrade("mp", 65)
+                    
+                    }
+                    },
+                    72: { 
+                        title: "Energy Combuster (MP72)",
+                                description: "Mega-Points boosts Energy.",
+                                cost: new Decimal(5000000),
+                                effect() {
+                                    return player.mp.points.add(1).pow("0.5")
+                                },
+                                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                unlocked() {
+                                    return hasUpgrade("mp", 71)
+                                
+                                }
+                                },
+                                73: { 
+                                    title: "Light Combuster (MP73)",
+                                            description: "Mega-Points boosts Light.",
+                                            cost: new Decimal(1e7),
+                                            effect() {
+                                                return player.mp.points.add(1).pow("0.333333333333333")
+                                            },
+                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                            unlocked() {
+                                                return hasUpgrade("mp", 72)
+                                            
+                                            }
+                                            },
+                                            74: { 
+                                                title: "Split of Points V (MP74)",
+                                                        description: "Energy boosts Super-Points",
+                                                        cost: new Decimal(1e7),
+                                                        effect() {
+                                                            return player.e.points.add(1).pow("3")
+                                                        },
+                                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                        unlocked() {
+                                                            return hasUpgrade("mp", 73)
+                                                        
+                                                        }
+                                                        },
+                                                        75: {
+                                                            title: "Air Light Booster (MP75)",
+                                                            description: "Every Air you have boosts light gain by 10x",
+                                                            cost: new Decimal(1.5e7),
+                                                            effect() {
+                                                                let effect = Decimal.pow(10, player.ai.points).div(10)
+                                                                return effect
+                                                            },
+                                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                            unlocked() {
+                                                                return hasUpgrade("mp", 74)
+                                                            
+                                                            }      
+                                                        },
+                                                        81: { 
+                                                            title: "Mega of Sub-Points III (MP81)",
+                                                                    description: "Unlock Points-6",
+                                                                    cost: new Decimal(6e7),
+                                                                    unlocked() {
+                                                                        return hasUpgrade("mp", 75)
+                                                                    
+                                                                    }
+                                                                    },
+                                                                    82: { title: "Discount VII (MP82)",
+                                                                    description: "Light will also divide the cost of Points-1, Points-2 and Points-3",
+                                                                    cost: new Decimal(2.5e8),
+                                                                    effect() {
+                                                                        return player.e.points.add(1).pow("1")
+                                                                    },
+                                                                    effectDisplay() { return  "/" + format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+                                                                    unlocked() {
+                                                                        return hasUpgrade("mp", 81)
+                                                                    }
+                                                                    },
+                                                                    83: {
+                                                                        title: "The pain continues II (MP83)",
+                                                                        description: "Unlock a 2nd mega point challenge",
+                                                                        cost: new Decimal("1e10000"),
+                                                                        currencyInternalName: "points",
+                                                                        currencyDisplayName: "Points",
+                                                                        unlocked() {return hasUpgrade('mp', 82)},
+                                                                    },
     },
     milestones: {
     1: {
@@ -234,6 +460,16 @@ addLayer("mp", {
         effectDescription: "Automatically buys Hyper-Point Upgrades.",
         done() { return player.mp.total.gte(250) }
     },
+    6: {
+        requirementDescription: "1 Energy (MPM6)",
+        effectDescription: "Gain 100% of Energy gained on reset per second.",
+        done() { return player.e.points.gte(1) }
+    },
+    7: {
+        requirementDescription: "1 Light (MPM7)",
+        effectDescription: "Gain 100% of Light gained on reset per second",
+        done() { return player.l.points.gte(1) }
+    },
 },
     challenges: {
         11: {
@@ -244,13 +480,21 @@ addLayer("mp", {
                 canComplete: function() {return player.points.gte("1e318")},
                 unlocked() { return (hasUpgrade('mp', 31)) },
         },
+        12: {
+            name: "Paradox",
+            challengeDescription: "Points-1, Points-2 and Points-3 scales much quicker again, you can't gain prestige points, ultra-points and hyper-point gain is square rooted.",
+            goalDescription: "1e58 Hyper-Points",
+            rewardDescription: "Double Mega-Point Gain and unlock a new layer. (Next Update)",
+            canComplete: function() {return player.hp.points.gte("1e58")},
+            unlocked() { return (hasUpgrade('mp', 31)) },
+    },
     },
     color: "orange",
     requires: new Decimal("1e1500"), // Can be a function that takes requirement increases into account
     resource: "Mega-Points", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
-    branches: ["hp", "pb4"],
+    branches: ["hp"],
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.00075, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -259,6 +503,12 @@ addLayer("mp", {
         if (hasChallenge('mp', 11)) mult = mult.times(2)
         if (hasUpgrade('mp', 34)) mult = mult.times(1.75)
         if (hasUpgrade('mp', 42)) mult = mult.times(upgradeEffect('mp', 42))
+        if (hasUpgrade('mp', 44)) mult = mult.times(1.75)
+        if (hasUpgrade('up', 81)) mult = mult.times(1.75)
+        if (hasUpgrade('mp', 63)) mult = mult.times(upgradeEffect('mp', 63))
+        if (hasUpgrade('hp', 72)) mult = mult.times(1.5)
+        if (hasUpgrade('sp', 85)) mult = mult.times(2)
+        if (hasChallenge('mp', 12)) mult = mult.times(2)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

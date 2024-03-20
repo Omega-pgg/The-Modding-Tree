@@ -631,7 +631,7 @@ addLayer("a", {
             done() {
                 if (hasUpgrade("mp", 24))
                 return true                },
-            tooltip: "Get the 9th mega-point upgrade. (MP24)",
+            tooltip: "Unlock Points-4.",
             onComplete() {
             },
         },
@@ -692,9 +692,99 @@ addLayer("a", {
         155: {
             name: "Stable Hyper",
             done() {
-                return player.hp.points.gte("1e170")
+                return player.hp.points.gte("1e200")
             },
-            tooltip: "Get 1e170 Hyper-Points<br> Reward: 2x Points and Super-Points",
+            tooltip: "Get 1e200 Hyper-Points<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        161: {
+            name: "Even more Sub-Points!?!?",
+            done() {
+                if (hasUpgrade("mp", 51))
+                return true                },
+            tooltip: "Unlock Points-5.",
+            onComplete() {
+            },
+        },
+        162: {
+            name: "Hyper God",
+            done() {
+                return player.hp.points.gte("1e303")
+            },
+            tooltip: "Get 1e303 Hyper-Points.",
+            onComplete() {
+            },
+        },
+        163: {
+            name: "Worker",
+            done() {
+                if (hasUpgrade("mp", 61))
+                return true                },
+            tooltip: "Unlock Air & Energy and Light",
+            onComplete() {
+            },
+        },
+        164: {
+            name: "Mega Smith",
+            done() {
+                return player.mp.points.gte("1e7")
+            },
+            tooltip: "Get 10,000,000 Mega-Points.",
+            onComplete() {
+            },
+        },
+        165: {
+            name: "Point Wesson",
+            done() {
+                return player.points.gte("1e6003")
+            },
+            tooltip: "Get 1e6,003 Points.<br> Reward: 2x Points and Super-Points",
+            onComplete() {
+            },
+        },
+        171: {
+            name: "Energlizer",
+            done() {
+                return player.e.points.gte("50000")
+            },
+            tooltip: "Get 50,000 Energy.",
+            onComplete() {
+            },
+        },
+        172: {
+            name: "Point Burner",
+            done() {
+                if (hasUpgrade("mp", 81))
+                return true    },
+            tooltip: "Unlock Points-6.",
+            onComplete() {
+            },
+        },
+        173: {
+            name: "Super Form",
+            done() {
+                return player.sp.points.gte("1e5000")
+            },
+            tooltip: "Get 1e5,000 Super-Points.",
+            onComplete() {
+            },
+        },
+        174: {
+            name: "Breath",
+            done() {
+                return player.ai.points.gte("5")
+            },
+            tooltip: "Get 5 Air.",
+            onComplete() {
+            },
+        },
+        175: {
+            name: "Point Pusher",
+            done() {
+                return player.points.gte("1e10000")
+            },
+            tooltip: "Get 1e10,000 Points!<br> Reward: 2x Points and Super-Points",
             onComplete() {
             },
         },

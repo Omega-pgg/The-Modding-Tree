@@ -29,7 +29,7 @@ addLayer("p", {
                     content: [
                         ["blank", "15px"],
                         ["raw-html", () => `<h4 style="opacity:.5">Welcome to the Omega Tree!<br> Your goal is to reach the endgame. You can press P to gain Prestige Points.<br> Which is used to buy upgrades.</h4>`],
-                        ["upgrades", [1,2,3,4,5,6,7,8,9,10,11]]
+                        ["upgrades", [1,2,3,4,5,6,7,8,9,10,11,12]]
                     ],
                 },
             },
@@ -569,6 +569,30 @@ addLayer("p", {
             return hasUpgrade("p", 114)
         }
         },
+        116: { title: "Point Expansion XI (PU116)",
+        description: "Points boosts Super-Points at a very reduced rate.",
+        cost: new Decimal("1e3250"),
+        effect() {
+            return player.points.add(1).pow("0.01").min("1e1000")
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("p", 105)
+        
+        }
+    },
+    121: { title: "Advanced Upgrades VII (PU121)",
+        description: "Points boosts Ultra-Points at a very reduced rate.",
+        cost: new Decimal("1e3690"),
+        effect() {
+            return player.points.add(1).pow("0.005").min("1e1000")
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("p", 116)
+        
+        }
+    },
     },
     doReset(mp) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -599,6 +623,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (inChallenge("hp", 22)) mult = mult.pow(0.2)
+        if (inChallenge("mp", 12)) mult = mult.div("1e123123")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

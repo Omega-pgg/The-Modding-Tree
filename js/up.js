@@ -357,8 +357,44 @@ addLayer("up", {
                                                                                                                                                                         return hasUpgrade("up", 74)
                                                                                                                                                                     
                                                                                                                                                                     }
-                                                                                                                                                                    },                                                                                                                                             
-                                                        
+                                                                                                                                                                    },   
+                                                                                                                                                                    81: { 
+                                                                                                                                                                        title: "Ultra-Mega (UP81)",
+                                                                                                                                                                                description: "+75% Mega-Points",
+                                                                                                                                                                                cost: new Decimal("1e1120"),
+                                                                                                                                                                                unlocked() {
+                                                                                                                                                                                    return hasUpgrade("up", 75)
+                                                                                                                                                                                
+                                                                                                                                                                                }
+                                                                                                                                                                                },    
+                                                                                                                                                                                82: {
+                                            title: "Air Super Booster (UP82)",
+                                            description: "Been a while. Every Air you have boosts super-point gain by 1e12x",
+                                            cost: new Decimal("1e2250"),
+                                            effect() {
+                                                let effect = Decimal.pow(1e12, player.ai.points)
+                                                return effect
+                                            },
+                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                            unlocked() {
+                                                return hasUpgrade("up", 81)
+                                            
+                                            }      
+                                        },                                                                                                                                      
+                                        83: {
+                                            title: "Air Point Booster (UP83)",
+                                            description: "Every Air you have boosts point gain by 1e15x",
+                                            cost: new Decimal("1e2285"),
+                                            effect() {
+                                                let effect = Decimal.pow(1e15, player.ai.points)
+                                                return effect
+                                            },
+                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                            unlocked() {
+                                                return hasUpgrade("up", 82)
+                                            
+                                            }      
+                                        },                                                                                                   
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "pink",
@@ -366,7 +402,7 @@ addLayer("up", {
     resource: "Ultra-Points", // Name of prestige currency
     baseResource: "Super-Points", // Name of resource prestige is based on
     baseAmount() {return player.sp.points}, // Get the current amount of baseResource
-    branches: ["sp"],
+    branches: ["sp", "hp", "pb4", "pb5", "pb6"],
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.25, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -429,6 +465,16 @@ addLayer("up", {
         if (hasChallenge('hp', 32)) mult = mult.times(1e6)
         if (hasUpgrade('mp', 33)) mult = mult.times(1e10)
         if (hasUpgrade('sp', 84)) mult = mult.times("2")
+        if (inChallenge("hp", 42)) mult = mult.pow(0.55)
+        if (hasUpgrade('mp', 54)) mult = mult.pow(1.02)
+        if (hasUpgrade('mp', 55)) mult = mult.times(upgradeEffect('mp', 55))
+        if (hasChallenge('hp', 51)) mult = mult.times(1000)
+        if (hasUpgrade('mp', 71)) mult = mult.times(upgradeEffect('mp', 71))
+        if (hasUpgrade('p', 121)) mult = mult.times(upgradeEffect('p', 121))
+        if (hasUpgrade('hp', 73)) mult = mult.times(upgradeEffect('hp', 73))
+        if (hasUpgrade('hp', 75)) mult = mult.times(upgradeEffect('hp', 75))
+        if (hasUpgrade('hp', 82)) mult = mult.times(upgradeEffect('hp', 82))
+        if (inChallenge("mp", 12)) mult = mult.div("1e123123")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

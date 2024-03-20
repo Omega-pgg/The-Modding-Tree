@@ -422,6 +422,26 @@ unlocked() {
                     
                     }
         },
+        85: { 
+            title: "The Mega of Super (SP85)",
+                    description: "Been a while again. Double Mega-Point Gain",
+                    cost: new Decimal("1e3700"),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 84)
+                    
+                    }
+        },
+        91: { 
+            title: "The Super of Resources (SP91)",
+                    description: "5x Energy and Light",
+                    cost: new Decimal("1e5735"),
+                    
+                    unlocked() {
+                        return hasUpgrade("sp", 85)
+                    
+                    }
+        },
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "red",
@@ -511,6 +531,18 @@ unlocked() {
             if (hasAchievement('a', 145)) mult = mult.times("2")
             if (hasChallenge('hp', 41)) mult = mult.pow(1.02)
             if (hasAchievement('a', 155)) mult = mult.times("2")
+            if (hasUpgrade('mp', 45)) mult = mult.pow(1.02)
+            if (hasUpgrade('pb5', 11)) mult = mult.div(upgradeEffect('pb5', 11))
+            if (inChallenge("hp", 42)) mult = mult.pow(0.55)
+            if (hasChallenge('hp', 51)) mult = mult.times(1000)
+            if (hasUpgrade('mp', 62)) mult = mult.times(upgradeEffect('mp', 62))
+            if (hasAchievement('a', 165)) mult = mult.times("2")
+            if (hasUpgrade('p', 116)) mult = mult.times(upgradeEffect('p', 116))
+            if (hasUpgrade('mp', 74)) mult = mult.times(upgradeEffect('mp', 74))
+            if (hasUpgrade('hp', 73)) mult = mult.times(upgradeEffect('hp', 73))
+            if (hasUpgrade('up', 82)) mult = mult.times(upgradeEffect('up', 82))
+            if (hasUpgrade('hp', 81)) mult = mult.times(upgradeEffect('hp', 81))
+            if (hasAchievement('a', 175)) mult = mult.times("2")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

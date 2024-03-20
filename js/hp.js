@@ -35,7 +35,7 @@ addLayer("hp", {
                     unlocked() {return (hasUpgrade("hp", 52))},
             content: [
                 ["blank", "15px"],
-                ["challenges", [1,2,3,4]]
+                ["challenges", [1,2,3,4,5,6]]
                 
             ]
                 },
@@ -105,6 +105,22 @@ addLayer("hp", {
     rewardDescription: "4x Hyper-Point Gain, ^1.02 Super-Points",
     canComplete: function() {return player.points.gte("250000")},
     unlocked() { return (hasChallenge('hp', 32)) },
+},
+42: {
+    name: "Harder 2",
+    challengeDescription: "Points, Super-Points and Ultra-Points is decreased to ^0.55.",
+    goalDescription: "1e615 Points",
+    rewardDescription: "4x Hyper-Point Gain and 100,000x Points.",
+    canComplete: function() {return player.points.gte("1e615")},
+    unlocked() { return (hasChallenge('hp', 41)) },
+},
+51: {
+    name: "Less Sub-Points 4",
+    challengeDescription: "Points-1, Points-2 and Points-3 cost scaling is 80% higher",
+    goalDescription: "100 Points-3",
+    rewardDescription: "16x Hyper-Point Gain, 1,000x Super-Points, Ultra-Points and Points.",
+    canComplete: function() {return player.pb3.points.gte("100")},
+    unlocked() { return (hasChallenge('hp', 42)) },
 },
         },
     upgrades: {
@@ -421,6 +437,87 @@ addLayer("hp", {
             return hasUpgrade("hp", 64)
         }
         },
+        71: { title: "Discount V (HP71)",
+        description: "Ultra-Points will divide the cost of Points-1, Points-2 and Points-3",
+        cost: new Decimal(1e228),
+        effect() {
+            return player.up.points.add(1).pow("0.1")
+        },
+        effectDisplay() { return  "/" + format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("hp", 65)
+        }
+        },
+        72: { 
+            title: "Points of Mega II (HP72)",
+                    description: "+50% Mega-Points",
+                    cost: new Decimal(1e265),
+                    unlocked() {
+                        return hasUpgrade("hp", 71)
+                    
+                    }    
+                },
+                73: { title: "Split of Points VI (HP73)",
+                                        description: "Light boosts Points, Super-Points and Ultra-Points",
+                                        cost: new Decimal("1e323"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 72)
+                                        },
+                                        effect() {
+                                            return player.l.points.add(1).pow("1")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        74: {
+                                            title: "Air Hyper Booster (HP74)",
+                                            description: "Every Air you have boosts hyper-point gain by 1,000x",
+                                            cost: new Decimal("3.333e333"),
+                                            effect() {
+                                                let effect = Decimal.pow(1000, player.ai.points)
+                                                return effect
+                                            },
+                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                            unlocked() {
+                                                return hasUpgrade("hp", 73)
+                                            
+                                            }      
+                                        },
+                                        75: {
+                                            title: "Air Ultra Booster (HP75)",
+                                            description: "Every Air you have boosts ultra-point gain by 10,000,000,000x",
+                                            cost: new Decimal("1e345"),
+                                            effect() {
+                                                let effect = Decimal.pow(1e10, player.ai.points)
+                                                return effect
+                                            },
+                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                            unlocked() {
+                                                return hasUpgrade("hp", 74)
+                                            
+                                            }      
+                                        },
+                                        81: { title: "Split of Points VII (HP81)",
+                                        description: "Ultra-Points boosts Super-Points",
+                                        cost: new Decimal("1e410"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 75)
+                                        },
+                                        effect() {
+                                            return player.up.points.add(1).pow("0.01")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        82: { title: "Split of Points VIII (HP82)",
+                                        description: "Super-Points boosts Points and Ultra-Points",
+                                        cost: new Decimal("1e420"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 81)
+                                        },
+                                        effect() {
+                                            return player.sp.points.add(1).pow("0.001")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
     },
     doReset(mp) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -447,7 +544,7 @@ addLayer("hp", {
     resource: "Hyper-Points", // Name of prestige currency
     baseResource: "Super-Points", // Name of resource prestige is based on
     baseAmount() {return player.sp.points}, // Get the current amount of baseResource
-    branches: ["up"],
+    branches: ["mp"],
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.0625, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -480,6 +577,13 @@ addLayer("hp", {
         if (hasUpgrade('sp', 84)) mult = mult.times("2")
         if (hasUpgrade('mp', 41)) mult = mult.times(2)
         if (hasChallenge('hp', 41)) mult = mult.times(4)
+        if (hasUpgrade('pb5', 11)) mult = mult.times(upgradeEffect('pb5', 11))
+        if (hasChallenge('hp', 42)) mult = mult.times(4)
+        if (hasUpgrade('mp', 53)) mult = mult.times(upgradeEffect('mp', 53))
+        if (hasChallenge('hp', 51)) mult = mult.times(16)
+        if (hasUpgrade('hp', 74)) mult = mult.times(upgradeEffect('hp', 74))
+        if (hasUpgrade('pb6', 11)) mult = mult.times(upgradeEffect('pb6', 11))
+        if (inChallenge("mp", 12)) mult = mult.pow(0.5)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

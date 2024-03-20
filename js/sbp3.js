@@ -35,13 +35,19 @@ addLayer("pb3", {
     branches: ["up", "p"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     canBuyMax() { return hasMilestone("hp", 2) },
+    
     exponent() {if (inChallenge("hp", 12)) return new Decimal(1.1)
+    else if (inChallenge("hp", 51)) return new Decimal("1.8")
     else if (inChallenge("hp", 32)) return new Decimal("1.4")
     else if (inChallenge("hp", 31)) return new Decimal("1.2")
     else if (inChallenge("mp", 11)) return new Decimal("20")
+    else if (inChallenge("mp", 12)) return new Decimal("20")
     else return new Decimal(1)},  
         gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('hp', 71)) mult = mult.div(upgradeEffect('hp', 71))
+        if (hasUpgrade('mp', 65)) mult = mult.div(upgradeEffect('mp', 65))
+        if (hasUpgrade('mp', 82)) mult = mult.div(upgradeEffect('mp', 82))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

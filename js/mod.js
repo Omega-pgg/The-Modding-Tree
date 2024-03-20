@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,11 +13,20 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.2.0: Update 2",
+	num: "1.3.0: Update 3",
 	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.3.0: Update 3 (20/03/2024)</h3><br>
+		- The Third Update is here!<br>
+		- Added many new upgrades.<br>
+		- Added many new achievements.<br>
+		- Added many new challenges.<br>
+		- Added more milestones.<br>
+		- Added some layer effects.<br>
+		- Added some more sub-layers.<br>
+		- Endgame: 1.00e10,300 Points.<br><br>
 <h3>v1.2.0: Update 2 (10/03/2024)</h3><br>
 		- The Second Update is here!<br>
 		- Added many new upgrades.<br>
@@ -65,7 +74,7 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(1)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(1).mul(tmp["e"].effect)
 	if (hasMilestone('hp', 22)) gain = gain.times(1.01)
 	if (hasUpgrade('p', 12)) gain = gain.times("2")
 	if (hasUpgrade('p', 13)) gain = gain.times("3")
@@ -215,6 +224,16 @@ function getPointGen() {
 	if (hasAchievement('a', 145)) gain = gain.times("2")
 	if (inChallenge("hp", 41)) gain = gain.pow(0.01)
 	if (hasAchievement('a', 155)) gain = gain.times("2")
+	if (inChallenge("hp", 42)) gain = gain.pow(0.55)
+	if (hasChallenge('hp', 42)) gain = gain.times(1e5)
+	if (hasUpgrade('mp', 52)) gain = gain.times("1e150")
+	if (hasChallenge('hp', 51)) gain = gain.times(1000)
+	if (hasAchievement('a', 165)) gain = gain.times("2")
+	if (hasUpgrade('hp', 73)) gain = gain.times(upgradeEffect('hp', 73))
+	if (hasUpgrade('up', 83)) gain = gain.times(upgradeEffect('up', 83))
+	if (hasUpgrade('pb6', 11)) gain = gain.div(upgradeEffect('pb6', 11))
+	if (hasUpgrade('hp', 82)) gain = gain.times(upgradeEffect('hp', 82))
+	if (hasAchievement('a', 175)) gain = gain.times("2")
 	return gain
 }
 
@@ -256,7 +275,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("1e4270"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("1e10300"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -265,7 +284,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1e4270"))
+	return player.points.gte(new Decimal("1e10300"))
 }
 
 
