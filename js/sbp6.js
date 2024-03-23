@@ -22,10 +22,16 @@ addLayer("pb6", {
      
         },
   },
+  autoUpgrade() { if (hasMilestone("sa" , 2)) return true},
 
     color: "#e0ddd2",
     requires: new Decimal(1), // Can be a function that takes requirement increases into account
+    resetsNothing() {return hasMilestone("sa", 2)},
+    autoPrestige() {
+        return hasMilestone("sa", 2)
+    },
     resource: "Points-6", // Name of prestige currency
+    canBuyMax() { return hasMilestone("sa", 2) },
     baseResource: "Points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     branches: ["l"],
@@ -34,6 +40,7 @@ addLayer("pb6", {
     else return new Decimal(4)},  
         gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('hp', 91)) mult = mult.div(upgradeEffect('hp', 91))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

@@ -61,6 +61,23 @@ effectDescription(){
         if (hasUpgrade('e', 13)) mult = mult.times(5)
         if (hasUpgrade('e', 14)) mult = mult.times(upgradeEffect('e', 14))
         if (hasUpgrade('sp', 91)) mult = mult.times(5)
+        if (hasMilestone('sa', 1)) mult = mult.times("5")
+        if (hasMilestone('sa', 2)) mult = mult.times("3")
+        if (hasMilestone('sa', 3)) mult = mult.times("2")
+        if (hasUpgrade('hp', 83)) mult = mult.times(upgradeEffect('hp',83))
+        if (hasUpgrade('hp', 84)) mult = mult.times(upgradeEffect('hp',84))
+        if (hasUpgrade('up', 84)) mult = mult.times(upgradeEffect('up',84))
+        if (hasMilestone('sa', 4)) mult = mult.times("5")
+        if (hasUpgrade('up', 85)) mult = mult.times(upgradeEffect('up',85))
+        if (hasMilestone('sa', 5)) mult = mult.times("4")
+        if (hasMilestone('sa', 6)) mult = mult.times("25")
+        if (hasMilestone('sa', 7)) mult = mult.times("1.5")
+        if (hasUpgrade('sp', 94)) mult = mult.times(upgradeEffect('sp',94))
+        if (hasUpgrade('up', 92)) mult = mult.times(upgradeEffect('up',92))
+        if (hasMilestone('sa', 9)) mult = mult.times("20")
+        if (hasUpgrade('up', 93)) mult = mult.times(15)
+        if (hasUpgrade('mp', 85)) mult = mult.pow(1.02)
+        if (hasMilestone('sa', 10)) mult = mult.times("7.5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

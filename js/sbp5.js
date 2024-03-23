@@ -22,10 +22,17 @@ addLayer("pb5", {
      
         },
   },
+  autoUpgrade() { if (hasMilestone("sa" , 2)) return true},
 
     color: "#500000",
     requires: new Decimal(1), // Can be a function that takes requirement increases into account
+    resetsNothing() {return hasMilestone("sa", 2)},
+    autoPrestige() {
+        return hasMilestone("sa", 2)
+    },
     resource: "Points-5", // Name of prestige currency
+    canBuyMax() { return hasMilestone("sa", 2) },
+
     baseResource: "Super-Points", // Name of resource prestige is based on
     baseAmount() {return player.sp.points}, // Get the current amount of baseResource
     branches: ["e"],
@@ -34,6 +41,7 @@ addLayer("pb5", {
     else return new Decimal(5)},  
         gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('hp', 91)) mult = mult.div(upgradeEffect('hp', 91))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

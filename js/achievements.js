@@ -788,6 +788,96 @@ addLayer("a", {
             onComplete() {
             },
         },
+        181: {
+            name: "A new reset journey!",
+            done() {
+                return player.sa.points.gte("1")
+            },
+            tooltip: "Reach Sacrifice Tier 1.",
+            onComplete() {
+            },
+        },
+        182: {
+            name: "When will the scaling begin?",
+            done() {
+                return player.pb3.points.gte("15000")
+            },
+            tooltip: "Get 15,000 Points-3.",
+            onComplete() {
+            },
+        },
+        183: {
+            name: "Mega Last",
+            done() {
+                return player.mp.points.gte("1e15")
+            },
+            tooltip: "Get 1e15 Mega-Points.",
+            onComplete() {
+            },
+        },
+        184: {
+            name: "Googolize Energy Power",
+            done() {
+                return player.e.points.gte("1e100")
+            },
+            tooltip: "Get 1e100 Energy.",
+            onComplete() {
+            },
+        },
+        185: {
+            name: "Super Googol",
+            done() {
+                return player.sp.points.gte("1e10000")
+            },
+            tooltip: "Get 1e10,000 Super-Points. Reward: 100,000x Ultra-Points and Hyper-Points",
+            onComplete() {
+            },
+        },
+        191: {
+            name: "A new reset journey... yet again but way easier!",
+            done() {
+                return player.sa.points.gte("5")
+            },
+            tooltip: "Reach Sacrifice Tier 5.",
+            onComplete() {
+            },
+        },
+        192: {
+            name: "Can't hold all of these e1,000!",
+            done() {
+                return player.hp.points.gte("1e1000")
+            },
+            tooltip: "Get 1e1,000 Hyper-Points",
+            onComplete() {
+            },
+        },
+        193: {
+            name: "Mega Broken",
+            done() {
+                return player.mp.points.gte("1e33")
+            },
+            tooltip: "Get 1e33 Mega-Points.",
+            onComplete() {
+            },
+        },
+        194: {
+            name: "Point Territory",
+            done() {
+                return player.points.gte("1e25000")
+            },
+            tooltip: "Get 1e25,000 Points.",
+            onComplete() {
+            },
+        },
+        195: {
+            name: "This is getting repetive",
+            done() {
+                return player.sa.points.gte("10")
+            },
+            tooltip: "Reach Sacrifice Tier 10.",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

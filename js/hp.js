@@ -518,6 +518,61 @@ addLayer("hp", {
                                         },
                                         effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
                                         },
+                                        83: { title: "Energetic Points (HP83)",
+                                        description: "Points boosts Energy & Light",
+                                        cost: new Decimal("1e535"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 82)
+                                        },
+                                        effect() {
+                                            return player.points.add(1).pow("0.0002")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        84: { title: "Energetic Points II (HP84)",
+                                        description: "Super-Points boosts Energy & Light",
+                                        cost: new Decimal("1e550"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 83)
+                                        },
+                                        effect() {
+                                            return player.sp.points.add(1).pow("0.0002")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        85: { title: "Mega to Points II (HP85)",
+                                        description: "Hyper-Points boosts Mega-Points",
+                                        cost: new Decimal("1e800"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 84)
+                                        },
+                                        effect() {
+                                            return player.hp.points.add(1).pow("0.001")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        91: { title: "Discount VIII (HP91)",
+        description: "Hyper-Points will divide the cost of Points-4, Points-5 and Points-6",
+        cost: new Decimal("1e1050"),
+        effect() {
+            return player.hp.points.add(1).pow("10")
+        },
+        effectDisplay() { return  "/" + format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+        unlocked() {
+            return hasUpgrade("hp", 85)
+        }
+        },
+        92: { title: "Sub-Power (HP92)",
+                                        description: "Points-4 boosts Mega-Points",
+                                        cost: new Decimal("1e1060"),
+                                        unlocked() {
+                                            return hasUpgrade("hp", 91)
+                                        },
+                                        effect() {
+                                            return player.pb4.points.add(1).pow("1")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
     },
     doReset(mp) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -529,9 +584,9 @@ addLayer("hp", {
     
         // Stage 3, track which main features you want to keep - milestones
         let keep = [];
-        if (hasMilestone('mp', 10)) keep.push("milestones");
+        if (hasMilestone('sa', 10)) keep.push("milestones");
         if (hasMilestone('mp', 3)) keep.push("challenges");
-    
+        if (hasMilestone('sa', 4)) keep.push("challenges");
         // Stage 4, do the actual data reset
         layerDataReset(this.layer, keep);
     
@@ -584,8 +639,22 @@ addLayer("hp", {
         if (hasUpgrade('hp', 74)) mult = mult.times(upgradeEffect('hp', 74))
         if (hasUpgrade('pb6', 11)) mult = mult.times(upgradeEffect('pb6', 11))
         if (inChallenge("mp", 12)) mult = mult.pow(0.5)
+        if (hasMilestone('sa', 1)) mult = mult.times("5")
+        if (hasMilestone('sa', 2)) mult = mult.times("5")
+        if (hasMilestone('sa', 3)) mult = mult.times("3")
+        if (hasMilestone('sa', 4)) mult = mult.times("50")
+        if (hasUpgrade('e', 23)) mult = mult.times(upgradeEffect('e',23))
+        if (hasUpgrade('e', 31)) mult = mult.times(upgradeEffect('e',31))
+        if (hasAchievement('a', 185)) mult = mult.times("1e5")
+        if (hasMilestone('sa', 8)) mult = mult.times("1e9")
+        if (hasUpgrade('mp', 84)) mult = mult.pow(1.02)
+        if (hasMilestone('sa', 9)) mult = mult.times("20")
+        if (hasMilestone('sa', 10)) mult = mult.times("7.5")
         return mult
     },
+    passiveGeneration() {
+        if (hasMilestone("sa", 5)) return (hasMilestone("sa", 5)?1:0)
+        },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },

@@ -394,7 +394,58 @@ addLayer("up", {
                                                 return hasUpgrade("up", 82)
                                             
                                             }      
-                                        },                                                                                                   
+                                        },              
+                                        84: { title: "Energetic Points III (UP84)",
+                                        description: "Ultra-Points boosts Energy & Light",
+                                        cost: new Decimal("1e3605"),
+                                        unlocked() {
+                                            return hasUpgrade("up", 83)
+                                        },
+                                        effect() {
+                                            return player.up.points.add(1).pow("0.0004")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },     
+                                        85: { title: "Energetic Points IV (UP85)",
+                                        description: "Hyper-Points boosts Energy & Light",
+                                        cost: new Decimal("1e3950"),
+                                        unlocked() {
+                                            return hasUpgrade("up", 83)
+                                        },
+                                        effect() {
+                                            return player.hp.points.add(1).pow("0.002")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        91: { title: "Mega-itself (UP91)",
+                                        description: "Mega-Points boosts itself.",
+                                        cost: new Decimal("1e5440"),
+                                        unlocked() {
+                                            return hasUpgrade("up", 85)
+                                        },
+                                        effect() {
+                                            return player.mp.points.add(1).pow("0.04")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        }, 
+                                        92: { title: "Mega-itself (UP92)",
+                                        description: "Points-3 boosts Energy & Light",
+                                        cost: new Decimal("1e6200"),
+                                        unlocked() {
+                                            return hasUpgrade("up", 91)
+                                        },
+                                        effect() {
+                                            return player.pb3.points.add(1).pow("1")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        93: { title: "Energy Boost III (UP93)",
+                                        description: "15x Light and 200x Energy",
+                                        cost: new Decimal("1e7290"),
+                                        unlocked() {
+                                            return hasUpgrade("up", 92)
+                                        },       
+                                        },                                                                                                                                                                           
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "pink",
@@ -475,6 +526,14 @@ addLayer("up", {
         if (hasUpgrade('hp', 75)) mult = mult.times(upgradeEffect('hp', 75))
         if (hasUpgrade('hp', 82)) mult = mult.times(upgradeEffect('hp', 82))
         if (inChallenge("mp", 12)) mult = mult.div("1e123123")
+        if (hasMilestone('sa', 1)) mult = mult.times("5")
+        if (hasMilestone('sa', 2)) mult = mult.times("5")
+        if (hasMilestone('sa', 3)) mult = mult.times("3")
+     if (hasUpgrade('e', 25)) mult = mult.times(upgradeEffect('e',25))
+                 if (hasAchievement('a', 185)) mult = mult.times("1e5")
+                 if (hasMilestone('sa', 8)) mult = mult.times("1e9")
+                         if (hasMilestone('sa', 9)) mult = mult.times("20")
+                         if (hasMilestone('sa', 10)) mult = mult.times("7.5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

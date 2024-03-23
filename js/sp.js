@@ -442,6 +442,41 @@ unlocked() {
                     
                     }
         },
+        92: { title: "Mega to Points (SP92)",
+                                        description: "Points boosts Mega-Points",
+                                        cost: new Decimal("1e10400"),
+                                        unlocked() {
+                                            return hasUpgrade("sp", 91)
+                                        },
+                                        effect() {
+                                            return player.points.add(1).pow("0.00005")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        93: {
+                                            title: "Energilizer (SP93)",
+                                        description: "Energy boosts itself.",
+                                        cost: new Decimal("1e11680"),
+                                        unlocked() {
+                                            return hasUpgrade("sp", 92)
+                                        },
+                                        effect() {
+                                            return player.e.points.add(1).pow("0.04")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
+                                        94: {
+                                            title: "Lightify (SP94)",
+                                        description: "Light boosts itself.",
+                                        cost: new Decimal("1e11950"),
+                                        unlocked() {
+                                            return hasUpgrade("sp", 93)
+                                        },
+                                        effect() {
+                                            return player.l.points.add(1).pow("0.05")
+                                        },
+                                        effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
+                                        },
             },
             autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
     color: "red",
@@ -543,6 +578,13 @@ unlocked() {
             if (hasUpgrade('up', 82)) mult = mult.times(upgradeEffect('up', 82))
             if (hasUpgrade('hp', 81)) mult = mult.times(upgradeEffect('hp', 81))
             if (hasAchievement('a', 175)) mult = mult.times("2")
+            if (hasMilestone('sa', 1)) mult = mult.times("5")
+            if (hasMilestone('sa', 2)) mult = mult.times("5")
+            if (hasMilestone('sa', 3)) mult = mult.times("3")
+            if (hasUpgrade('e', 25)) mult = mult.times(upgradeEffect('e',25))
+            if (hasMilestone('sa', 8)) mult = mult.times("1e9")
+            if (hasMilestone('sa', 9)) mult = mult.times("20")
+            if (hasMilestone('sa', 10)) mult = mult.times("7.5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

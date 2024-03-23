@@ -15,7 +15,7 @@ addLayer("ai", {
             description: "Every Air you have boosts energy and light by 5x",
             cost: new Decimal(0),
             effect() {
-                let effect = Decimal.pow(5, player[this.layer].points).div(5).min("10000")
+                let effect = Decimal.pow(5, player[this.layer].points).div(5).min("1e213")
                 return effect
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -32,6 +32,8 @@ addLayer("ai", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('e', 15)) mult = mult.div(10)
+        if (hasUpgrade('e', 21)) mult = mult.div(upgradeEffect('e', 21))
+        if (hasUpgrade('e', 22)) mult = mult.div(upgradeEffect('e', 22))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

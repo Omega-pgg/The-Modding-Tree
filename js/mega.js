@@ -417,7 +417,7 @@ addLayer("mp", {
                                                                     }
                                                                     },
                                                                     82: { title: "Discount VII (MP82)",
-                                                                    description: "Light will also divide the cost of Points-1, Points-2 and Points-3",
+                                                                    description: "Energy will divide the cost of Points-1, Points-2 and Points-3 by even more.",
                                                                     cost: new Decimal(2.5e8),
                                                                     effect() {
                                                                         return player.e.points.add(1).pow("1")
@@ -435,6 +435,24 @@ addLayer("mp", {
                                                                         currencyDisplayName: "Points",
                                                                         unlocked() {return hasUpgrade('mp', 82)},
                                                                     },
+                                                                    84: { 
+                                                                        title: "Unstable Points X (MP84)",
+                                                                                description: "Been a while. ^1.02 Hyper-Points",
+                                                                                cost: new Decimal(1e27),
+                                                                                unlocked() {
+                                                                                    return hasUpgrade("mp", 83)
+                                                                                
+                                                                                }
+                                                                                },
+                                                                                85: { 
+                                                                                    title: "Unstable Points XI (MP85)",
+                                                                                            description: "^1.02 Energy & Light",
+                                                                                            cost: new Decimal(1e32),
+                                                                                            unlocked() {
+                                                                                                return hasUpgrade("mp", 84)
+                                                                                            
+                                                                                            }
+                                                                                            },
     },
     milestones: {
     1: {
@@ -471,6 +489,22 @@ addLayer("mp", {
         done() { return player.l.points.gte(1) }
     },
 },
+doReset(sa) {
+    // Stage 1, almost always needed, makes resetting this layer not delete your progress
+    if (layers[sa].row <= this.row) return;
+
+    // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+    let keptUpgrades = [];
+
+    // Stage 3, track which main features you want to keep - milestones
+    let keep = [];
+    if (hasMilestone('sa', 7)) keep.push("challenges");
+    // Stage 4, do the actual data reset
+    layerDataReset(this.layer, keep);
+
+    // Stage 5, add back in the specific subfeatures you saved earlier
+    player[this.layer].upgrades.push(...keptUpgrades);
+},
     challenges: {
         11: {
                 name: "Ultra-less",
@@ -484,9 +518,9 @@ addLayer("mp", {
             name: "Paradox",
             challengeDescription: "Points-1, Points-2 and Points-3 scales much quicker again, you can't gain prestige points, ultra-points and hyper-point gain is square rooted.",
             goalDescription: "1e58 Hyper-Points",
-            rewardDescription: "Double Mega-Point Gain and unlock a new layer. (Next Update)",
+            rewardDescription: "Double Mega-Point Gain and unlock a new layer.",
             canComplete: function() {return player.hp.points.gte("1e58")},
-            unlocked() { return (hasUpgrade('mp', 31)) },
+            unlocked() { return (hasUpgrade('mp', 83)) },
     },
     },
     color: "orange",
@@ -509,6 +543,17 @@ addLayer("mp", {
         if (hasUpgrade('hp', 72)) mult = mult.times(1.5)
         if (hasUpgrade('sp', 85)) mult = mult.times(2)
         if (hasChallenge('mp', 12)) mult = mult.times(2)
+        if (hasMilestone('sa', 1)) mult = mult.times("5")
+        if (hasMilestone('sa', 4)) mult = mult.times("2")
+        if (hasUpgrade('e', 24)) mult = mult.times(upgradeEffect('e',24))
+        if (hasUpgrade('e', 32)) mult = mult.times(upgradeEffect('e',32))
+                if (hasMilestone('sa', 6)) mult = mult.times("4")
+                if (hasUpgrade('sp', 92)) mult = mult.times(upgradeEffect('sp', 92))
+                if (hasUpgrade('hp', 85)) mult = mult.times(upgradeEffect('hp', 85))
+                if (hasUpgrade('up', 91)) mult = mult.times(upgradeEffect('up', 91))
+                if (hasUpgrade('hp', 92)) mult = mult.times(upgradeEffect('hp', 92))
+                        if (hasMilestone('sa', 9)) mult = mult.times("20")
+                        if (hasMilestone('sa', 10)) mult = mult.times("7.5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
