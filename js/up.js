@@ -534,6 +534,9 @@ addLayer("up", {
                  if (hasMilestone('sa', 8)) mult = mult.times("1e9")
                          if (hasMilestone('sa', 9)) mult = mult.times("20")
                          if (hasMilestone('sa', 10)) mult = mult.times("7.5")
+                         if (hasUpgrade('e', 42)) mult = mult.times(upgradeEffect('e',42))
+                         if (inChallenge("sa", 11)) mult = mult.div("10^^308")
+                         if (hasAchievement('a', 205)) mult = mult.times("10")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

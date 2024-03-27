@@ -169,6 +169,127 @@ effectDescription(){
             return hasUpgrade("e", 31)
         }
         },
+        33: {
+            title: "Sacrifice to Previous Layers (EU33)",
+            description: "Every Sacrifice Tier you have boosts energy gain by 2x",
+            cost: new Decimal(1e202),
+            effect() {
+                let effect = Decimal.pow(2, player.sa.points).min("1e213")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                return hasMilestone("sa", 12)
+            }       
+        },
+        34: {
+            title: "Sacrifice to Previous Layers II (EU34)",
+            description: "Every Sacrifice Tier you have boosts light gain by 2x",
+            cost: new Decimal(1e207),
+            effect() {
+                let effect = Decimal.pow(2, player.sa.points).min("1e213")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                return hasUpgrade("e", 33)
+            }       
+        },
+        35: {
+            title: "Sacrifice to Previous Layers III (EU35)",
+            description: "Every Sacrifice Tier you have boosts mega-point gain by 1.25x",
+            cost: new Decimal(1e212),
+            effect() {
+                let effect = Decimal.pow(1.25, player.sa.points).min("1e213")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                return hasUpgrade("e", 34)
+            }       
+        },
+        41: {
+            title: "Sacrifice to Previous Layers IV (EU41)",
+            description: "Every Sacrifice Tier you have boosts hyper-point gain by 10x",
+            cost: new Decimal(1e215),
+            effect() {
+                let effect = Decimal.pow(10, player.sa.points).min("1e221312323113")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                return hasUpgrade("e", 35)
+            }       
+        },
+        42: {
+          title: "Sacrifice to Previous Layers V (EU42)",
+            description: "Every Sacrifice Tier you have boosts ultra-point gain by 1,000x",
+            cost: new Decimal(1e216),
+            effect() {
+                let effect = Decimal.pow(1000, player.sa.points).min("1e2213232113")
+                return effect
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                return hasUpgrade("e", 41)
+            }       
+        },
+        43: {
+            title: "Sacrifice to Previous Layers VI (EU43)",
+              description: "Every Sacrifice Tier you have boosts super-point gain by 100,000x",
+              cost: new Decimal(1e217),
+              effect() {
+                  let effect = Decimal.pow(100000, player.sa.points).min("1e2213232113")
+                  return effect
+              },
+              effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+              unlocked() {
+                  return hasUpgrade("e", 42)
+              }       
+          },
+          44: {
+            title: "Sacrifice to Previous Layers VII (EU44)",
+              description: "Every Sacrifice Tier you have boosts point gain by 10,000,000,000x",
+              cost: new Decimal(1e218),
+              effect() {
+                  let effect = Decimal.pow(1e10, player.sa.points).min("1e2213232113")
+                  return effect
+              },
+              effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+              unlocked() {
+                  return hasUpgrade("e", 43)
+              }       
+          },
+          45: {
+            title: "Sacrifice Tier Cheapener (EU45)",
+              description: "Sacrifice Points makes Sacrifice Tier cheaper.",
+              cost: new Decimal(1e219),
+              effect() {
+                return player.scp.points.add(1).pow("1")
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+              unlocked() {
+                  return hasUpgrade("e", 44)
+              }       
+          },
+          51: {
+            title: "Energy Boost IV (EU51)",
+            description: "2,300x Energy & Light.",
+            cost: new Decimal("1e388"),
+            unlocked() {
+                return hasUpgrade("e", 45)
+            
+            }
+                },
+                52: {
+                    title: "Energy Megalizer (EU52)",
+                    description: "25x Mega-Points.",
+                    cost: new Decimal("1e398"),
+                    unlocked() {
+                        return hasUpgrade("e", 51)
+                    
+                    }
+                        },
   },
   tabFormat: [
     "main-display",
@@ -189,7 +310,8 @@ microtabs: {
         },
     },
     color: "yellow",
-    requires: new Decimal("1e4000"), // Can be a function that takes requirement increases into account
+    requires() {if (inChallenge("sa", 11)) return new Decimal("1e49")
+    else return new Decimal("1e4000")},      
     resource: "Energy", // Name of prestige currency
     baseResource: "Points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
@@ -221,6 +343,43 @@ microtabs: {
         if (hasUpgrade('up', 93)) mult = mult.times(200)
         if (hasUpgrade('mp', 85)) mult = mult.pow(1.02)
         if (hasMilestone('sa', 10)) mult = mult.times("7.5")
+        if (hasUpgrade('scp', 11)) mult = mult.times(2.5)
+        if (hasUpgrade('scp', 12)) mult = mult.times(3)
+        if (hasUpgrade('scp', 13)) mult = mult.times(3)
+        if (hasUpgrade('scp', 14)) mult = mult.times(1.7)
+        if (hasUpgrade('scp', 15)) mult = mult.times(1.5)
+        if (hasUpgrade('scp', 21)) mult = mult.times(3)
+        if (hasUpgrade('scp', 23)) mult = mult.times(3)
+        if (hasUpgrade('scp', 24)) mult = mult.times(3)
+        if (hasUpgrade('scp', 25)) mult = mult.times(2)
+        if (hasUpgrade('scp', 33)) mult = mult.times(1.7)
+        if (hasUpgrade('scp', 35)) mult = mult.times(1.5)
+        if (hasUpgrade('scp', 41)) mult = mult.times(2)
+        if (hasUpgrade('scp', 42)) mult = mult.times(2)
+        if (hasUpgrade('e', 33)) mult = mult.times(upgradeEffect('e',33))
+        if (hasMilestone('sa', 13)) mult = mult.times("30")
+        if (hasUpgrade('scp', 43)) mult = mult.times(2.5)
+        if (hasUpgrade('scp', 44)) mult = mult.times(4)
+        if (hasUpgrade('scp', 45)) mult = mult.times(1.5)
+        if (hasUpgrade('scp', 51)) mult = mult.times(2)
+        if (hasUpgrade('scp', 52)) mult = mult.times(1.8)
+        if (hasUpgrade('scp', 53)) mult = mult.times(2)
+        if (hasUpgrade('scp', 55)) mult = mult.times(30)
+        if (hasUpgrade('scp', 62)) mult = mult.times(2.25)
+        if (hasUpgrade('scp', 63)) mult = mult.times(10)
+        if (hasUpgrade('scp', 64)) mult = mult.times(4)
+        if (hasUpgrade('scp', 71)) mult = mult.times(10)
+        if (hasUpgrade('scp', 72)) mult = mult.times(50)
+        if (hasMilestone('sa', 16)) mult = mult.times("1e9")
+        if (hasUpgrade('scp', 81)) mult = mult.times(10)
+        if (hasUpgrade('scp', 83)) mult = mult.times(10)
+        if (hasUpgrade('scp', 84)) mult = mult.times(10)
+        if (hasMilestone('sa', 18)) mult = mult.times("10")
+        if (hasUpgrade('scp', 92)) mult = mult.times(3)
+        if (hasUpgrade('scp', 93)) mult = mult.times(10)
+        if (hasUpgrade('scp', 94)) mult = mult.times(10)
+        if (hasUpgrade('e', 51)) mult = mult.times(2300)
+
         return mult
     
     },

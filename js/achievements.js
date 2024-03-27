@@ -878,6 +878,51 @@ addLayer("a", {
             onComplete() {
             },
         },
+        201: {
+            name: "Not anymore.",
+            done() {
+                return player.scp.points.gte("1")
+            },
+            tooltip: "Get 1 Sacrifice Point.",
+            onComplete() {
+            },
+        },
+        202: {
+            name: "Ultra-Sublizer",
+            done() {
+                return player.up.points.gte("1e10000")
+            },
+            tooltip: "Get 1e10,000 Ultra-Points",
+            onComplete() {
+            },
+        },
+        203: {
+            name: "Infinity Energy",
+            done() {
+                return player.e.points.gte("1.80e308")
+            },
+            tooltip: "Get 1.80e308 Energy",
+            onComplete() {
+            },
+        },
+        204: {
+            name: "Point AFK",
+            done() {
+                return player.points.gte("1e50000")
+            },
+            tooltip: "Get 1e50,000 Points.",
+            onComplete() {
+            },
+        },
+        205: {
+            name: "Quite challenging the layers!",
+            done() {
+                if (hasChallenge("mp", 11))
+                return true            },
+            tooltip: "Complete the 1st sacrifice challenge. Reward: 10x Points, SP, UP and HP",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

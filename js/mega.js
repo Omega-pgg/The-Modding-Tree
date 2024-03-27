@@ -499,6 +499,7 @@ doReset(sa) {
     // Stage 3, track which main features you want to keep - milestones
     let keep = [];
     if (hasMilestone('sa', 7)) keep.push("challenges");
+    if (hasMilestone('sa', 11)) keep.push("milestones");
     // Stage 4, do the actual data reset
     layerDataReset(this.layer, keep);
 
@@ -554,8 +555,49 @@ doReset(sa) {
                 if (hasUpgrade('hp', 92)) mult = mult.times(upgradeEffect('hp', 92))
                         if (hasMilestone('sa', 9)) mult = mult.times("20")
                         if (hasMilestone('sa', 10)) mult = mult.times("7.5")
+                        if (hasUpgrade('scp', 11)) mult = mult.times(2.5)
+                        if (hasUpgrade('scp', 12)) mult = mult.times(3)
+                        if (hasUpgrade('scp', 13)) mult = mult.times(3)
+                        if (hasUpgrade('scp', 14)) mult = mult.times(1.7)
+                        if (hasUpgrade('scp', 15)) mult = mult.times(1.5)
+                        if (hasUpgrade('scp', 21)) mult = mult.times(3)
+                        if (hasUpgrade('scp', 23)) mult = mult.times(3)
+                        if (hasUpgrade('scp', 24)) mult = mult.times(3)
+                        if (hasUpgrade('scp', 25)) mult = mult.times(2)
+                                if (hasUpgrade('scp', 33)) mult = mult.times(1.7)
+                                if (hasUpgrade('scp', 35)) mult = mult.times(1.5)
+                                        if (hasUpgrade('scp', 41)) mult = mult.times(2)
+                                                if (hasUpgrade('scp', 42)) mult = mult.times(2)
+                                                if (hasUpgrade('e', 35)) mult = mult.times(upgradeEffect('e',35))
+                                                if (hasMilestone('sa', 13)) mult = mult.times("30")
+                                                if (hasUpgrade('scp', 43)) mult = mult.times(2.5)
+                                                if (hasUpgrade('scp', 44)) mult = mult.times(4)
+                                                if (hasUpgrade('scp', 45)) mult = mult.times(1.5)
+                                                if (hasUpgrade('scp', 51)) mult = mult.times(2)
+                                                if (hasMilestone('sa', 14)) mult = mult.pow("1.02")
+                                                if (hasUpgrade('scp', 52)) mult = mult.times(1.8)
+                                                if (hasUpgrade('scp', 53)) mult = mult.times(2)
+                                                if (hasUpgrade('scp', 55)) mult = mult.times(30)
+                                                        if (hasUpgrade('scp', 62)) mult = mult.times(2.25)
+                                                        if (hasMilestone('sa', 15)) mult = mult.times("5")
+                                                                if (hasUpgrade('scp', 63)) mult = mult.times(10)
+                                                                if (hasUpgrade('scp', 64)) mult = mult.times(4)
+                                                                if (hasUpgrade('scp', 71)) mult = mult.times(10)
+                                                                if (hasUpgrade('scp', 72)) mult = mult.times(50)
+                                                                if (hasUpgrade('scp', 81)) mult = mult.times(10)
+                                                                if (hasMilestone('sa', 17)) mult = mult.times("5")
+                                                                if (hasUpgrade('scp', 83)) mult = mult.times(10)
+                                                                if (hasUpgrade('scp', 84)) mult = mult.times(10)
+                                                                if (hasMilestone('sa', 18)) mult = mult.times("10")
+                                                                if (hasUpgrade('scp', 92)) mult = mult.times(3)
+                                                                if (hasUpgrade('scp', 93)) mult = mult.times(10)
+                                                                if (hasUpgrade('scp', 94)) mult = mult.times(10)
+                                                                if (hasUpgrade('e', 52)) mult = mult.times(25)
+
         return mult
     },
+                autoUpgrade() { if (hasMilestone("sa" , 15)) return true},
+
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },

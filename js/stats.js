@@ -37,14 +37,14 @@ function getStatTab(){
     x += "<h3>You have played for " + formatTime(player.timePlayed, true + ".</h3>")
    x += br
     x+= "<h4>―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――</h4>"
-    if (player.mp.unlocked){
+    if (player.sa.unlocked){
         x += br
-        x += "<h1 style='color: orange'>Mega-Point</h1>"
+        x += "<h1 style='color: purple'>Sacrifice</h1>"
         x += br
-        x += "<h3>You have " + formatWhole(player.mp.points) + " Mega Points (" + formatWhole(player.mp.total) + " Total).</h3>"
+        x += "<h3>You are at Sacrifice Tier " + formatWhole(player.sa.points) + ".</h3>"
        
         x += br
-       x += "<h3>You have spent " + formatTime(player.mp.resetTime, true) + " in this Mega Point.</h3>"
+       x += "<h3>You have " + formatWhole(player.scp.points) + " Sacrifice Points.</h3>"
        x += br
        x+= "――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――"
     }

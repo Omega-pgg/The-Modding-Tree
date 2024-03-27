@@ -624,6 +624,7 @@ addLayer("p", {
         mult = new Decimal(1)
         if (inChallenge("hp", 22)) mult = mult.pow(0.2)
         if (inChallenge("mp", 12)) mult = mult.div("1e123123")
+        if (inChallenge("sa", 11)) mult = mult.div("10^^308")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

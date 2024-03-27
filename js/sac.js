@@ -25,7 +25,7 @@ addLayer("sa", {
                     ]
                 },
                 "Challenges": {
-                    unlocked() {return (hasUpgrade("mp", 31))},
+                    unlocked() {return (hasMilestone("sa", 20))},
             content: [
                 ["blank", "15px"],
                 ["challenges", [1,2]]
@@ -83,9 +83,75 @@ milestones: {
 },
 10: {
     requirementDescription: "Sacrifice Tier 10 (STM10)",
-    effectDescription: "Unlock a new sub-layer. (Next Update) + 7.5x Everything below Sac (Except PP) and keep Hyper-Point milestones on reset",
+    effectDescription: "Unlock a new sub-layer + 7.5x Everything below Sac (Except PP) and keep Hyper-Point milestones on reset",
     done() { return player.sa.points.gte(10) }
 },
+11: {
+    requirementDescription: "Sacrifice Tier 11 (STM11)",
+    effect() {
+        let eff = player.sa.points.add(1).pow(0.5)
+        return eff
+    },
+    effectDescription() {
+        return "Sacrifice Tier boosts Sacrifice Points and keep mega-point milestones on reset.<br>Currently: " + format(milestoneEffect("sa",11))+"x"}
+        ,    done() { return player.sa.points.gte("11")}
+        
+    },
+    12: {
+        requirementDescription: "Sacrifice Tier 12 (STM12)",
+        effectDescription: "Unlock more energy upgrades.",
+        done() { return player.sa.points.gte(12) }
+    },
+    13: {
+        requirementDescription: "Sacrifice Tier 13 (STM13)",
+        effectDescription: "30x Energy, Light and Mega-Points.",
+        done() { return player.sa.points.gte(13) }
+    },
+    14: {
+        requirementDescription: "Sacrifice Tier 14 (STM14)",
+        effectDescription: "^1.02 Mega-Points.",
+        done() { return player.sa.points.gte(14) }
+    },
+    15: {
+        requirementDescription: "Sacrifice Tier 15 (STM15)",
+        effectDescription: "Autobuy Mega-Point Upgrades and 5x MP.",
+        done() { return player.sa.points.gte(15) }
+    },
+    16: {
+        requirementDescription: "Sacrifice Tier 16 (STM16)",
+        effectDescription: "1,000,000,000x Energy & Light.",
+        done() { return player.sa.points.gte(16) }
+    },
+    17: {
+        requirementDescription: "Sacrifice Tier 17 (STM17)",
+        effectDescription: "5x SP and MP.",
+        done() { return player.sa.points.gte(17) }
+    },
+    18: {
+        requirementDescription: "Sacrifice Tier 18 (STM18)",
+        effectDescription: "10x Energy, Light and Mega-Points.",
+        done() { return player.sa.points.gte(18) }
+    },
+    19: {
+        requirementDescription: "Sacrifice Tier 19 (STM19)",
+        effectDescription: "1e55x Sacrifice Points. (Overpowered)",
+        done() { return player.sa.points.gte(19) }
+    },
+    20: {
+        requirementDescription: "Sacrifice Tier 23 (STM20)",
+        effectDescription: "Unlock a sacrifice challenge.",
+        done() { return player.sa.points.gte(23) }
+    },
+},
+challenges: {
+    11: {
+            name: "Broken Idea",
+            challengeDescription: "You can not gain any Lights, Prestige Points, Super-Points, Ultra-Points and Hyper-Points but Energy's Cost is much cheaper.",
+            goalDescription: "1e300 Points",
+            rewardDescription: "Unlock a new sub-layer. (Next Update)",
+            canComplete: function() {return player.points.gte("1e300")},
+            unlocked() { return (hasMilestone('sa', 20)) },
+    },
 },
     color: "purple",
     requires: new Decimal(1e10), // Can be a function that takes requirement increases into account
@@ -97,6 +163,7 @@ milestones: {
     exponent: 2,    
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('e', 45)) mult = mult.div(upgradeEffect('e',45))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

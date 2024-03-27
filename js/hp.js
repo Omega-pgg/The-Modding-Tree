@@ -650,6 +650,9 @@ addLayer("hp", {
         if (hasUpgrade('mp', 84)) mult = mult.pow(1.02)
         if (hasMilestone('sa', 9)) mult = mult.times("20")
         if (hasMilestone('sa', 10)) mult = mult.times("7.5")
+        if (hasUpgrade('e', 41)) mult = mult.times(upgradeEffect('e',41))
+        if (inChallenge("sa", 11)) mult = mult.div("10^^308")
+        if (hasAchievement('a', 205)) mult = mult.times("10")
         return mult
     },
     passiveGeneration() {

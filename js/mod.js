@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,11 +13,20 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.4.0: Update 4",
+	num: "1.5.0: Update 5",
 	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.5.0: Update 5 (27/03/2024)</h3><br>
+		- The Fifth Update is here!<br>
+		- Added many new upgrades.<br>
+		- Added more achievements.<br>
+		- Added more milestones.<br>
+		- Added more automation.<br>
+		- Added 1 new challenge.<br>
+		- Added 1 new sub-layer.<br>
+		- Endgame: 1.00e64,000 Points.<br><br>
 <h3>v1.4.0: Update 4 (23/03/2024)</h3><br>
 		- The Fourth Update is here!<br>
 		- Added many new upgrades.<br>
@@ -251,6 +260,8 @@ function getPointGen() {
 	if (hasMilestone('sa', 8)) gain = gain.times("1e9")
 	if (hasMilestone('sa', 9)) gain = gain.times("20")
 	if (hasMilestone('sa', 10)) gain = gain.times("7.5")
+	if (hasUpgrade('e', 44)) gain = gain.times(upgradeEffect('e',44))
+	if (hasAchievement('a', 205)) gain = gain.times("10")
 	return gain
 }
 
@@ -292,7 +303,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("e28000"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("e64000"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -301,7 +312,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e28000"))
+	return player.points.gte(new Decimal("e64000"))
 }
 
 
