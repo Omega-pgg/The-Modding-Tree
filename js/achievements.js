@@ -917,7 +917,7 @@ addLayer("a", {
         205: {
             name: "Quite challenging the layers!",
             done() {
-                if (hasChallenge("mp", 11))
+                if (hasChallenge("scp", 11))
                 return true            },
             tooltip: "Complete the 1st sacrifice challenge. Reward: 10x Points, SP, UP and HP",
             onComplete() {

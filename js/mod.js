@@ -13,11 +13,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.5.0: Update 5",
+	num: "1.5.1: Bug Fix",
 	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.5.1: Bug Fix (27/03/2024)</h3><br>
+		- The Small Update.<br>
+		- Fixed the 100th achievement giving when completing MC11.<br>
+		- Endgame: 1.00e64,100 Points.<br><br>
 <h3>v1.5.0: Update 5 (27/03/2024)</h3><br>
 		- The Fifth Update is here!<br>
 		- Added many new upgrades.<br>
@@ -303,7 +307,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("e64000"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("e64100"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -312,7 +316,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e64000"))
+	return player.points.gte(new Decimal("e64100"))
 }
 
 
