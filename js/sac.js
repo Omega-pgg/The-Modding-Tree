@@ -142,17 +142,52 @@ milestones: {
         effectDescription: "Unlock a sacrifice challenge.",
         done() { return player.sa.points.gte(23) }
     },
+    21: {
+        requirementDescription: "Sacrifice Tier 27 (STM21)",
+        effect() {
+            let eff = player.sa.points.add(1).pow(1)
+            return eff
+        },
+        effectDescription() {
+            return "Sacrifice Tier boosts Cells and Sacrifice Points. + Make Cell Buyables 12 & 13 Cheaper.<br>Currently: " + format(milestoneEffect("sa",21))+"x"}
+            ,    done() { return player.sa.points.gte("27")}
+            
+        },
+        22: {
+            requirementDescription: "Sacrifice Tier 28 (STM22)",
+            effectDescription: "^1.05 Sacrifice Points and ^1.02 Cells.",
+            done() { return player.sa.points.gte(28) }
+        },
+        23: {
+            requirementDescription: "Sacrifice Tier 30 (STM23)",
+            effectDescription: "^1.05 Hyper-Points, Sacrifice Tier no longer resets anything, Air is automated + Autobuy energy upgrades.",
+            done() { return player.sa.points.gte(30) }
+        },
+        24: {
+            requirementDescription: "Sacrifice Tier 35 (STM24)",
+            effectDescription: "Unlock another sacrifice challenge.",
+            done() { return player.sa.points.gte(35) }
+        },
 },
 challenges: {
     11: {
             name: "Broken Idea",
             challengeDescription: "You can not gain any Lights, Prestige Points, Super-Points, Ultra-Points and Hyper-Points but Energy's Cost is much cheaper.",
             goalDescription: "1e300 Points",
-            rewardDescription: "Unlock a new sub-layer. (Next Update)",
+            rewardDescription: "Unlock a new sub-layer.",
             canComplete: function() {return player.points.gte("1e300")},
             unlocked() { return (hasMilestone('sa', 20)) },
     },
+    12: {
+        name: "Broken Eletricity",
+        challengeDescription: "You can't gain Energy and Lights + Mega-Point gain is raised to ^0.2.",
+        goalDescription: "1e12 Mega-Points",
+        rewardDescription: "Unlock another sub-layer (Next Update) + 5x Energy, Light and MP.",
+        canComplete: function() {return player.mp.points.gte("1e12")},
+        unlocked() { return (hasMilestone('sa', 24)) },
 },
+},
+resetsNothing() {return hasMilestone("sa", 23)},
     color: "purple",
     requires: new Decimal(1e10), // Can be a function that takes requirement increases into account
     resource: "Sacrifice Tier", // Name of prestige currency

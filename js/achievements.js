@@ -917,9 +917,54 @@ addLayer("a", {
         205: {
             name: "Quite challenging the layers!",
             done() {
-                if (hasChallenge("scp", 11))
+                if (hasChallenge("sa", 11))
                 return true            },
             tooltip: "Complete the 1st sacrifice challenge. Reward: 10x Points, SP, UP and HP",
+            onComplete() {
+            },
+        },
+        211: {
+            name: "Is this bacteria??",
+            done() {
+                return player.c.points.gte("1")
+            },
+            tooltip: "Get 1 Cell.",
+            onComplete() {
+            },
+        },
+        212: {
+            name: "Sacrifice Inflation",
+            done() {
+                return player.scp.points.gte("1e100")
+            },
+            tooltip: "Get 1e100 Sacrifice Points.",
+            onComplete() {
+            },
+        },
+        213: {
+            name: "Sacrifice Spammer",
+            done() {
+                return player.sa.points.gte("30")
+            },
+            tooltip: "Reach Sacrifice Tier 30.",
+            onComplete() {
+            },
+        },
+        214: {
+            name: "Light Focus",
+            done() {
+                return player.l.points.gte("1e250")
+            },
+            tooltip: "Get 1e250 Light.",
+            onComplete() {
+            },
+        },
+        215: {
+            name: "No boosts from layers challenge",
+            done() {
+                if (hasChallenge("sa", 12))
+                return true            },
+            tooltip: "Complete the 2nd sacrifice challenge.",
             onComplete() {
             },
         },

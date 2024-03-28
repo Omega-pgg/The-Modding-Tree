@@ -115,6 +115,9 @@ effectDescription(){
         if (hasUpgrade('scp', 94)) mult = mult.times(10)
         if (hasUpgrade('e', 51)) mult = mult.times(2300)
         if (inChallenge("sa", 11)) mult = mult.div("10^^308")
+        if (hasUpgrade('e', 63)) mult = mult.pow(1.05)
+        if (inChallenge("sa", 12)) mult = mult.div("10^^308")
+        if (hasChallenge('sa', 12)) mult = mult.times("5")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

@@ -290,6 +290,73 @@ effectDescription(){
                     
                     }
                         },
+                        53: {
+                            title: "Energy Buyablizer (EU53)",
+                            description: "Unlock a new cell buyable.",
+                            cost: new Decimal("1e420"),
+                            unlocked() {
+                                return hasUpgrade("e", 52)
+                            
+                            }
+                                },
+                                54: {
+                                    title: "Energy Sacrifition (EU54)",
+                                    description: "3,125,000x Sacrifice Points.",
+                                    cost: new Decimal("1e422"),
+                                    unlocked() {
+                                        return hasUpgrade("e", 53)
+                                    
+                                    }
+                                        },
+                                        55: {
+                                            title: "Energy Buyablizer Booster (EU55)",
+                                              description: "Every Cell Buyable 11 you bought also boosts hyper-point gain by 2x",
+                                              cost: new Decimal("1e422"),
+                                              effect() {
+                                                  let effect = Decimal.pow(2, player.c.buyables[11]).min("1e2213232113")
+                                                  return effect
+                                              },
+                                              effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                              unlocked() {
+                                                  return hasUpgrade("e", 54)
+                                              }       
+                                          },
+                                          61: {
+                                            title: "Energy Sacrifition II (EU61)",
+                                            description: "^1.02 Sacrifice Points.",
+                                            cost: new Decimal("1e426"),
+                                            unlocked() {
+                                                return hasUpgrade("e", 55)
+                                            
+                                            }
+                                                },
+                                                62: {
+                                                    title: "Energy Lab (EU62)",
+                                                    description: "^1.05 Cells.",
+                                                    cost: new Decimal("1e426"),
+                                                    unlocked() {
+                                                        return hasUpgrade("e", 61)
+                                                    
+                                                    }
+                                                        },
+                                                        63: {
+                                                            title: "Energy Powerlize (EU63)",
+                                                            description: "^1.05 Energy & Light.",
+                                                            cost: new Decimal("1e427"),
+                                                            unlocked() {
+                                                                return hasUpgrade("e", 62)
+                                                            
+                                                            }
+                                                                },
+                                                                64: {
+                                                                    title: "Energy Powerlize (EU64)",
+                                                                    description: "^1.05 Ultra-Points",
+                                                                    cost: new Decimal("1e496"),
+                                                                    unlocked() {
+                                                                        return hasUpgrade("e", 63)
+                                                                    
+                                                                    }
+                                                                        },
   },
   tabFormat: [
     "main-display",
@@ -379,13 +446,17 @@ microtabs: {
         if (hasUpgrade('scp', 93)) mult = mult.times(10)
         if (hasUpgrade('scp', 94)) mult = mult.times(10)
         if (hasUpgrade('e', 51)) mult = mult.times(2300)
-
+        if (hasUpgrade('e', 63)) mult = mult.pow(1.05)
+        if (inChallenge("sa", 12)) mult = mult.div("10^^308")
+        if (hasChallenge('sa', 12)) mult = mult.times("5")
         return mult
     
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
+    autoUpgrade() { if (hasMilestone("sa" , 23)) return true},
+
     row: 4, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "E", description: "E: Reset for Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},

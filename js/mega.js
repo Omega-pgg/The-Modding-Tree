@@ -453,6 +453,15 @@ addLayer("mp", {
                                                                                             
                                                                                             }
                                                                                             },
+                                                                                            91: { 
+                                                                                                title: "Unstable Points XII (MP91)",
+                                                                                                        description: "Been a while again. ^1.05 Mega-Points",
+                                                                                                        cost: new Decimal(1e111),
+                                                                                                        unlocked() {
+                                                                                                            return hasUpgrade("mp", 85)
+                                                                                                        
+                                                                                                        }
+                                                                                                        },
     },
     milestones: {
     1: {
@@ -487,6 +496,11 @@ addLayer("mp", {
         requirementDescription: "1 Light (MPM7)",
         effectDescription: "Gain 100% of Light gained on reset per second",
         done() { return player.l.points.gte(1) }
+    },
+    8: {
+        requirementDescription: "1 Cell (MPM8)",
+        effectDescription: "Gain 100% of Cells gained on reset per second",
+        done() { return player.c.points.gte(1) }
     },
 },
 doReset(sa) {
@@ -593,8 +607,10 @@ doReset(sa) {
                                                                 if (hasUpgrade('scp', 93)) mult = mult.times(10)
                                                                 if (hasUpgrade('scp', 94)) mult = mult.times(10)
                                                                 if (hasUpgrade('e', 52)) mult = mult.times(25)
-
-        return mult
+                                                                if (hasUpgrade('mp', 91)) mult = mult.pow("1.05")
+                                                                if (inChallenge("sa", 12)) mult = mult.pow(0.2)
+                                                                if (hasChallenge('sa', 12)) mult = mult.times("5")
+                                                                return mult
     },
                 autoUpgrade() { if (hasMilestone("sa" , 15)) return true},
 

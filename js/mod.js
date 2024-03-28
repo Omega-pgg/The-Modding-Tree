@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,11 +13,22 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.5.1: Bug Fix",
+	num: "1.6.0: Update 6",
 	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.6.0: Update 6 (28/03/2024)</h3><br>
+		- The Sixth Update is here!<br>
+		- Added many new upgrades.<br>
+		- Added more achievements.<br>
+		- Added more milestones.<br>
+		- Added more automation.<br>
+		- Added more QOL's.<br>
+		- Added 1 new challenge.<br>
+		- Added 3 new buyables.<br>
+		- Added 1 new sub-layer.<br>
+		- Endgame: 1.00e84,000 Points.<br><br>
 <h3>v1.5.1: Bug Fix (27/03/2024)</h3><br>
 		- The Small Update.<br>
 		- Fixed the 100th achievement giving when completing MC11.<br>
@@ -307,7 +318,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("e64100"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("e84000"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -316,7 +327,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e64100"))
+	return player.points.gte(new Decimal("e84000"))
 }
 
 

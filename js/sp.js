@@ -588,7 +588,9 @@ unlocked() {
                                      if (hasUpgrade('e', 43)) mult = mult.times(upgradeEffect('e',43))
                                                               if (inChallenge("sa", 11)) mult = mult.div("10^^308")
                                                               if (hasAchievement('a', 205)) mult = mult.times("10")
-        return mult
+                                                              if (hasUpgrade('scp', 104)) mult = mult.pow("1.05")
+
+                                                              return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)

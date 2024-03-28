@@ -21,6 +21,12 @@ addLayer("ai", {
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
                 },
   },
+  resetsNothing() {return hasMilestone("sa", 23)},
+    autoPrestige() {
+        return hasMilestone("sa", 23)
+    },
+    canBuyMax() { return hasMilestone("sa", 23) },
+    autoUpgrade() { if (hasMilestone("sa" , 23)) return true},
     color: "blue",
     requires: new Decimal(100000), // Can be a function that takes requirement increases into account
     resource: "Air", // Name of prestige currency
