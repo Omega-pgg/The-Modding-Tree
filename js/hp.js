@@ -834,7 +834,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e500")
-            player.points = player.points.sub(this.cost().mul(cost))
+            player.points = player.points.sub(this.cost().sub(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -867,7 +867,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e900")
-            player.sp.points = player.sp.points.sub(this.cost().mul(cost))
+            player.sp.points = player.sp.points.sub(this.cost().sub(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -896,7 +896,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e2000")
-            player.points = player.points.sub(this.cost().mul(cost))
+            player.points = player.points.sub(this.cost().sub(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {

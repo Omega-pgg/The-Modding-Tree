@@ -168,6 +168,22 @@ milestones: {
             effectDescription: "Unlock another sacrifice challenge.",
             done() { return player.sa.points.gte(35) }
         },
+        25: {
+            requirementDescription: "Sacrifice Tier 40 (STM25)",
+            effectDescription: "1e24x Cells.",
+            done() { return player.sa.points.gte(40) }
+        },
+        26: {
+            requirementDescription: "Sacrifice Tier 43 (STM26)",
+            effect() {
+                let eff = player.scp.points.add(1).pow(1)
+                return eff
+            },
+            effectDescription() {
+                return "Sacrifice Points boosts Points + Unlock a new layer (Next Update)<br>Currently: " + format(milestoneEffect("sa",26))+"x"}
+                ,    done() { return player.sa.points.gte("43")}
+                
+            },
 },
 challenges: {
     11: {
@@ -193,7 +209,7 @@ resetsNothing() {return hasMilestone("sa", 23)},
     resource: "Sacrifice Tier", // Name of prestige currency
     baseResource: "Mega-Points", // Name of resource prestige is based on
     baseAmount() {return player.mp.points}, // Get the current amount of baseResource
-    branches: ["mp", "l", "e", "ai"],
+    branches: ["mp"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 2,    
     gainMult() { // Calculate the multiplier for main currency from bonuses

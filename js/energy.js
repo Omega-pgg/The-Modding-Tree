@@ -357,6 +357,39 @@ effectDescription(){
                                                                     
                                                                     }
                                                                         },
+                                                                        65: {
+                                                                            title: "Time Pointing (EU65)",
+                                                                              description: "Time Points boosts Points.",
+                                                                              cost: new Decimal("e552"),
+                                                                              effect() {
+                                                                                return player.tp.points.add(1).pow("1")
+                                                                            },
+                                                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                              unlocked() {
+                                                                                  return hasUpgrade("e", 64)
+                                                                              }       
+                                                                          },
+                                                                          71: {
+                                                                            title: "Cells Takeover (EU71)",
+                                                                              description: "Cells boosts Points.",
+                                                                              cost: new Decimal("e555"),
+                                                                              effect() {
+                                                                                return player.c.points.add(1).pow("1")
+                                                                            },
+                                                                            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                              unlocked() {
+                                                                                  return hasUpgrade("e", 65)
+                                                                              }       
+                                                                          },
+                                                                          72: {
+                                                                            title: "Energy Sacrifition III (EU72)",
+                                                                            description: "1,000,000x Sacrifice Points",
+                                                                            cost: new Decimal("e590"),
+                                                                            unlocked() {
+                                                                                return hasUpgrade("e", 71)
+                                                                            
+                                                                            }
+                                                                                },
   },
   tabFormat: [
     "main-display",
@@ -449,6 +482,7 @@ microtabs: {
         if (hasUpgrade('e', 63)) mult = mult.pow(1.05)
         if (inChallenge("sa", 12)) mult = mult.div("10^^308")
         if (hasChallenge('sa', 12)) mult = mult.times("5")
+        if (hasAchievement('a', 225)) mult = mult.times("1e6")
         return mult
     
     },

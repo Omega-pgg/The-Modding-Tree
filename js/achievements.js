@@ -968,6 +968,51 @@ addLayer("a", {
             onComplete() {
             },
         },
+        221: {
+            name: "Time Counter",
+            done() {
+                return player.tp.points.gte("1")
+            },
+            tooltip: "Get 1 Time Power.",
+            onComplete() {
+            },
+        },
+        222: {
+            name: "Cells Grinder",
+            done() {
+                return player.c.points.gte("e50")
+            },
+            tooltip: "Get 1e50 Cells.",
+            onComplete() {
+            },
+        },
+        223: {
+            name: "Already e308??",
+            done() {
+                return player.scp.points.gte("1.80e308")
+            },
+            tooltip: "Get 1.80e308 Sacrifice Points.",
+            onComplete() {
+            },
+        },
+        224: {
+            name: "Current year in seconds",
+            done() {
+                return player.tp.points.gte("6.3829e10")
+            },
+            tooltip: "Get 63,829,000,000 Time Power. (Year 2024)",
+            onComplete() {
+            },
+        },
+        225: {
+            name: "Answer to Everything",
+            done() {
+                return player.sa.points.gte("42")
+            },
+            tooltip: "Reach Sacrifice Tier 42.<br> Reward: 1,000,000x Energy & Light",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

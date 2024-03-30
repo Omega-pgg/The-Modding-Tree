@@ -118,6 +118,7 @@ effectDescription(){
         if (hasUpgrade('e', 63)) mult = mult.pow(1.05)
         if (inChallenge("sa", 12)) mult = mult.div("10^^308")
         if (hasChallenge('sa', 12)) mult = mult.times("5")
+        if (hasAchievement('a', 225)) mult = mult.times("1e6")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

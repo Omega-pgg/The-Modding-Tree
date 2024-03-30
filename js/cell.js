@@ -132,7 +132,7 @@ effectDescription(){
     resource: "Cells", // Name of prestige currency
     baseResource: "Mega-Points", // Name of resource prestige is based on
     baseAmount() {return player.mp.points}, // Get the current amount of baseResource
-    branches: ["scp", "l"],
+    branches: ["e", "scp"],
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 1e-308,    
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -150,6 +150,18 @@ effectDescription(){
         if (hasUpgrade('scp', 112)) mult = mult.times(10)
         if (hasUpgrade('scp', 113)) mult = mult.times(4)
         if (hasUpgrade('scp', 114)) mult = mult.times(15)
+        if (hasUpgrade('tp', 13)) mult = mult.times(50)
+if (hasUpgrade('tp', 14)) mult = mult.times(10)
+if (hasUpgrade('scp', 115)) mult = mult.times(3)
+if (hasUpgrade('scp', 121)) mult = mult.times(4)
+if (hasUpgrade('tp', 24)) mult = mult.times(20)
+if (hasUpgrade('tp', 25)) mult = mult.times(50)
+if (hasUpgrade('tp', 32)) mult = mult.times(20)
+if (hasUpgrade('scp', 123)) mult = mult.times(5)
+if (hasUpgrade('tp', 34)) mult = mult.times(50)
+if (hasUpgrade('scp', 124)) mult = mult.times(2)
+if (hasUpgrade('scp', 125)) mult = mult.times(20)
+if (hasMilestone('sa', 25)) mult = mult.times(1e24)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
