@@ -61,9 +61,9 @@ addLayer("hp", {
             12: {
                 name: "Less Sub-Points",
                 challengeDescription: "Points-1, Points-2 and Points-3 cost scaling is 10% higher",
-                goalDescription: "1.80e308 Points",
+                goalDescription: "1e200 Points",
                 rewardDescription: "Double Hyper-Point Gain and reach a milestone again.",
-                canComplete: function() {return player.points.gte("1.80e308")},
+                canComplete: function() {return player.points.gte("1e200")},
                 unlocked() { return (hasUpgrade('hp', 53)) },
             },
         21: {

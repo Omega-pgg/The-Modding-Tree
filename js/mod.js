@@ -21,7 +21,7 @@ let changelog = `<h1>Changelog:</h1><br>
 <h3>v1.8.1: Update 8.1 (06/04/2024)</h3><br>
 		- Small Update 2<br>
 		- Balanced the 4th layer more.<br>
-		- Changed some challenge requirements.<br>
+		- Changed some challenge requirements.<br><br>
 <h3>v1.8.0: Update 8 (06/04/2024)</h3><br>
 		- The Eighth Update is here!<br>
 		- Added many new upgrades.<br>
@@ -50,7 +50,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Added 3 new buyables.<br>
 		- Added 1 new sub-layer.<br>
 		- Endgame: 1.00e84,000 Points.<br><br>
-<h3>v1.5.1: Bug Fix (27/03/2024)</h3><br>
+<h3>v1.5.1: Update 5.1 (27/03/2024)</h3><br>
 		- The Small Update.<br>
 		- Fixed the 100th achievement giving when completing MC11.<br>
 		- Endgame: 1.00e64,100 Points.<br><br>
