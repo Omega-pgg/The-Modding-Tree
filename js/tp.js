@@ -6,6 +6,9 @@ addLayer("tp", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    passiveGeneration() {
+        if (hasMilestone("le", 3)) return (hasMilestone("le", 3)?1:0)
+        },
     tabFormat: [
         "main-display",
         "prestige-button",
@@ -15,6 +18,7 @@ addLayer("tp", {
     tooltip(){
         return "<h3>Time Power</h3><br>" + format(player.tp.points) + " TP"
       },
+              autoUpgrade() { if (hasMilestone("le" , 4)) return true},
       microtabs: {
         stuff: {
                         "Upgrades": {
@@ -493,7 +497,16 @@ addLayer("tp", {
         if (hasUpgrade('tp', 94)) mult = mult.times(3)
         if (hasUpgrade('tp', 95)) mult = mult.times(2)
         if (hasUpgrade('scp', 131)) mult = mult.times(3)
-        return mult
+        if (hasMilestone('le', 1)) mult = mult.times(3)
+        if (hasUpgrade('le', 12)) mult = mult.times(upgradeEffect('le', 12))
+        if (hasUpgrade('le', 14)) mult = mult.pow(1.3)
+        if (hasUpgrade('le', 24)) mult = mult.times(upgradeEffect('le',24))
+        if (hasUpgrade('le', 31)) mult = mult.times(upgradeEffect('le',31))
+        if (hasUpgrade('le', 32)) mult = mult.times(upgradeEffect('le',32))
+        if (hasUpgrade('le', 35)) mult = mult.times(upgradeEffect('le',35))
+                                                        if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
+                                                        mult = mult.times(buyableEffect('le', 11))
+                return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)

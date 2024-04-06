@@ -119,14 +119,14 @@ effectDescription(){
         if (inChallenge("sa", 12)) mult = mult.div("10^^308")
         if (hasChallenge('sa', 12)) mult = mult.times("5")
         if (hasAchievement('a', 225)) mult = mult.times("1e6")
+        if (hasUpgrade('le', 13)) mult = mult.pow(1.25)
+        mult = mult.times(buyableEffect('le', 12))
+        if (hasAchievement('a', 245)) mult = mult.times("10")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
     row: 4, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
-        {key: "L", description: "L: Reset for Light", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
     layerShown(){return (hasUpgrade("mp", 61) || player[this.layer].unlocked)},
 })

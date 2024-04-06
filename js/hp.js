@@ -587,6 +587,8 @@ addLayer("hp", {
         if (hasMilestone('sa', 10)) keep.push("milestones");
         if (hasMilestone('mp', 3)) keep.push("challenges");
         if (hasMilestone('sa', 4)) keep.push("challenges");
+        if (hasAchievement('a', 231)) keep.push("challenges");
+        if (hasAchievement('a', 231)) keep.push("milestones");
         // Stage 4, do the actual data reset
         layerDataReset(this.layer, keep);
     

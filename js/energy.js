@@ -23,8 +23,8 @@ addLayer("e", {
       },
       effect(){
         let e = player[this.layer].total.max("1").pow("3")
-        if(e.gt("e3000")){
-            if(hasAchievement("a",237))e=e.log10().pow(5.18e3/6).min("ee4")
+        if(e.gt("e1e4")){
+            if(hasAchievement("a",231))e=e.log10().pow(2500).min("e1e6")
         }
         return e
       },
@@ -34,7 +34,7 @@ addLayer("e", {
 effectDescription(){
     let s =  "boosting point gain by x" + format(tmp[this.layer].effect) 
     if(this.effect().gt("e1e6")){s=s+" (hardcapped)"}
-    else if(this.effect().gt("e3000")){s=s+" (softcapped)"}
+    else if(this.effect().gt("e1e4")){s=s+" (softcapped)"}
     return s
     /*
       use format(num) whenever displaying a number
@@ -390,6 +390,18 @@ effectDescription(){
                                                                             
                                                                             }
                                                                                 },
+                                                                                73: {
+                                                                                    title: "Leaf Point Non-stop (EU73)",
+                                                                                      description: "Leaf Points boosts itself.",
+                                                                                      cost: new Decimal("e3160"),
+                                                                                      effect() {
+                                                                                        return player.le.points.add(1).pow("0.25")
+                                                                                    },
+                                                                                    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                      unlocked() {
+                                                                                          return hasUpgrade("e", 72)
+                                                                                      }       
+                                                                                  },
   },
   tabFormat: [
     "main-display",
@@ -483,6 +495,9 @@ microtabs: {
         if (inChallenge("sa", 12)) mult = mult.div("10^^308")
         if (hasChallenge('sa', 12)) mult = mult.times("5")
         if (hasAchievement('a', 225)) mult = mult.times("1e6")
+        if (hasUpgrade('le', 13)) mult = mult.pow(1.25)
+        mult = mult.times(buyableEffect('le', 12))
+        if (hasAchievement('a', 245)) mult = mult.times("10")
         return mult
     
     },

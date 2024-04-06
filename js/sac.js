@@ -160,7 +160,7 @@ milestones: {
         },
         23: {
             requirementDescription: "Sacrifice Tier 30 (STM23)",
-            effectDescription: "^1.05 Hyper-Points, Sacrifice Tier no longer resets anything, Air is automated + Autobuy energy upgrades.",
+            effectDescription: "^1.05 Hyper-Points, Air is automated + Autobuy energy upgrades.",
             done() { return player.sa.points.gte(30) }
         },
         24: {
@@ -180,10 +180,30 @@ milestones: {
                 return eff
             },
             effectDescription() {
-                return "Sacrifice Points boosts Points + Unlock a new layer (Next Update)<br>Currently: " + format(milestoneEffect("sa",26))+"x"}
+                return "Sacrifice Points boosts Points + Unlock a new layer<br>Currently: " + format(milestoneEffect("sa",26))+"x"}
                 ,    done() { return player.sa.points.gte("43")}
                 
             },
+},
+doReset(le) {
+    // Stage 1, almost always needed, makes resetting this layer not delete your progress
+    if (layers[le].row <= this.row) return;
+
+    // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+    let keptUpgrades = [];
+
+    // Stage 3, track which main features you want to keep - milestones
+    let keep = [];
+    if (hasMilestone('le', 7)) keep.push("challenges");
+    if (hasMilestone('le', 7)) keep.push("milestones");
+    // Stage 4, do the actual data reset
+    layerDataReset(this.layer, keep);
+
+    // Stage 5, add back in the specific subfeatures you saved earlier
+    player[this.layer].upgrades.push(...keptUpgrades);
+},
+autoPrestige() {
+    return hasAchievement("a", 235)
 },
 challenges: {
     11: {
@@ -203,7 +223,8 @@ challenges: {
         unlocked() { return (hasMilestone('sa', 24)) },
 },
 },
-resetsNothing() {return hasMilestone("sa", 23)},
+resetsNothing() {return hasAchievement("a", 213)},
+canBuyMax() { return hasMilestone("le", 5) },
     color: "purple",
     requires: new Decimal(1e10), // Can be a function that takes requirement increases into account
     resource: "Sacrifice Tier", // Name of prestige currency

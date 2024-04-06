@@ -946,7 +946,7 @@ addLayer("a", {
             done() {
                 return player.sa.points.gte("30")
             },
-            tooltip: "Reach Sacrifice Tier 30.",
+            tooltip: "Reach Sacrifice Tier 30.<br> Reward: Sacrifice Tier doesn't reset anything forever.",
             onComplete() {
             },
         },
@@ -1010,6 +1010,96 @@ addLayer("a", {
                 return player.sa.points.gte("42")
             },
             tooltip: "Reach Sacrifice Tier 42.<br> Reward: 1,000,000x Energy & Light",
+            onComplete() {
+            },
+        },
+        231: {
+            name: "More Layers",
+            done() {
+                return player.le.points.gte("1")
+            },
+            tooltip: "Get 1 Leaf Points.<br> Reward: Row 1 to Row 3 Layers are automated forever.",
+            onComplete() {
+            },
+        },
+        232: {
+            name: "MORE INFLATION",
+            done() {
+                return player.points.gte("e200000")
+            },
+            tooltip: "Get 1e200,000 Points.",
+            onComplete() {
+            },
+        },
+        233: {
+            name: "Addition Buyable Amount??",
+            done() {
+                 if (hasMilestone("le", 4))
+                return true            },
+            tooltip: "Reach 4th leaf milestone.",
+            onComplete() {
+            },
+        },
+        234: {
+            name: "Faster Inflation!!",
+            done() {
+                return player.scp.points.gte("e1500")
+            },            
+            tooltip: "Get 1e1,500 Sacrifice Points",
+            onComplete() {
+            },
+        },
+        235: {
+            name: "Sacrificer No Lifer ",
+            done() {
+                return player.sa.points.gte("100")
+            },            
+            tooltip: "Reach Sacrifice Tier 100. <br> Reward: Automatically get Sacrifice Tier forever.",
+            onComplete() {
+            },
+        },
+        241: {
+            name: "Energy Combuster",
+            done() {
+                return player.e.points.gte("1e2500")
+            },            
+            tooltip: "Get 1e2,500 Energy.",
+            onComplete() {
+            },
+        },
+        242: {
+            name: "Time Consumer",
+            done() {
+                return player.tp.points.gte("1e420")
+            },            
+            tooltip: "Get 1e420 Time Power",
+            onComplete() {
+            },
+        },
+        243: {
+            name: "Grass Toucher",
+            done() {
+                return player.le.points.gte("1e9")
+            },            
+            tooltip: "Get 1,000,000,000 Leaf Points.<br> Reward: Automatically buy Cell Buyables",
+            onComplete() {
+            },
+        },
+        244: {
+            name: "Point Prestigious",
+            done() {
+                return player.points.gte("e500000")
+            },            
+            tooltip: "Get 1e500,000 Points",
+            onComplete() {
+            },
+        },
+        245: {
+            name: "The Softcap",
+            done() {
+                return player.e.points.gte("3.333e3333")
+            },            
+            tooltip: "Reach the energy softcap.<br> Reward: 10x every Currency below Sacrifice (Except MP)",
             onComplete() {
             },
         },

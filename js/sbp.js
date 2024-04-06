@@ -49,6 +49,7 @@ addLayer("pb", {
         if (hasUpgrade('hp', 71)) mult = mult.div(upgradeEffect('hp', 71))
         if (hasUpgrade('mp', 65)) mult = mult.div(upgradeEffect('mp', 65))
         if (hasUpgrade('mp', 82)) mult = mult.div(upgradeEffect('mp', 82))
+        if (hasUpgrade('le', 11)) mult = mult.times(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -58,5 +59,6 @@ addLayer("pb", {
     hotkeys: [
         {key: "1", description: "1: Reset for Points-1", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return (hasUpgrade("up", 11) || player[this.layer].unlocked)},
+    layerShown(){if (hasUpgrade("le", 11)) return false
+    else return (hasUpgrade("up", 11) || player[this.layer].unlocked)},
 })

@@ -6,6 +6,9 @@ addLayer("scp", {
         unlocked: false,
 		points: new Decimal(0),
     }},
+    passiveGeneration() {
+        if (hasMilestone("le", 3)) return (hasMilestone("le", 3)?1:0)
+        },
     tabFormat: [
         "main-display",
         "prestige-button",
@@ -27,6 +30,7 @@ addLayer("scp", {
                 },
             },
         },
+        autoUpgrade() { if (hasMilestone("le" , 4)) return true},
         upgrades: {
             11: {
                 title: "The Sacrificer I (SAP11)",
@@ -662,6 +666,14 @@ addLayer("scp", {
         if (hasUpgrade('tp', 94)) mult = mult.times(200)
                 if (hasUpgrade('tp', 95)) mult = mult.times(500)
                 if (hasUpgrade('e', 72)) mult = mult.times("1e6")
+                        if (hasMilestone('le', 1)) mult = mult.times(25)
+                        if (hasUpgrade('le', 12)) mult = mult.times(upgradeEffect('le', 12))
+                        if (hasUpgrade('le', 14)) mult = mult.pow(1.25)
+                        if (hasUpgrade('le', 24)) mult = mult.times(upgradeEffect('le',24))
+                        if (hasUpgrade('le', 34)) mult = mult.times(upgradeEffect('le',34))
+                        if (hasUpgrade('le', 42)) mult = mult.times(upgradeEffect('le',42))
+                                                if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
+
     return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

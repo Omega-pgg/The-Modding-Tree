@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,11 +13,21 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.7.0: Update 7",
+	num: "1.8.0: Update 8",
 	name: "",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v1.8.0: Update 8 (06/04/2024)</h3><br>
+		- The Eighth Update is here!<br>
+		- Added many new upgrades.<br>
+		- Added more achievements.<br>
+		- Added more milestones.<br>
+		- Added 1 new major layer.<br>
+		- Added 2 new buyables.<br>
+		- Added more QOL's.<br>
+		- Added more automation.<br>
+		- Endgame: 1.00e512,000 Points.<br><br>
 <h3>v1.7.0: Update 7 (30/03/2024)</h3><br>
 		- The Seventh Update is here!<br>
 		- Added many new upgrades.<br>
@@ -287,6 +297,8 @@ function getPointGen() {
 	if (hasUpgrade('e', 65)) gain = gain.times(upgradeEffect('e',65))
 	if (hasUpgrade('e', 71)) gain = gain.times(upgradeEffect('e',71))
 	if (hasMilestone('sa', 26)) gain = gain.times(milestoneEffect('sa', 26))
+	if (hasUpgrade('le', 11)) gain = gain.times(upgradeEffect('le', 11))
+	if (hasAchievement('a', 245)) gain = gain.times("10")
 	return gain
 }
 
@@ -328,7 +340,7 @@ function getUndulatingColor(period = Math.sqrt(760)){
 var displayThings = [
 	function(){
 		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("e94000"))/*"Taeyeon"*/+" Points."
+		let a = "Current endgame: "+colorText("h2", x,format("e512000"))/*"Taeyeon"*/+" Points."
 		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
 		let e = `<br>────────────────────────────────────`
 		return a+d+e
@@ -337,7 +349,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e94000"))
+	return player.points.gte(new Decimal("e512000"))
 }
 
 

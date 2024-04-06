@@ -43,6 +43,9 @@ addLayer("mp", {
             },
     
 },
+passiveGeneration() {
+    if (hasMilestone("le", 2)) return (hasMilestone("le", 2)?1:0)
+    },
     upgrades: {
         11: {
             title: "Extension V (MP11)",
@@ -462,6 +465,24 @@ addLayer("mp", {
                                                                                                         
                                                                                                         }
                                                                                                         },
+                                                                                                        92: { 
+                                                                                                            title: "The Super Leaf (MP92)",
+                                                                                                                    description: "2x Leaf",
+                                                                                                                    cost: new Decimal("e168"),
+                                                                                                                    unlocked() {
+                                                                                                                        return hasUpgrade("mp", 91)
+                                                                                                                    
+                                                                                                                    }
+                                                                                                                    },
+                                                                                                                    93: { 
+                                                                                                                        title: "The Super Leaf II (MP93)",
+                                                                                                                                description: "2x Leaf again",
+                                                                                                                                cost: new Decimal("e265"),
+                                                                                                                                unlocked() {
+                                                                                                                                    return hasUpgrade("mp", 92)
+                                                                                                                                
+                                                                                                                                }
+                                                                                                                                },
     },
     milestones: {
     1: {
@@ -514,6 +535,8 @@ doReset(sa) {
     let keep = [];
     if (hasMilestone('sa', 7)) keep.push("challenges");
     if (hasMilestone('sa', 11)) keep.push("milestones");
+    if (hasAchievement('a', 231)) keep.push("milestones");
+    if (hasMilestone('le', 6)) keep.push("challenges");
     // Stage 4, do the actual data reset
     layerDataReset(this.layer, keep);
 
@@ -610,6 +633,10 @@ doReset(sa) {
                                                                 if (hasUpgrade('mp', 91)) mult = mult.pow("1.05")
                                                                 if (inChallenge("sa", 12)) mult = mult.pow(0.2)
                                                                 if (hasChallenge('sa', 12)) mult = mult.times("5")
+                                                                if (hasUpgrade('le', 15)) mult = mult.pow(1.25)
+                                                                if (hasUpgrade('le', 24)) mult = mult.times(upgradeEffect('le',24))
+                                                                if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
+                                                                mult = mult.times(buyableEffect('le', 11))
                                                                 return mult
     },
                 autoUpgrade() { if (hasMilestone("sa" , 15)) return true},

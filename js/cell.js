@@ -40,6 +40,23 @@ effectDescription(){
       use format(num) whenever displaying a number
     */
 },
+automate() {
+    if (hasAchievement('a', 243)) {
+        if (layers.c.buyables[11].canAfford()) {
+            layers.c.buyables[11].buy();
+        };
+    };
+    if (hasAchievement('a', 243)) {
+        if (layers.c.buyables[12].canAfford()) {
+            layers.c.buyables[12].buy();
+        };
+    };
+    if (hasAchievement('a', 243)) {
+        if (layers.c.buyables[13].canAfford()) {
+            layers.c.buyables[13].buy();
+        };
+    };
+},
       buyables: {
         11: {
             title: "Point Buyable 4: The Number",
@@ -51,6 +68,7 @@ effectDescription(){
                 return new Decimal("1e64000").mul(Decimal.pow(35, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
             },
             display() {
+               if (hasMilestone('le', 4)) return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id)+'+' + formatWhole(getBuyableAmount(this.layer,12)) + "<br>Effect: Boost Cells by x" + format(buyableEffect(this.layer, this.id))
                 return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Cells by x" + format(buyableEffect(this.layer, this.id))
             },
             canAfford() {
@@ -66,6 +84,8 @@ effectDescription(){
                 let base2 = x
                 let expo = new Decimal(1.000)
                 let eff = base1.pow(Decimal.pow(base2, expo))
+                if (hasMilestone('le',4)){return base1.pow(getBuyableAmount(this.layer,this.id).add(getBuyableAmount(this.layer,12)))}
+                else {return base1.pow(getBuyableAmount(this.layer,this.id))}
                 return eff
             },
         },
@@ -78,8 +98,9 @@ effectDescription(){
               return new Decimal("1e9").mul(Decimal.pow(2, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
           },
           display() {
-              return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Cells" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Sacrifice Point by x" + format(buyableEffect(this.layer, this.id))
-          },
+            if (hasMilestone('le', 6)) return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Cells" + "<br>Bought: " + getBuyableAmount(this.layer, this.id)+'+' + formatWhole(getBuyableAmount(this.layer,13)) + "<br>Effect: Boost Sacrifice Points by x" + format(buyableEffect(this.layer, this.id))
+             return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Cells" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Sacrifice Points by x" + format(buyableEffect(this.layer, this.id))
+         },
           canAfford() {
               return player.c.points.gte(this.cost())
           },
@@ -93,6 +114,8 @@ effectDescription(){
               let base2 = x
               let expo = new Decimal(1.000)
               let eff = base1.pow(Decimal.pow(base2, expo))
+              if (hasMilestone('le',6)){return base1.pow(getBuyableAmount(this.layer,this.id).add(getBuyableAmount(this.layer,13)))}
+                else {return base1.pow(getBuyableAmount(this.layer,this.id))}
               return eff
           },
       },
@@ -162,7 +185,15 @@ if (hasUpgrade('tp', 34)) mult = mult.times(50)
 if (hasUpgrade('scp', 124)) mult = mult.times(2)
 if (hasUpgrade('scp', 125)) mult = mult.times(20)
 if (hasMilestone('sa', 25)) mult = mult.times(1e24)
-        return mult
+if (hasMilestone('le', 1)) mult = mult.times(10)
+if (hasUpgrade('le', 12)) mult = mult.times(upgradeEffect('le', 12))
+if (hasUpgrade('le', 14)) mult = mult.pow(1.25)
+if (hasUpgrade('le', 24)) mult = mult.times(upgradeEffect('le',24))
+if (hasUpgrade('le', 25)) mult = mult.times(upgradeEffect('le',25))
+if (hasUpgrade('le', 33)) mult = mult.times(upgradeEffect('le',33))
+if (hasUpgrade('le', 41)) mult = mult.times(upgradeEffect('le',41))
+if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
+return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
