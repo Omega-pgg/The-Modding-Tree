@@ -13,7 +13,7 @@ addLayer("sa", {
         ["blank", "25px"],
     ],
     tooltip(){
-        return "<h3>Sacrifice</h3><br>" + "ST " + format(player.sa.points)
+        return "<h3>Sacrifice</h3><br>" + "Sac Tier " + format(player.sa.points)
       },
       microtabs: {
         stuff: {
@@ -196,6 +196,8 @@ doReset(le) {
     let keep = [];
     if (hasMilestone('le', 7)) keep.push("challenges");
     if (hasMilestone('le', 7)) keep.push("milestones");
+    if (hasMilestone('st', 3)) keep.push("challenges");
+    if (hasMilestone('st', 3)) keep.push("milestones");
     // Stage 4, do the actual data reset
     layerDataReset(this.layer, keep);
 
@@ -232,8 +234,8 @@ canBuyMax() { return hasMilestone("le", 5) },
     baseAmount() {return player.mp.points}, // Get the current amount of baseResource
     branches: ["mp"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 2,    
-    gainMult() { // Calculate the multiplier for main currency from bonuses
+    exponent() {if (hasUpgrade("le", 55)) return new Decimal(1.8)
+    else return new Decimal(2)},        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('e', 45)) mult = mult.div(upgradeEffect('e',45))
         return mult

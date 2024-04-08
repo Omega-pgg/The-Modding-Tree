@@ -498,6 +498,9 @@ microtabs: {
         if (hasUpgrade('le', 13)) mult = mult.pow(1.25)
         mult = mult.times(buyableEffect('le', 12))
         if (hasAchievement('a', 245)) mult = mult.times("10")
+        if (hasMilestone('st', 1)) mult = mult.times(250)
+        if (hasMilestone('st', 2)) mult = mult.times(1e11)
+        
         return mult
     
     },

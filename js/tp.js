@@ -506,7 +506,11 @@ addLayer("tp", {
         if (hasUpgrade('le', 35)) mult = mult.times(upgradeEffect('le',35))
                                                         if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
                                                         mult = mult.times(buyableEffect('le', 11))
-                return mult
+                                                                                                                        if (hasMilestone('st', 1)) mult = mult.times(250)
+                                                                                                                                if (hasMilestone('st', 2)) mult = mult.times(1e11)
+                                                                                                                                if (hasMilestone('st', 4)) mult = mult.times(100)
+
+                                                                                                                                return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)

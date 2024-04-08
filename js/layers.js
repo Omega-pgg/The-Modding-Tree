@@ -14,6 +14,7 @@ addLayer("p", {
         return "<h3>Prestige</h3><br>" + format(player.p.points) + " PP"
       },
     passiveGeneration() {
+        if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
         if (hasMilestone("hp", 6)) return (hasMilestone("hp", 6)?1:0)
         },
     tabFormat: [

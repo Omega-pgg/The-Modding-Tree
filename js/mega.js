@@ -537,6 +537,7 @@ doReset(sa) {
     if (hasMilestone('sa', 11)) keep.push("milestones");
     if (hasAchievement('a', 231)) keep.push("milestones");
     if (hasMilestone('le', 6)) keep.push("challenges");
+    if (hasAchievement('a', 251)) keep.push("challenges");
     // Stage 4, do the actual data reset
     layerDataReset(this.layer, keep);
 
@@ -637,6 +638,9 @@ doReset(sa) {
                                                                 if (hasUpgrade('le', 24)) mult = mult.times(upgradeEffect('le',24))
                                                                 if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
                                                                 mult = mult.times(buyableEffect('le', 11))
+                                                                if (hasMilestone('st', 1)) mult = mult.times(250)
+                                                                if (hasMilestone('st', 2)) mult = mult.times(1e11)
+                                                                if (hasMilestone('st', 4)) mult = mult.times(100)
                                                                 return mult
     },
                 autoUpgrade() { if (hasMilestone("sa" , 15)) return true},

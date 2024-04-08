@@ -657,9 +657,12 @@ addLayer("hp", {
         if (hasAchievement('a', 205)) mult = mult.times("10")
         if (hasUpgrade('e', 55)) mult = mult.times(upgradeEffect('e',55))
         if (hasMilestone('sa', 23)) mult = mult.pow("1.05")
+        if (hasAchievement('a', 245)) mult = mult.times("10")
+        if (hasMilestone('st', 1)) mult = mult.times(250)
         return mult
     },
     passiveGeneration() {
+        if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
         if (hasMilestone("sa", 5)) return (hasMilestone("sa", 5)?1:0)
         },
     gainExp() { // Calculate the exponent on main currency from bonuses

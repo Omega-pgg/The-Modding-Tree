@@ -125,6 +125,7 @@ automate() {
         cost(x) {
             let exp2 = 1.1
             if (hasMilestone('sa', 21)) exp2 = 1.05
+            if (hasUpgrade('le', 53)) exp2 = 1.04
             return new Decimal("1e12").mul(Decimal.pow(2, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
         },
         display() {
@@ -193,6 +194,9 @@ if (hasUpgrade('le', 25)) mult = mult.times(upgradeEffect('le',25))
 if (hasUpgrade('le', 33)) mult = mult.times(upgradeEffect('le',33))
 if (hasUpgrade('le', 41)) mult = mult.times(upgradeEffect('le',41))
 if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
+if (hasMilestone('st', 1)) mult = mult.times(250)
+if (hasMilestone('st', 2)) mult = mult.times(1e11)
+if (hasMilestone('st', 4)) mult = mult.times(100)
 return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

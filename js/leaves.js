@@ -46,9 +46,11 @@ addLayer("le", {
                 unlocked() { return hasUpgrade("le", 45) },
                 cost(x) {
                     let exp2 = 1.1
+                    if (hasUpgrade('le', 54)) exp2 = 1.05
                     return new Decimal("1e600").mul(Decimal.pow(1000, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
                 },
                 display() {
+                    if (hasUpgrade('le', 51)) return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Mega-Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id)+'+' + formatWhole(getBuyableAmount(this.layer,12)) + "<br>Effect: Boost Mega-Points and Time Power by x" + format(buyableEffect(this.layer, this.id))
                     return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Mega-Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Mega-Points and Time Power by x" + format(buyableEffect(this.layer, this.id))
                 },
                 canAfford() {
@@ -64,6 +66,8 @@ addLayer("le", {
                     let base2 = x
                     let expo = new Decimal(1.000)
                     let eff = base1.pow(Decimal.pow(base2, expo))
+                    if (hasUpgrade('le',51)){return base1.pow(getBuyableAmount(this.layer,this.id).add(getBuyableAmount(this.layer,12)))}
+                    else {return base1.pow(getBuyableAmount(this.layer,this.id))}
                     return eff
                 },
             },
@@ -72,6 +76,7 @@ addLayer("le", {
                 unlocked() { return hasMilestone("le", 7) },
                 cost(x) {
                     let exp2 = 1.2
+                    if (hasUpgrade('le', 54)) exp2 = 1.1
                     return new Decimal("1e2900").mul(Decimal.pow(1000, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
                 },
                 display() {
@@ -87,6 +92,33 @@ addLayer("le", {
                 },
                 effect(x) {
                     let base1 = new Decimal(10)
+                    let base2 = x
+                    let expo = new Decimal(1.000)
+                    let eff = base1.pow(Decimal.pow(base2, expo))
+                    return eff
+                },
+            },
+            13: {
+                title: "Point Buyable 9: The Leaf Statue III",
+                unlocked() { return hasUpgrade("le", 51) },
+                cost(x) {
+                    let exp2 = 1.1
+                    if (hasUpgrade('le', 54)) exp2 = 1.05
+                    return new Decimal("1e13").mul(Decimal.pow(10, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
+                },
+                display() {
+                    return "Cost: " + format(tmp[this.layer].buyables[this.id].cost) + " Leaf Points" + "<br>Bought: " + getBuyableAmount(this.layer, this.id) + "<br>Effect: Boost Leaf Points by x" + format(buyableEffect(this.layer, this.id))
+                },
+                canAfford() {
+                    return player.le.points.gte(this.cost())
+                },
+                buy() {
+                    let cost = new Decimal ("1e13")
+                    player.le.points = player.le.points.sub(this.cost().sub(cost))
+                    setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+                },
+                effect(x) {
+                    let base1 = new Decimal(2)
                     let base2 = x
                     let expo = new Decimal(1.000)
                     let eff = base1.pow(Decimal.pow(base2, expo))
@@ -312,7 +344,63 @@ addLayer("le", {
                                                                                                                                                                                                                         unlocked() {
                                                                                                                                                                                                                             return hasUpgrade("le", 44)
                                                                                                                                                                                                                         },
-                                                                                                                                                                                                                        },                                                                                                                                         
+                                                                                                                                                                                                                        }, 
+                                                                                                                                                                                                                        51: { 
+                                                                                                                                                                                                                            title: "The Leaf Repeatable Booster (LP51)",
+                                                                                                                                                                                                                                    description: "LB12 increases LB11 amount and unlocks a new leaf buyable.",
+                                                                                                                                                                                                                                    cost: new Decimal(1e17),
+                                                                                                                                                                                                                                    unlocked() {
+                                                                                                                                                                                                                                        return hasUpgrade("le", 45)
+                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                    },  
+                                                                                                                                                                                                                                    52: { 
+                                                                                                                                                                                                                                        title: "Super Tier Divider (LP52)",
+                                                                                                                                                                                                                                                description: "Sacrifice Tier divides Super Tier cost and 50x Leafs.",
+                                                                                                                                                                                                                                                cost: new Decimal(1e19),
+                                                                                                                                                                                                                                                unlocked() {
+                                                                                                                                                                                                                                                    return hasUpgrade("le", 51)
+                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                effect() {
+                                                                                                                                                                                                                                                    return player.sa.points.add(1).pow("1")
+                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                effectDisplay() { return "/" +format(upgradeEffect(this.layer, this.id)) }, // Add formatting to the effect
+                                                                                                                                                                                                                                                },  
+                                                                                                                                                                                                                                                53: { 
+                                                                                                                                                                                                                                                    title: "Buyable Scale (LP53)",
+                                                                                                                                                                                                                                                            description: "Decrease the scale of CB13.",
+                                                                                                                                                                                                                                                            cost: new Decimal(1e28),
+                                                                                                                                                                                                                                                            unlocked() {
+                                                                                                                                                                                                                                                                return hasUpgrade("le", 52)
+                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                            },  
+                                                                                                                                                                                                                                                            54: { 
+                                                                                                                                                                                                                                                                title: "Buyable Scale II (LP54)",
+                                                                                                                                                                                                                                                                        description: "Decrease the scale of LB11 & LB12 and LB13.",
+                                                                                                                                                                                                                                                                        cost: new Decimal(1e30),
+                                                                                                                                                                                                                                                                        unlocked() {
+                                                                                                                                                                                                                                                                            return hasUpgrade("le", 53)
+                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                        },   
+                                                                                                                                                                                                                                                                        55: { 
+                                                                                                                                                                                                                                                                            title: "Sacrifice Scale (LP55)",
+                                                                                                                                                                                                                                                                                    description: "Decrease the scale of Sacrifice Tier & Super Tier.",
+                                                                                                                                                                                                                                                                                    cost: new Decimal(1e33),
+                                                                                                                                                                                                                                                                                    unlocked() {
+                                                                                                                                                                                                                                                                                        return hasUpgrade("le", 54)
+                                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                                    },                    
+                                                                                                                                                                                                                                                                                    61: { 
+                                                                                                                                                                                                                                                                                        title: "The Leaf Grinder (LP61)",
+                                                                                                                                                                                                                                                                                                description: "Sacrifice Tier boosts Leaf Point.",
+                                                                                                                                                                                                                                                                                                cost: new Decimal(1e34),
+                                                                                                                                                                                                                                                                                                unlocked() {
+                                                                                                                                                                                                                                                                                                    return hasUpgrade("le", 55)
+                                                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                                                    effect() {
+                                                                                                                                                                                                                                                                                                        return player.sa.points.add(1).pow("1")
+                                                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                                                    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+                                                                                                                                                                                                                                                                                                },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
                     },
             milestones: {
             1: {
@@ -352,9 +440,24 @@ addLayer("le", {
 },
 8: {
     requirementDescription: "1e13 Total Leaf Points (LPM8)",
-    effectDescription: "Unlock a new layer. (Next Update)",
+    effectDescription: "Unlock a new sub layer. (Next Update)",
     done() { return player.le.total.gte(1e13) }
 },
+    },
+    doReset(st) {
+        // Stage 1, almost always needed, makes resetting this layer not delete your progress
+        if (layers[st].row <= this.row) return;
+    
+        // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+        let keptUpgrades = [];
+        if (hasMilestone('st', 1)) keptUpgrades.push(11);
+        // Stage 3, track which main features you want to keep - milestones
+        let keep = [];
+        // Stage 4, do the actual data reset
+        layerDataReset(this.layer, keep);
+    
+        // Stage 5, add back in the specific subfeatures you saved earlier
+        player[this.layer].upgrades.push(...keptUpgrades);
     },
     color: "#66FF00",
     requires: new Decimal("e410"), // Can be a function that takes requirement increases into account
@@ -377,6 +480,15 @@ addLayer("le", {
         if (hasMilestone('le', 6)) mult = mult.times(3)
         if (hasUpgrade('le', 44)) mult = mult.pow(1.3)
         if (hasUpgrade('e', 73)) mult = mult.times(upgradeEffect('e',73))
+        if (hasMilestone('st', 1)) mult = mult.times(10)
+        if (hasMilestone('st', 2)) mult = mult.times(10)
+        if (hasMilestone('st', 2)) mult = mult.times(5)
+        mult = mult.times(buyableEffect('le', 13))
+        if (hasUpgrade('le', 52)) mult = mult.times(50)
+        if (hasMilestone('st', 4)) mult = mult.times(100)
+        if (hasMilestone('st', 5)) mult = mult.times(5)
+        if (hasMilestone('st', 6)) mult = mult.times(3)
+        if (hasUpgrade('le', 61)) mult = mult.times(upgradeEffect('le',61))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

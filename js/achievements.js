@@ -1103,6 +1103,51 @@ addLayer("a", {
             onComplete() {
             },
         },
+        251: {
+            name: "A layer that resets on the same row???",
+            done() {
+                return player.st.points.gte("1")
+            },
+            tooltip: "Reach Super Tier 1.<br> Reward: Row 4 Layer is automated forever.",
+            onComplete() {
+            },
+        },
+        252: {
+            name: "Already???",
+            done() {
+                return player.st.points.gte("2")
+            },
+            tooltip: "Reach Super Tier 2.",
+            onComplete() {
+            },
+        },
+        253: {
+            name: "Finally...",
+            done() {
+                return player.mp.points.gte("e1000")
+            },            
+            tooltip: "Get 1e1,000 Mega-Points.",
+            onComplete() {
+            },
+        },
+        254: {
+            name: "Trees",
+            done() {
+                return player.le.points.gte("1e33")
+            },            
+            tooltip: "Get 1e33 Leaf Points.",
+            onComplete() {
+            },
+        },
+        255: {
+            name: "Time Overflow",
+            done() {
+                return player.tp.points.gte("1e1000")
+            },            
+            tooltip: "Get 1e1,000 Time Power",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

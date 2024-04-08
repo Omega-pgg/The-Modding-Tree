@@ -8,6 +8,7 @@ addLayer("sp", {
         auto: false,
     }},
     passiveGeneration() {
+        if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
         if (hasMilestone("hp", 6)) return (hasMilestone("hp", 6)?1:0)
         },
     tabFormat: [
@@ -590,6 +591,7 @@ unlocked() {
                                                               if (hasAchievement('a', 205)) mult = mult.times("10")
                                                               if (hasUpgrade('scp', 104)) mult = mult.pow("1.05")
                          if (hasAchievement('a', 245)) mult = mult.times("10")
+                         if (hasMilestone('st', 1)) mult = mult.times(250)
                                                               return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
