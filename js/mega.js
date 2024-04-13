@@ -485,41 +485,81 @@ passiveGeneration() {
                                                                                                                                 },
     },
     milestones: {
-    1: {
-        requirementDescription: "2 Total Mega-Points (MPM1)",
-        effectDescription: "Keep the first hyper-point upgrade on reset.",
-        done() { return player.mp.total.gte(2) }
-},
-2: {
-    requirementDescription: "5 Total Mega-Points (MPM2)",
-    effectDescription: "Keep the first two hyper-point buyables unlocked on reset.",
-    done() { return player.mp.total.gte(5) }
-},
-3: {
-    requirementDescription: "50 Total Mega-Points (MPM3)",
-    effectDescription: "Keep all four hyper-point challenges completed.",
-    done() { return player.mp.total.gte(50) }
-},
-4: {requirementDescription: "Finish Mega Challenge 11 (MPM4)",
-             effectDescription: "Gain 100% Of Ultra-Points gain per second but the hyper-point buyables does not do anything and give a ^1.11... Points",
-                done() {return hasChallenge("mp",11)}},
-    5: {
-        requirementDescription: "250 Total Mega-Points (MPM5)",
-        effectDescription: "Automatically buys Hyper-Point Upgrades.",
-        done() { return player.mp.total.gte(250) }
-    },
-    6: {
-        requirementDescription: "1 Energy (MPM6)",
-        effectDescription: "Gain 100% of Energy gained on reset per second.",
-        done() { return player.e.points.gte(1) }
-    },
-    7: {
-        requirementDescription: "1 Light (MPM7)",
-        effectDescription: "Gain 100% of Light gained on reset per second",
-        done() { return player.l.points.gte(1) }
-    },
+        1: {
+            requirementDescription() {
+                dis = "[1] 2 Total Mega-Points"
+                if (hasUpgrade('cp', 31)) dis = dis + " (Charged)"  
+                return dis},
+            effectDescription() {
+                dis = "Keep the first hyper-point upgrade on reset."
+                if (hasUpgrade('cp', 31)) dis = dis + "<br>Charge effect: Mega-Points boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 31)) + "x"
+                return dis},
+            done() { return player.mp.total.gte(2) },
+            style(){if (hasUpgrade('cp', 31)) return{'background-color':'#ffad00'}}
+        },
+        2: {
+            requirementDescription(){des = "[2] 5 Total Mega-Points"
+                if (hasUpgrade('cp', 52)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Keep the first two hyper-point buyables unlocked on reset."
+            if (hasUpgrade('cp', 52)) des = des + "<br> Charge effect: ^1.5 Hyper-Points"
+            return des},
+            done() { return player.mp.total.gte(5) },
+            style(){if (hasUpgrade('cp', 52)) return{'background-color':'#ffad00'}}
+        },
+        3: {
+            requirementDescription(){des = "[3] 50 Total Mega-Points"
+                if (hasUpgrade('cp', 61)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Keep all four hyper-point challenges completed."
+            if (hasUpgrade('cp', 61)) des = des + "<br> Charge effect: Unlock a new mega-point challenge."
+            return des},
+            done() { return player.mp.total.gte(50) },
+            style(){if (hasUpgrade('cp', 61)) return{'background-color':'#ffad00'}}
+        },
+
+        4: {
+            requirementDescription(){des = "[4] Finish Mega Challenge 11"
+                if (hasUpgrade('cp', 65)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Gain 100% Of Ultra-Points gain per second but the hyper-point buyables does not do anything and give a ^1.11... Points."
+            if (hasUpgrade('cp', 65)) des = des + "<br> Charge effect: ^1.01 Charge Power"
+            return des},
+            done() {return hasChallenge("mp",11)},
+            style(){if (hasUpgrade('cp', 65)) return{'background-color':'#ffad00'}}
+        },
+        5: {
+            requirementDescription(){des = "[5] 250 Total Mega-Points"
+                if (hasUpgrade('cp', 74)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Automatically buys Hyper-Point Upgrades."
+            if (hasUpgrade('cp', 74)) des = des + "<br> Charge effect: ^1.075 Hyper-Points & Super-Points"
+            return des},
+            done() { return player.mp.total.gte(250) },
+            style(){if (hasUpgrade('cp', 74)) return{'background-color':'#ffad00'}}
+        },
+        6: {
+            requirementDescription(){des = "[6] 1 Energy"
+                if (hasUpgrade('cp', 83)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Gain 100% of Energy gained on reset per second."
+            if (hasUpgrade('cp', 83)) des = des + "<br> Charge effect: ^1.2 Time Power"
+            return des},
+            done() { return player.e.points.gte(1) },
+            style(){if (hasUpgrade('cp', 83)) return{'background-color':'#ffad00'}}
+        },
+        7: {
+            requirementDescription(){des = "[7] 1 Light"
+                if (hasUpgrade('dp', 35)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Gain 100% of Light gained on reset per second."
+            if (hasUpgrade('dp', 35)) des = des + "<br> Charge effect: ^1.3 Divine Perks but ^0.9 Divine Points"
+            return des},
+            done() { return player.l.points.gte(1) },
+            style(){if (hasUpgrade('dp', 35)) return{'background-color':'#ffad00'}}
+        },
     8: {
-        requirementDescription: "1 Cell (MPM8)",
+        requirementDescription: "[8] 1 Cell",
         effectDescription: "Gain 100% of Cells gained on reset per second",
         done() { return player.c.points.gte(1) }
     },
@@ -561,6 +601,14 @@ doReset(sa) {
             canComplete: function() {return player.hp.points.gte("1e58")},
             unlocked() { return (hasUpgrade('mp', 83)) },
     },
+    21: {
+        name: "Disable Layers",
+        challengeDescription: "You can't gain any resources below Mega-Points.",
+        goalDescription: "1e400,000 Points",
+        rewardDescription: "^1.01 Mega Points and 1,000,000,000x Charge Power.",
+        canComplete: function() {return player.points.gte("e400000")},
+        unlocked() { return (hasUpgrade('cp', 61)) },
+},
     },
     color: "orange",
     requires: new Decimal("1e1500"), // Can be a function that takes requirement increases into account
@@ -641,6 +689,11 @@ doReset(sa) {
                                                                 if (hasMilestone('st', 1)) mult = mult.times(250)
                                                                 if (hasMilestone('st', 2)) mult = mult.times(1e11)
                                                                 if (hasMilestone('st', 4)) mult = mult.times(100)
+                                                                if (hasUpgrade('cp', 24)) mult = mult.pow(1.1)
+                                                                mult = mult.times(buyableEffect('le', 21))
+                                                                if (hasAchievement('a', 275)) mult = mult.times("1e8")
+                                                                if (hasChallenge('mp', 21)) mult = mult.pow(1.01)
+                                                                if (hasUpgrade('dp', 41)) mult = mult.times(upgradeEffect('dp', 41))
                                                                 return mult
     },
                 autoUpgrade() { if (hasMilestone("sa" , 15)) return true},

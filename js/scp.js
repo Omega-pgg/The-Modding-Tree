@@ -676,6 +676,10 @@ addLayer("scp", {
                                                                 if (hasMilestone('st', 1)) mult = mult.times(250)
                                                                 if (hasMilestone('st', 2)) mult = mult.times(1e11)
                                                                 if (hasMilestone('st', 4)) mult = mult.times(100)
+                                                                        mult = mult.times(buyableEffect('cp', 13))
+                                                                                                                                        if (hasAchievement('a', 275)) mult = mult.times("1e8")
+                                                                                                                                                if (hasUpgrade('cp', 81)) mult = mult.pow(1.2)
+                                                                                                                                                if (hasUpgrade('dp', 41)) mult = mult.times(upgradeEffect('dp', 41))
     return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

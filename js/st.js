@@ -23,46 +23,118 @@ addLayer("st", {
                         "milestones"
                     ]
                 },
-                "Buyables": {
-                    unlocked() {return (hasUpgrade("le", 45))},
-                    content: [
-                        ["blank", "15px"],
-                        "buyables"
-                    ]
-                },
-            },
         },
-            milestones: {
-            1: {
-                requirementDescription: "Super Tier 1 (S.TierM1)",
-                effectDescription: "10x Leaf Points and 250x everything else and always have the first leaf upgrade.",
-                done() { return player.st.points.gte(1) }
-        },
-        2: {
-            requirementDescription: "Super Tier 2 (S.TierM2)",
-            effectDescription: "10x Leaf Points and 100,000,000,000x Time Power, Cells, Sacrifice Points, Energy, Light and Mega-Points.",
-            done() { return player.st.points.gte(2) }
     },
-    3: {
-        requirementDescription: "Super Tier 3 (S.TierM3)",
-        effectDescription: "5x Leaf Points and keep Sacrifice Milestones & Challenges.",
-        done() { return player.st.points.gte(3) }
+            milestones: {
+                1: {
+                    requirementDescription() {
+                        dis = "[1] Super Tier 1"
+                        if (hasUpgrade('cp', 41)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "10x Leaf Points, 250x everything else (Except PP) and always have the first leaf upgrade"
+                        if (hasUpgrade('cp', 41)) dis = dis + "<br>Charge effect: Energy boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 41)) + "x"
+                        return dis},
+                    done() { return player.st.points.gte(1) },
+                    style(){if (hasUpgrade('cp', 41)) return{'background-color':'#ffad00'}}
+                },
+                2: {
+                    requirementDescription(){des = "[2] Super Tier 2"
+                        if (hasUpgrade('cp', 53)) des = des + " (Charged)"
+                        return des},
+                    effectDescription() {des = "10x Leaf Points and 100,000,000,000x Time Power, Cells, Sacrifice Points, Energy, Light and Mega-Points."
+                    if (hasUpgrade('cp', 53)) des = des + "<br> Charge effect: ^1.1 Time Power and ^1.05 Leaf Points."
+                    return des},
+                    done() { return player.st.points.gte(2) },
+                    style(){if (hasUpgrade('cp', 53)) return{'background-color':'#ffad00'}}
+                },
+                3: {
+                    requirementDescription() {
+                        dis = "[3] Super Tier 3"
+                        if (hasUpgrade('cp', 64)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "5x Leaf Points and keep Sacrifice Milestones & Challenges."                        
+                        if (hasUpgrade('cp', 64)) dis = dis + "<br>Charge effect: Light boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 64)) + "x"
+                        return dis},
+                    done() { return player.st.points.gte(3) },
+                    style(){if (hasUpgrade('cp', 64)) return{'background-color':'#ffad00'}}
+                },
+                4: {
+                    requirementDescription(){des = "[4] Super Tier 4"
+                        if (hasUpgrade('cp', 73)) des = des + " (Charged)"
+                        return des},
+                    effectDescription() {des = "100x Leaf Points, Time Power, Cells and Mega-Points."
+                    if (hasUpgrade('cp', 73)) des = des + "<br> Charge effect: Light effect softcap is even weaker."
+                    return des},
+                    done() { return player.st.points.gte(4) },
+                    style(){if (hasUpgrade('cp', 73)) return{'background-color':'#ffad00'}}
+                },
+                5: {
+                    requirementDescription(){des = "[5] Super Tier 5"
+                        if (hasUpgrade('cp', 82)) des = des + " (Charged)"
+                        return des},
+                    effectDescription() {des = "5x Leaf Points."
+                    if (hasUpgrade('cp', 82)) des = des + "<br> Charge effect: ^1.2 Cells."
+                    return des},
+                    done() { return player.st.points.gte(5) },
+                    style(){if (hasUpgrade('cp', 82)) return{'background-color':'#ffad00'}}
+                },
+                6: {
+                    requirementDescription(){des = "[6] Super Tier 6"
+                        if (hasUpgrade('cp', 91)) des = des + " (Charged)"
+                        return des},
+                    effectDescription() {des = "3x Leaf Points and unlock a new layer."
+                    if (hasUpgrade('cp', 91)) des = des + "<br> Charge effect: ^1.3 Divine Points."
+                    return des},
+                    done() { return player.st.points.gte(6) },
+                    style(){if (hasUpgrade('cp', 91)) return{'background-color':'#ffad00'}}
+                },
+                7: {
+                    requirementDescription(){des = "[7] Super Tier 8"
+                        if (hasUpgrade('dp', 43)) des = des + " (Charged)"
+                        return des},
+                    effectDescription() {des = "Automate Leaf Buyables & Upgrades and 1,000,000,000x Charge Power."
+                    if (hasUpgrade('dp', 43)) des = des + "<br> Charge effect: ^1.125 Leaf Points."
+                    return des},
+                    done() { return player.st.points.gte(8) },
+                    style(){if (hasUpgrade('dp', 43)) return{'background-color':'#ffad00'}}
+                },
+8: {
+    requirementDescription: "[8] Super Tier 10 ",
+    effectDescription: "Keep Leaf Milestones on reset.",
+    done() { return player.st.points.gte(10) }
 },
-4: {
-    requirementDescription: "Super Tier 4 (S.TierM4)",
-    effectDescription: "100x Leaf Points, Time Power, Cells and Mega-Points.",
-    done() { return player.st.points.gte(4) }
+9: {
+    requirementDescription: "[9] Super Tier 18 ",
+    effectDescription: "LB21 adds free levels to LB13.",
+    done() { return player.st.points.gte(18) }
 },
-5: {
-    requirementDescription: "Super Tier 5 (S.TierM5)",
-    effectDescription: "5x Leaf Points.",
-    done() { return player.st.points.gte(5) }
+10: {
+    requirementDescription: "[10] Super Tier 21 ",
+    effectDescription: "^1.05 Energy & Light, Cells and Charge Power",
+    done() { return player.st.points.gte(21) }
 },
-6: {
-    requirementDescription: "Super Tier 6 (S.TierM6)",
-    effectDescription: "3x Leaf Points and unlock a new layer. (Next Update)",
-    done() { return player.st.points.gte(6) }
-},
+    },
+    autoPrestige() {
+        return hasAchievement("a", 273)
+    },
+    resetsNothing() {return hasAchievement("a", 273)},
+    doReset(dp) {
+        // Stage 1, almost always needed, makes resetting this layer not delete your progress
+        if (layers[dp].row <= this.row) return;
+    
+        // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+        let keptUpgrades = [];
+    
+        // Stage 3, track which main features you want to keep - milestones
+        let keep = [];
+        if (hasMilestone('dp', 2)) keep.push("milestones");
+        // Stage 4, do the actual data reset
+        layerDataReset(this.layer, keep);
+    
+        // Stage 5, add back in the specific subfeatures you saved earlier
+        player[this.layer].upgrades.push(...keptUpgrades);
     },
     color: "#8b0000",
     requires: new Decimal("e13"), // Can be a function that takes requirement increases into account
@@ -71,7 +143,8 @@ addLayer("st", {
     baseAmount() {return player.le.points}, // Get the current amount of baseResource
     branches: ["le"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent() {if (hasUpgrade("le", 55)) return new Decimal(2.85)
+    exponent() {if (hasUpgrade("le", 72)) return new Decimal(2.25)
+    else if (hasUpgrade("le", 55)) return new Decimal("2.85")
     else return new Decimal(3)},    gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('le', 52)) mult = mult.div(upgradeEffect('le', 52))

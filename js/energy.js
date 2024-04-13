@@ -24,6 +24,7 @@ addLayer("e", {
       effect(){
         let e = player[this.layer].total.max("1").pow("3")
         if(e.gt("e1e4")){
+            if(hasUpgrade("cp",45))e=e.pow(5).min("e1e60")
             if(hasAchievement("a",231))e=e.log10().pow(2500).min("e1e6")
         }
         return e
@@ -415,7 +416,7 @@ microtabs: {
                         unlocked() {return (hasAchievement("a", 11))},
                 content: [
                     ["blank", "15px"],
-                    ["raw-html", () => `<h4 style="opacity:.5">The Energy Layer will give a boost to Points.</h4>`],
+                    ["raw-html", () => `<h4 style="opacity:.5">The Energy Layer will give a boost to Points.<br> Softcap effect starts at 1e10,000x</h4>`],
                     ["upgrades", [1,2,3,4,5,6,7,8,9,10,11]]
                 ],
             },
@@ -500,7 +501,12 @@ microtabs: {
         if (hasAchievement('a', 245)) mult = mult.times("10")
         if (hasMilestone('st', 1)) mult = mult.times(250)
         if (hasMilestone('st', 2)) mult = mult.times(1e11)
-        
+        if (hasMilestone('st', 10)) mult = mult.pow(1.05)
+        if (hasUpgrade('dp', 12)) mult = mult.pow(1.25)
+        if (hasUpgrade('le', 73)) mult = mult.times(upgradeEffect('le',73))
+        if (hasUpgrade('cp', 72)) mult = mult.pow(1.05)
+        if (hasUpgrade('cp', 85)) mult = mult.pow(1.2)
+
         return mult
     
     },

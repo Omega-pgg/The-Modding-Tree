@@ -48,9 +48,6 @@ addLayer("pb4", {
         return new Decimal(1)
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
-        {key: "4", description: "4: Reset for Points-4", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
     layerShown(){if (hasUpgrade("le", 11)) return false
     else return (hasUpgrade("mp", 24) || player[this.layer].unlocked)},
 })

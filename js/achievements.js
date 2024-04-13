@@ -717,7 +717,7 @@ addLayer("a", {
             },
         },
         163: {
-            name: "Worker",
+            name: "Mechanic",
             done() {
                 if (hasUpgrade("mp", 61))
                 return true                },
@@ -1099,7 +1099,7 @@ addLayer("a", {
             done() {
                 return player.e.points.gte("3.333e3333")
             },            
-            tooltip: "Reach the energy softcap.<br> Reward: 10x every Currency below Sacrifice (Except MP)",
+            tooltip: "Reach the energy effect softcap.<br> Reward: 10x every Currency below Sacrifice (Except MP)",
             onComplete() {
             },
         },
@@ -1145,6 +1145,141 @@ addLayer("a", {
                 return player.tp.points.gte("1e1000")
             },            
             tooltip: "Get 1e1,000 Time Power",
+            onComplete() {
+            },
+        },
+        261: {
+            name: "A new layer without the reset button?",
+            done() {
+                return player.cp.points.gte("1")
+            },            
+            tooltip: "Get 1 Charge Power.<br> Reward: Automatically buy Leaf Buyables. (except the last one)",
+            onComplete() {
+            },
+        },
+        262: {
+            name: "Maximusmillion",
+            done() {
+                return player.points.gte("e1e6")
+            },            
+            tooltip: "Get 1e1,000,000 Points.",
+            onComplete() {
+            },
+        },
+        263: {
+            name: "Evolved Milestones",
+            done() {
+                if (hasUpgrade("cp", 24))
+                return true            },
+            tooltip: "Charge the first hyper-point milestone",
+            onComplete() {
+            },
+        },
+        264: {
+            name: "The Super Softcap",
+            done() {
+                return player.c.points.gte("1e2500")
+            },            
+            tooltip: "Reach the cell softcap.",
+            onComplete() {
+            },
+        },
+        265: {
+            name: "Time based milestones???",
+            done() {
+                if (hasUpgrade("cp", 33))
+                return true            },
+            tooltip: "Charge the first leaf point milestone",
+            onComplete() {
+            },
+        },
+        271: {
+            name: "New Grassy",
+            done() {
+                return player.le.points.gte("1e250")
+            },            
+            tooltip: "Get 1e250 Leaf Points.",
+            onComplete() {
+            },
+        },
+        272: {
+            name: "Maximusmillion x2",
+            done() {
+                return player.points.gte("e2e6")
+            },            
+            tooltip: "Get 1e2,000,000 Points.",
+            onComplete() {
+            },
+        },
+        273: {
+            name: "Sacrificer Explosion ",
+            done() {
+                return player.sa.points.gte("1000")
+            },            
+            tooltip: "Reach Sacrifice Tier 1,000. <br> Reward: Automatically get Super Tier forever.",
+            onComplete() {
+            },
+        },
+        274: {
+            name: "Divine?",
+            done() {
+                return player.dp.points.gte("1")
+            },            
+            tooltip: "Get 1 Divine Point.<br> Reward: Automatically buys the last leaf buyable",
+            onComplete() {
+            },
+        },
+        275: {
+            name: "Micrillion",
+            done() {
+                return player.points.gte("e3e6")
+            },            
+            tooltip: "Get 1e3,000,000 Points.<br> Reward: 100,000,000x MP, Cells, SP and TP",
+            onComplete() {
+            },
+        },
+        281: {
+            name: "Division?",
+            done() {
+                return player.dp.total.gte("100")
+            },            
+            tooltip: "Get 100 Divine Point.<br> Reward: Automatically buy Charge Power Buyables",
+            onComplete() {
+            },
+        },
+        282: {
+            name: "The Hardcap",
+            done() {
+                if (hasUpgrade("cp", 73))
+                return true            },
+            tooltip: "Reach the light effect hardcap",
+            onComplete() {
+            },
+        },
+        283: {
+            name: "The Grind",
+            done() {
+                return player.dp.total.gte("1e6")
+            },            
+            tooltip: "Get 1,000,000 Divine Points.",
+            onComplete() {
+            },
+        },
+        284: {
+            name: "Pure Pain!",
+            done() {
+                if (hasChallenge("dp", 12))
+                return true            },
+            tooltip: "Complete the 2nd divine challenge.",
+            onComplete() {
+            },
+        },
+        285: {
+            name: "The Upgrade Tree with sub-currency!",
+            done() {
+                if (hasUpgrade("dp", 31))
+                return true            },
+            tooltip: "Unlock the upgrade tree tab with Divine Perks.",
             onComplete() {
             },
         },

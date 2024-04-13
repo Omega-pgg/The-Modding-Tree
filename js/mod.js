@@ -2,22 +2,37 @@ let modInfo = {
 	name: "The Omega Tree",
 	id: "2",
 	author: "Omega",
-	pointsName: "points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js"],
+	pointsName: "Points",
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js", "cp.js", "divine.js", "pa.js"],
 
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
 	offlineLimit: 24,  // In hours
 }
-
 // Set your version in num and name
 let VERSION = {
-	num: "1.9.0: Update 9",
-	name: "",
+	num: "2.0.0: Update 10",
+	name: "The Big One",
 }
-
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v2.0.0: Update 10 (13/04/2024)</h3><br>
+		- The First Big Update is here!<br>
+		- You can now change notations in settings.<br>
+		- Removed the endgame at the top.<br>
+		- Added Save Bank.<br>
+		- Made Hyper-Mega Layers a bit easier.<br>
+		- Added many new upgrades.<br>
+		- Added Upgrade Tree.<br>
+		- Added 1 sub-currency.<br>
+		- Added many new achievements.<br>
+		- Added many new milestones.<br>
+		- Added charged milestones.<br>
+		- Added 1 new sub layer.<br>
+		- Added 1 new major layer.<br>
+		- Added 5 new buyables.<br>
+		- Added 3 new challenges.<br>
+		- Endgame: 1.00e13,000,000 Points.<br><br>
 <h3>v1.9.0: Update 9 (08/04/2024)</h3><br>
 		- The Ninth Update is here!<br>
 		- Added more upgrades.<br>
@@ -311,6 +326,9 @@ function getPointGen() {
 	if (hasMilestone('sa', 26)) gain = gain.times(milestoneEffect('sa', 26))
 	if (hasUpgrade('le', 11)) gain = gain.times(upgradeEffect('le', 11))
 	if (hasAchievement('a', 245)) gain = gain.times("10")
+		if (hasUpgrade('le', 65)) gain = gain.times(upgradeEffect('le', 65))
+		if (hasUpgrade('cp', 33)) gain = gain.times(upgradeEffect('cp', 33))
+		if (hasUpgrade('cp', 55)) gain = gain.pow(1.01)
 	return gain
 }
 
@@ -351,17 +369,15 @@ function getUndulatingColor(period = Math.sqrt(760)){
 }
 var displayThings = [
 	function(){
-		let x = getUndulatingColor()
-		let a = "Current endgame: "+colorText("h2", x,format("e765000"))/*"Taeyeon"*/+" Points."
-		let d = isEndgame()?makeRed("<br>You are past the endgame,<br>and the game might not be balanced here."):""
-		let e = `<br>────────────────────────────────────`
-		return a+d+e
+		let d = isEndgame()?makeRed("You are past the endgame,<br>and the game might not be balanced here.<br>"):""
+		let e = `────────────────────────────────────`
+		return d+e
 	},
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e765000"))
+	return player.points.gte(new Decimal("e1.3e7"))
 }
 
 

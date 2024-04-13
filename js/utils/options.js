@@ -17,6 +17,12 @@ function getStartOptions() {
 	}
 }
 
+let notations = ['Scientific','Engineering','Standard','Mixed Scientific','Mixed Engineering']
+
+function changeNotation() {
+	player.notation = notations[(notations.indexOf(player.notation) + 1) % notations.length]
+}
+
 function toggleOpt(name) {
 	if (name == "oldStyle" && styleCooldown > 0)
 		return;

@@ -592,6 +592,8 @@ unlocked() {
                                                               if (hasUpgrade('scp', 104)) mult = mult.pow("1.05")
                          if (hasAchievement('a', 245)) mult = mult.times("10")
                          if (hasMilestone('st', 1)) mult = mult.times(250)
+                         if (inChallenge("mp", 21)) mult = mult.div("10^^308")
+                                 if (hasUpgrade('cp', 74)) mult = mult.pow("1.075")
                                                               return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

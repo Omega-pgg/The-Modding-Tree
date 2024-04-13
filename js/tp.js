@@ -509,6 +509,10 @@ addLayer("tp", {
                                                                                                                         if (hasMilestone('st', 1)) mult = mult.times(250)
                                                                                                                                 if (hasMilestone('st', 2)) mult = mult.times(1e11)
                                                                                                                                 if (hasMilestone('st', 4)) mult = mult.times(100)
+                                                                if (hasAchievement('a', 275)) mult = mult.times("1e8")
+                                                                if (hasUpgrade('cp', 53)) mult = mult.pow(1.1)
+if (hasUpgrade('cp', 83)) mult = mult.pow(1.2)
+        if (inChallenge('dp', 11)) mult = mult.div(Infinity)
 
                                                                                                                                 return mult
     },

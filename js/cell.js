@@ -23,8 +23,9 @@ addLayer("c", {
       },
       effect(){
         let e = player[this.layer].total.max("1").pow("2")
-        if(e.gt("e3000")){
-            if(hasAchievement("a",237))e=e.log10().pow(5.18e3/6).min("ee4")
+        if(e.gt("e5000")){
+            if(hasUpgrade("cp",51))e=e.log10().pow(5000).min("ee6")
+            if(hasAchievement("a",262))e=e.log10().pow(1360).min("ee6")
         }
         return e
       },
@@ -34,7 +35,7 @@ addLayer("c", {
 effectDescription(){
     let s =  "boosting sacrifice point gain by x" + format(tmp[this.layer].effect) 
     if(this.effect().gt("e1e6")){s=s+" (hardcapped)"}
-    else if(this.effect().gt("e3000")){s=s+" (softcapped)"}
+    else if(this.effect().gt("e5000")){s=s+" (softcapped)"}
     return s
     /*
       use format(num) whenever displaying a number
@@ -197,6 +198,12 @@ if (hasUpgrade('le', 43)) mult = mult.times(upgradeEffect('le',43))
 if (hasMilestone('st', 1)) mult = mult.times(250)
 if (hasMilestone('st', 2)) mult = mult.times(1e11)
 if (hasMilestone('st', 4)) mult = mult.times(100)
+if (hasMilestone('st', 10)) mult = mult.pow(1.05)
+if (hasAchievement('a', 275)) mult = mult.times("1e8")
+if (hasUpgrade('le', 73)) mult = mult.times(upgradeEffect('le',73))
+if (hasUpgrade('cp', 72)) mult = mult.pow(1.05)
+if (hasUpgrade('cp', 82)) mult = mult.pow(1.2)
+if (inChallenge('dp', 11)) mult = mult.div(Infinity)
 return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

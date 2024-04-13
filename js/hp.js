@@ -396,7 +396,7 @@ addLayer("hp", {
         },
         62: { title: "Cells IV (HP62)",
                                         description: "Points boosts itself at a very reduced rate.",
-                                        cost: new Decimal(5e59),
+                                        cost: new Decimal(1e58),
                                         unlocked() {
                                             return hasUpgrade("hp", 61)
                                         },
@@ -659,6 +659,9 @@ addLayer("hp", {
         if (hasMilestone('sa', 23)) mult = mult.pow("1.05")
         if (hasAchievement('a', 245)) mult = mult.times("10")
         if (hasMilestone('st', 1)) mult = mult.times(250)
+        if (hasUpgrade('cp', 52)) mult = mult.pow("1.5")
+        if (inChallenge("mp", 21)) mult = mult.div("10^^308")
+        if (hasUpgrade('cp', 74)) mult = mult.pow("1.075")
         return mult
     },
     passiveGeneration() {
@@ -675,20 +678,37 @@ addLayer("hp", {
     layerShown(){return (hasUpgrade("p", 61) || player[this.layer].unlocked)},
     milestones: {
         1: {
-            requirementDescription: "1e100 Points (HPM1)",
-            effectDescription: "Automatically buys upgrades below Hyper-Points (except Prestige Points)",
-            done() { return player.points.gte(1e100) }
-    },
-    2: {
-        requirementDescription: "100,000 Hyper-Points (HPM2)",
-        effectDescription: "You can buy max of Points-1, Points-2 and Points-3",
-        done() { return player.hp.points.gte(100000) }
-},
-3: {requirementDescription: "Finish Hyper Challenge 11 (HPM3)",
-             effectDescription: "Points-1, Points-2 and Points-3 are automated and they no longer reset anything.",
-                done() {return hasChallenge("hp",11)}},
+            requirementDescription(){des = "[1] 1e100 Points"
+                if (hasUpgrade('cp', 24)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Automatically buy upgrades below Hyper-Points. (Except PP)"
+            if (hasUpgrade('cp', 24)) des = des + "<br> Charge effect: ^1.1 Mega-Points"
+            return des},
+            done() { return player.points.gte(1e100) },
+            style(){if (hasUpgrade('cp', 24)) return{'background-color':'#ffad00'}}
+        },
+        2: {
+            requirementDescription(){des = "[2] 100,000 Hyper-Points"
+                if (hasUpgrade('cp', 51)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "You can buy max Points-1, Points-2 and Points-3."
+            if (hasUpgrade('cp', 51)) des = des + "<br> Charge effect: Light & Cell Effect softcaps are weaker."
+            return des},
+            done() { return player.hp.points.gte(1e5) },
+            style(){if (hasUpgrade('cp', 51)) return{'background-color':'#ffad00'}}
+        },
+        3: {
+            requirementDescription(){des = "[3] Finish Hyper Challenge 11"
+                if (hasUpgrade('cp', 55)) des = des + " (Charged)"
+                return des},
+            effectDescription() {des = "Points-1, Points-2 and Points-3 are automated and they no longer reset anything."
+            if (hasUpgrade('cp', 55)) des = des + "<br> Charge effect: ^1.01 Points and Leaf Points."
+            return des},
+            done() {return hasChallenge("hp",11)},
+            style(){if (hasUpgrade('cp', 55)) return{'background-color':'#ffad00'}}
+        },
 4: {
-    requirementDescription: "100,000,000 Hyper-Points (HPM4)",
+    requirementDescription: "[4] 100,000,000 Hyper-Points",
     effect() {
         let eff = player.up.points.add(1).pow(0.2)
         return eff
@@ -699,20 +719,20 @@ addLayer("hp", {
         
     },
     5: {
-        requirementDescription: "450,000,000 Hyper-Points (HPM5)",
+        requirementDescription: "[5] 450,000,000 Hyper-Points",
         effectDescription: "1,000x Points, 10x Super-Points and Ultra-Points",
         done() { return player.hp.points.gte(4.5e8) }
 },
-6: {requirementDescription: "Finish Hyper Challenge 12 (HPM6)",
+6: {requirementDescription: "[6] Finish Hyper Challenge 12",
              effectDescription: "Finally, gain 100% of prestige points and super-points gain per second",
                 done() {return hasChallenge("hp",12)}},
     7: {
-        requirementDescription: "5,000,000,000 Hyper-Points (HPM7)",
+        requirementDescription: "[7] 5,000,000,000 Hyper-Points",
         effectDescription: "PU25, SP64 and HP42 Effects are better",
         done() { return player.hp.points.gte(5e9) }
     },
     8: {
-        requirementDescription: "25,000,000,000 Hyper-Points (HPM8)",
+        requirementDescription: "[8] 25,000,000,000 Hyper-Points",
         effect() {
             let eff = player.hp.points.add(1).pow(0.33333333333333333)
             return eff
@@ -723,65 +743,65 @@ addLayer("hp", {
             
         },
         9: {
-            requirementDescription: "75,000,000,000 Hyper-Points (HPM9)",
+            requirementDescription: "[9] 75,000,000,000 Hyper-Points",
             effectDescription: "^1.01 Points",
             done() { return player.hp.points.gte(7.5e10) }
         },
         10: {
-            requirementDescription: "4e13 Hyper-Points (HPM10)",
+            requirementDescription: "[10] 4e13 Hyper-Points",
             effectDescription: "^1.05 Points!",
             done() { return player.hp.points.gte(3e13) }
         },
         11: {
-            requirementDescription: "2e15 Hyper-Points (HPM11)",
+            requirementDescription: "[11] 2e15 Hyper-Points",
             effectDescription: "^1.05 Points again",
             done() { return player.hp.points.gte(2e15) }
         },
         12: {
-            requirementDescription: "5e16 Hyper-Points (HPM12)",
+            requirementDescription: "[12] 5e16 Hyper-Points",
             effectDescription: "^1.2 Super-Points!!",
             done() { return player.hp.points.gte(5e16) }
         },
         13: {
-            requirementDescription: "2e18 Hyper-Points (HPM13)",
+            requirementDescription: "[13] 2e18 Hyper-Points",
             effectDescription: "^1.25 Ultra-Points!!",
             done() { return player.hp.points.gte(2e18) }
         },
         14: {
-            requirementDescription: "1e19 Hyper-Points (HPM14)",
+            requirementDescription: "[14] 1e19 Hyper-Points",
             effectDescription: "Gain ^1.25 Points but nullify PU25 & HP42 effects.",
             done() { return player.hp.points.gte(1e19) }
         },
         15: {
-            requirementDescription: "1e500 Points (HPM15)",
+            requirementDescription: "[15] 1e500 Points",
             effectDescription: "Automatically buys prestige point upgrades",
             done() { return player.points.gte("1e500") }
     },
     16: {
-        requirementDescription: "1e23 Hyper-Points (HPM16)",
+        requirementDescription: "[16] 1e23 Hyper-Points",
         effectDescription: "SP73 Effect is better and ^1.05 Points.",
         done() { return player.hp.points.gte(1e23) }
     },
-    17: {requirementDescription: "Finish Hyper Challenge 21 (HPM17)",
+    17: {requirementDescription: "[17] Finish Hyper Challenge 21",
              effectDescription: "UP52 Effect is better",
                 done() {return hasChallenge("hp",21)}},
 18: {
-    requirementDescription: "1e27 Hyper-Points (HPM18)",
+    requirementDescription: "[18] 1e27 Hyper-Points",
     effectDescription: "HB11 Effect is doubled",
     done() { return player.hp.points.gte(1e27) }
 },
 19: {
-    requirementDescription: "1e620 Points (HPM19)",
+    requirementDescription: "[19] 1e620 Points",
     effectDescription: "^1.1 Points",
     done() { return player.points.gte("1e620") }
 },
 20: {
-requirementDescription: "1e36 Hyper-Points (HPM20)",
+requirementDescription: "[20] 1e36 Hyper-Points",
 effectDescription: "HB11 Effect is increased by +50%",
 done() { return player.hp.points.gte(1e36) }
 },
 21: {
-    requirementDescription: "1e37 Hyper-Points (HPM21)",
+    requirementDescription: "[21] 1e37 Hyper-Points",
     effect() {
         let eff = player.hp.points.add(1).pow(0.2)
         return eff
@@ -792,12 +812,12 @@ done() { return player.hp.points.gte(1e36) }
         
     },
     22: {
-        requirementDescription: "1e38 Hyper-Points (HPM22)",
+        requirementDescription: "[22] 1e38 Hyper-Points",
         effectDescription: "+1% Point Gain",
         done() { return player.hp.points.gte(1e38) }
     },
     23: {
-        requirementDescription: "2e38 Hyper-Points (HPM23)",
+        requirementDescription: "[23] 2e38 Hyper-Points",
         effect() {
             let eff = player.hp.points.add(1).pow(0.333333333333333333333)
             return eff
@@ -807,16 +827,16 @@ done() { return player.hp.points.gte(1e36) }
             ,    done() { return player.hp.points.gte("2e38")}
             
         },
-        24: {requirementDescription: "Finish Hyper Challenge 22 (HPM24)",
+        24: {requirementDescription: "[24] Finish Hyper Challenge 22",
              effectDescription: "SP73 Effect is better again",
                 done() {return hasChallenge("hp",22)}},
                 25: {
-                    requirementDescription: "1e42 Hyper-Points (HPM25)",
+                    requirementDescription: "[25] 1e42 Hyper-Points",
                     effectDescription: "^1.05 Points",
                     done() { return player.hp.points.gte("1e42") }
                 },
                 26: {
-                    requirementDescription: "5e57 Hyper-Points (HPM26)",
+                    requirementDescription: "[26] 5e57 Hyper-Points",
                     effectDescription: "^1.01 Points",
                     done() { return player.hp.points.gte("5e57") }
                 },
@@ -827,7 +847,7 @@ buyables: {
         unlocked() { return hasUpgrade("p", 112) },
         cost(x) {
             let exp2 = 1.1
-            if (hasMilestone('hp', 22)) exp2 = 1.1
+            if (hasMilestone('hp', 22)) exp2 = 1.01
             if (hasMilestone('mp', 4)) exp2 = 1e308
             return new Decimal("1e500").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
         },
@@ -860,7 +880,7 @@ buyables: {
         unlocked() { return hasUpgrade("p", 115) },
         cost(x) {
             let exp2 = 1.1
-            if (hasUpgrade('mp', 14)) exp2 = 1.1
+            if (hasUpgrade('mp', 14)) exp2 = 1.01
             if (hasMilestone('mp', 4)) exp2 = 1e308
             return new Decimal("1e900").pow(Decimal.pow(1.025, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
         },

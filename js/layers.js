@@ -565,7 +565,7 @@ addLayer("p", {
         },
         115: { title: "Advanced Upgrades VI (PU115)",
         description: "10x Points, Super-Points, Ultra-Points, +50% Hyper-Points and finally unlock a new layer + a new buyable...",
-        cost: new Decimal("1e745"),
+        cost: new Decimal("1e740"),
         unlocked() {
             return hasUpgrade("p", 114)
         }
@@ -626,6 +626,7 @@ addLayer("p", {
         if (inChallenge("hp", 22)) mult = mult.pow(0.2)
         if (inChallenge("mp", 12)) mult = mult.div("1e123123")
         if (inChallenge("sa", 11)) mult = mult.div("10^^308")
+        if (inChallenge("mp", 21)) mult = mult.div("10^^308")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

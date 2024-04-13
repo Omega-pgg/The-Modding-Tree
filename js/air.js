@@ -40,6 +40,7 @@ addLayer("ai", {
         if (hasUpgrade('e', 15)) mult = mult.div(10)
         if (hasUpgrade('e', 21)) mult = mult.div(upgradeEffect('e', 21))
         if (hasUpgrade('e', 22)) mult = mult.div(upgradeEffect('e', 22))
+        if (hasUpgrade('dp', 12)) mult = mult.times(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -49,5 +50,5 @@ addLayer("ai", {
     hotkeys: [
         {key: "A", description: "A: Reset for Air", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return (hasUpgrade("mp", 61) || player[this.layer].unlocked)},
-})
+    layerShown(){if (hasUpgrade("dp", 12)) return false
+    else return (hasUpgrade("mp", 61) || player[this.layer].unlocked)},})

@@ -36,58 +36,101 @@ addLayer("sa", {
     
 },
 milestones: {
-      1: {
-        requirementDescription: "Sacrifice Tier 1 (STM1)",
-        effectDescription: "5x Everything (Except PP) and 50x Points.",
-        done() { return player.sa.points.gte(1) }
-},
-2: {
-    requirementDescription: "Sacrifice Tier 2 (STM2)",
-    effectDescription: "3x Energy & Light Gain and 5x everything else (Except PP and MP) + automate Points-4, Points-5 and Points-6",
-    done() { return player.sa.points.gte(2) }
-},
-3: {
-    requirementDescription: "Sacrifice Tier 3 (STM3)",
-    effectDescription: "2x Energy & Light Gain and 3x everything else (Except PP and MP)",
-    done() { return player.sa.points.gte(3) }
-},
-4: {
-    requirementDescription: "Sacrifice Tier 4 (STM4)",
-    effectDescription: "5x Energy & Light Gain, 50x Hyper-Points and 2x Mega-Points + Keep Hyper-Point Challenges",
-    done() { return player.sa.points.gte(4) }
-},
-5: {
-    requirementDescription: "Sacrifice Tier 5 (STM5)",
-    effectDescription: "4x Energy & Light Gain and gain 100% of Hyper-Points gain per second.",
-    done() { return player.sa.points.gte(5) }
-},
-6: {
-    requirementDescription: "Sacrifice Tier 6 (STM6)",
-    effectDescription: "25x Energy & Light Gain and 4x Mega-Points",
-    done() { return player.sa.points.gte(6) }
-},
-7: {
-    requirementDescription: "Sacrifice Tier 7 (STM7)",
-    effectDescription: "1.5x Energy & Light Gain and 1,000,000,000x Points + Keep Mega-Point challenges.",
-    done() { return player.sa.points.gte(7) }
-},
+    1: {
+        requirementDescription(){des = "[1] Sacrifice Tier 1"
+            if (hasUpgrade('cp', 32)) des = des + " (Charged)"
+            return des},
+        effectDescription() {des = "5x Everything (Except PP) and 50x Points."
+        if (hasUpgrade('cp', 32)) des = des + "<br> Charge effect: LP21 also affects Charge Power gain."
+        return des},
+        done() { return player.sa.points.gte(1) },
+        style(){if (hasUpgrade('cp', 32)) return{'background-color':'#ffad00'}}
+    },
+    2: {
+        requirementDescription(){des = "[2] Sacrifice Tier 2"
+            if (hasUpgrade('cp', 52)) des = des + " (Charged)"
+            return des},
+        effectDescription() {des = "3x Energy & Light Gain and 5x everything else (Except PP and MP) + automate Points-4, Points-5 and Points-6."
+        if (hasUpgrade('cp', 52)) des = des + "<br> Charge effect: ^1.05 Ultra-Points."
+        return des},
+        done() { return player.sa.points.gte(2) },
+        style(){if (hasUpgrade('cp', 52)) return{'background-color':'#ffad00'}}
+    },
+    3: {
+        requirementDescription() {
+            dis = "[3] Sacrifice Tier 3"
+            if (hasUpgrade('cp', 62)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "2x Energy & Light Gain and 3x everything else (Except PP and MP)"
+            if (hasUpgrade('cp', 62)) dis = dis + "<br>Charge effect: Cells boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 62)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(3) },
+        style(){if (hasUpgrade('cp', 62)) return{'background-color':'#ffad00'}}
+    },
+    4: {
+        requirementDescription() {
+            dis = "[4] Sacrifice Tier 4"
+            if (hasUpgrade('cp', 71)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "5x Energy & Light Gain, 50x Hyper-Points and 2x Mega-Points + Keep Hyper-Point Challenges"
+            if (hasUpgrade('cp', 71)) dis = dis + "<br>Charge effect: Time Power boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 71)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(4) },
+        style(){if (hasUpgrade('cp', 71)) return{'background-color':'#ffad00'}}
+    },
+    5: {
+        requirementDescription() {
+            dis = "[5] Sacrifice Tier 5"
+            if (hasUpgrade('cp', 75)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "4x Energy & Light Gain and gain 100% of Hyper-Points gain per second."
+            if (hasUpgrade('cp', 75)) dis = dis + "<br>Charge effect: Sacrifice Tier boosts Divine Points.<br>Currently: " + format(upgradeEffect('cp', 75)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(5) },
+        style(){if (hasUpgrade('cp', 75)) return{'background-color':'#ffad00'}}
+    },
+    6: {
+        requirementDescription(){des = "[6] Sacrifice Tier 6"
+            if (hasUpgrade('cp', 84)) des = des + " (Charged)"
+            return des},
+        effectDescription() {des = "25x Energy & Light Gain and 4x Mega-Points."
+        if (hasUpgrade('cp', 84)) des = des + "<br> Charge effect: ^1.2 Light and 1,000,000,000x Leaf Points."
+        return des},
+        done() { return player.sa.points.gte(6) },
+        style(){if (hasUpgrade('cp', 84)) return{'background-color':'#ffad00'}}
+    },
+    7: {
+        requirementDescription() {
+            dis = "[7] Sacrifice Tier 7"
+            if (hasUpgrade('dp', 41)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "1.5x Energy & Light Gain and 1,000,000,000x Points + Keep Mega-Point challenges."
+            if (hasUpgrade('dp', 41)) dis = dis + "<br>Charge effect: Divine Perks boosts Sacrifice Points & Mega Points.<br>Currently: " + format(upgradeEffect('dp', 41)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(7) },
+        style(){if (hasUpgrade('dp', 41)) return{'background-color':'#ffad00'}}
+    },
 8: {
-    requirementDescription: "Sacrifice Tier 8 (STM8)",
+    requirementDescription: "[8] Sacrifice Tier 8",
     effectDescription: "1,000,000,000x Points again, Super-Points, Ultra-Points and Hyper-Points.",
     done() { return player.sa.points.gte(8) }
 },
 9: {
-    requirementDescription: "Sacrifice Tier 9 (STM9)",
+    requirementDescription: "[9] Sacrifice Tier 9",
     effectDescription: "20x Everything below Sac (Except PP)",
     done() { return player.sa.points.gte(9) }
 },
 10: {
-    requirementDescription: "Sacrifice Tier 10 (STM10)",
+    requirementDescription: "[10] Sacrifice Tier 10",
     effectDescription: "Unlock a new sub-layer + 7.5x Everything below Sac (Except PP) and keep Hyper-Point milestones on reset",
     done() { return player.sa.points.gte(10) }
 },
 11: {
-    requirementDescription: "Sacrifice Tier 11 (STM11)",
+    requirementDescription: "[11] Sacrifice Tier 11",
     effect() {
         let eff = player.sa.points.add(1).pow(0.5)
         return eff
@@ -98,52 +141,52 @@ milestones: {
         
     },
     12: {
-        requirementDescription: "Sacrifice Tier 12 (STM12)",
+        requirementDescription: "[12] Sacrifice Tier 12",
         effectDescription: "Unlock more energy upgrades.",
         done() { return player.sa.points.gte(12) }
     },
     13: {
-        requirementDescription: "Sacrifice Tier 13 (STM13)",
+        requirementDescription: "[13] Sacrifice Tier 13",
         effectDescription: "30x Energy, Light and Mega-Points.",
         done() { return player.sa.points.gte(13) }
     },
     14: {
-        requirementDescription: "Sacrifice Tier 14 (STM14)",
+        requirementDescription: "[14] Sacrifice Tier 14",
         effectDescription: "^1.02 Mega-Points.",
         done() { return player.sa.points.gte(14) }
     },
     15: {
-        requirementDescription: "Sacrifice Tier 15 (STM15)",
+        requirementDescription: "[15] Sacrifice Tier 15",
         effectDescription: "Autobuy Mega-Point Upgrades and 5x MP.",
         done() { return player.sa.points.gte(15) }
     },
     16: {
-        requirementDescription: "Sacrifice Tier 16 (STM16)",
+        requirementDescription: "[16] Sacrifice Tier 16",
         effectDescription: "1,000,000,000x Energy & Light.",
         done() { return player.sa.points.gte(16) }
     },
     17: {
-        requirementDescription: "Sacrifice Tier 17 (STM17)",
+        requirementDescription: "[17] Sacrifice Tier 17",
         effectDescription: "5x SP and MP.",
         done() { return player.sa.points.gte(17) }
     },
     18: {
-        requirementDescription: "Sacrifice Tier 18 (STM18)",
+        requirementDescription: "[18] Sacrifice Tier 18",
         effectDescription: "10x Energy, Light and Mega-Points.",
         done() { return player.sa.points.gte(18) }
     },
     19: {
-        requirementDescription: "Sacrifice Tier 19 (STM19)",
+        requirementDescription: "[19] Sacrifice Tier 19",
         effectDescription: "1e55x Sacrifice Points. (Overpowered)",
         done() { return player.sa.points.gte(19) }
     },
     20: {
-        requirementDescription: "Sacrifice Tier 23 (STM20)",
+        requirementDescription: "[20] Sacrifice Tier 23",
         effectDescription: "Unlock a sacrifice challenge.",
         done() { return player.sa.points.gte(23) }
     },
     21: {
-        requirementDescription: "Sacrifice Tier 27 (STM21)",
+        requirementDescription: "[21] Sacrifice Tier 27",
         effect() {
             let eff = player.sa.points.add(1).pow(1)
             return eff
@@ -154,27 +197,27 @@ milestones: {
             
         },
         22: {
-            requirementDescription: "Sacrifice Tier 28 (STM22)",
+            requirementDescription: "[22] Sacrifice Tier 28",
             effectDescription: "^1.05 Sacrifice Points and ^1.02 Cells.",
             done() { return player.sa.points.gte(28) }
         },
         23: {
-            requirementDescription: "Sacrifice Tier 30 (STM23)",
+            requirementDescription: "[23] Sacrifice Tier 30 ",
             effectDescription: "^1.05 Hyper-Points, Air is automated + Autobuy energy upgrades.",
             done() { return player.sa.points.gte(30) }
         },
         24: {
-            requirementDescription: "Sacrifice Tier 35 (STM24)",
+            requirementDescription: "[24] Sacrifice Tier 35",
             effectDescription: "Unlock another sacrifice challenge.",
             done() { return player.sa.points.gte(35) }
         },
         25: {
-            requirementDescription: "Sacrifice Tier 40 (STM25)",
+            requirementDescription: "[25] Sacrifice Tier 40",
             effectDescription: "1e24x Cells.",
             done() { return player.sa.points.gte(40) }
         },
         26: {
-            requirementDescription: "Sacrifice Tier 43 (STM26)",
+            requirementDescription: "[26] Sacrifice Tier 43",
             effect() {
                 let eff = player.scp.points.add(1).pow(1)
                 return eff
@@ -220,7 +263,7 @@ challenges: {
         name: "Broken Eletricity",
         challengeDescription: "You can't gain Energy and Lights + Mega-Point gain is raised to ^0.2.",
         goalDescription: "1e12 Mega-Points",
-        rewardDescription: "Unlock another sub-layer (Next Update) + 5x Energy, Light and MP.",
+        rewardDescription: "Unlock another sub-layer + 5x Energy, Light and MP.",
         canComplete: function() {return player.mp.points.gte("1e12")},
         unlocked() { return (hasMilestone('sa', 24)) },
 },
@@ -234,10 +277,12 @@ canBuyMax() { return hasMilestone("le", 5) },
     baseAmount() {return player.mp.points}, // Get the current amount of baseResource
     branches: ["mp"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent() {if (hasUpgrade("le", 55)) return new Decimal(1.8)
+    exponent() {if (hasUpgrade("cp", 44)) return new Decimal(1.6)
+    else if (hasUpgrade("le", 55)) return new Decimal("1.8")
     else return new Decimal(2)},        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('e', 45)) mult = mult.div(upgradeEffect('e',45))
+        if (inChallenge('dp', 11)) mult = mult.times(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
