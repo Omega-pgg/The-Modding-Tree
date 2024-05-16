@@ -62,7 +62,7 @@ milestones: {
             if (hasUpgrade('cp', 62)) dis = dis + " (Charged)"  
             return dis},
         effectDescription() {
-            dis = "2x Energy & Light Gain and 3x everything else (Except PP and MP)"
+            dis = "2x Energy & Light Gain and 3x everything else (Except PP and MP) + Keep Hyper-Point Challenges"
             if (hasUpgrade('cp', 62)) dis = dis + "<br>Charge effect: Cells boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 62)) + "x"
             return dis},
         done() { return player.sa.points.gte(3) },
@@ -74,7 +74,7 @@ milestones: {
             if (hasUpgrade('cp', 71)) dis = dis + " (Charged)"  
             return dis},
         effectDescription() {
-            dis = "5x Energy & Light Gain, 50x Hyper-Points and 2x Mega-Points + Keep Hyper-Point Challenges"
+            dis = "5x Energy & Light Gain, 50x Hyper-Points and 2x Mega-Points"
             if (hasUpgrade('cp', 71)) dis = dis + "<br>Charge effect: Time Power boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 71)) + "x"
             return dis},
         done() { return player.sa.points.gte(4) },
@@ -96,7 +96,7 @@ milestones: {
         requirementDescription(){des = "[6] Sacrifice Tier 6"
             if (hasUpgrade('cp', 84)) des = des + " (Charged)"
             return des},
-        effectDescription() {des = "25x Energy & Light Gain and 4x Mega-Points."
+        effectDescription() {des = "25x Energy & Light Gain and 4x Mega-Points + Keep Mega-Point challenges."
         if (hasUpgrade('cp', 84)) des = des + "<br> Charge effect: ^1.2 Light and 1,000,000,000x Leaf Points."
         return des},
         done() { return player.sa.points.gte(6) },
@@ -108,7 +108,7 @@ milestones: {
             if (hasUpgrade('dp', 41)) dis = dis + " (Charged)"  
             return dis},
         effectDescription() {
-            dis = "1.5x Energy & Light Gain and 1,000,000,000x Points + Keep Mega-Point challenges."
+            dis = "1.5x Energy & Light Gain and 1,000,000,000x Points."
             if (hasUpgrade('dp', 41)) dis = dis + "<br>Charge effect: Divine Perks boosts Sacrifice Points & Mega Points.<br>Currently: " + format(upgradeEffect('dp', 41)) + "x"
             return dis},
         done() { return player.sa.points.gte(7) },
@@ -142,7 +142,7 @@ milestones: {
     },
     12: {
         requirementDescription: "[12] Sacrifice Tier 12",
-        effectDescription: "Unlock more energy upgrades.",
+        effectDescription: "Unlock more energy upgrades and Air is automated.",
         done() { return player.sa.points.gte(12) }
     },
     13: {
@@ -157,7 +157,7 @@ milestones: {
     },
     15: {
         requirementDescription: "[15] Sacrifice Tier 15",
-        effectDescription: "Autobuy Mega-Point Upgrades and 5x MP.",
+        effectDescription: "5x MP.",
         done() { return player.sa.points.gte(15) }
     },
     16: {
@@ -203,7 +203,7 @@ milestones: {
         },
         23: {
             requirementDescription: "[23] Sacrifice Tier 30 ",
-            effectDescription: "^1.05 Hyper-Points, Air is automated + Autobuy energy upgrades.",
+            effectDescription: "^1.05 Hyper-Points.",
             done() { return player.sa.points.gte(30) }
         },
         24: {
@@ -254,9 +254,9 @@ challenges: {
     11: {
             name: "Broken Idea",
             challengeDescription: "You can not gain any Lights, Prestige Points, Super-Points, Ultra-Points and Hyper-Points but Energy's Cost is much cheaper.",
-            goalDescription: "1e300 Points",
+            goalDescription: "1e24 Energy",
             rewardDescription: "Unlock a new sub-layer.",
-            canComplete: function() {return player.points.gte("1e300")},
+            canComplete: function() {return player.e.points.gte("1e24")},
             unlocked() { return (hasMilestone('sa', 20)) },
     },
     12: {

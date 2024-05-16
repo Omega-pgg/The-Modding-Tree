@@ -7,7 +7,9 @@ addLayer("tp", {
 		points: new Decimal(0),
     }},
     passiveGeneration() {
+        if (hasAchievement("a", 262)) return (hasAchievement("a", 262)?1:0)
         if (hasMilestone("le", 3)) return (hasMilestone("le", 3)?1:0)
+        if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?0.05:0)
         },
     tabFormat: [
         "main-display",
@@ -18,7 +20,7 @@ addLayer("tp", {
     tooltip(){
         return "<h3>Time Power</h3><br>" + format(player.tp.points) + " TP"
       },
-              autoUpgrade() { if (hasMilestone("le" , 4)) return true},
+      autoUpgrade() { if (hasAchievement("a" , 233)) return true},
       microtabs: {
         stuff: {
                         "Upgrades": {
@@ -445,7 +447,7 @@ addLayer("tp", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: "eee1e-3008",    
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(5)
         if (hasUpgrade('tp', 11)) mult = mult.times(1.4)
         if (hasUpgrade('tp', 12)) mult = mult.times(1.5)
         if (hasUpgrade('tp', 13)) mult = mult.times(1.3)

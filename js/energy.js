@@ -432,7 +432,7 @@ microtabs: {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 1e-308,    
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         mult = mult.times(tmp.l.effect)
         if (hasUpgrade('ai', 11)) mult = mult.times(upgradeEffect('ai', 11))
         if (hasUpgrade('mp', 64)) mult = mult.times(upgradeEffect('mp', 64))
@@ -513,7 +513,7 @@ microtabs: {
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
-    autoUpgrade() { if (hasMilestone("sa" , 23)) return true},
+    autoUpgrade() { if (hasAchievement("a" , 204)) return true},
 
     row: 4, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [

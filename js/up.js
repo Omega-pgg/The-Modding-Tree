@@ -8,7 +8,9 @@ addLayer("up", {
     }},
     passiveGeneration() {
         if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
+        if (hasAchievement("a", 191)) return (hasAchievement("a", 191)?1:0)
         if (hasMilestone("mp", 4)) return (hasMilestone("mp", 4)?1:0)
+        if (hasAchievement("a", 121)) return (hasAchievement("a", 121)?0.05:0)
         },
     tabFormat: [
         "main-display",
@@ -133,7 +135,7 @@ addLayer("up", {
                                                                                                                             },
                                                                                                                             32: { 
                                                                                                                                 title: "Pointer VI (UP32)",
-                                                                                                                                        description: "3x Points.",
+                                                                                                                                        description: "3x Points and Ultra-Points.",
                                                                                                                                         cost: new Decimal(25000),
                                                                                                                                         unlocked() {
                                                                                                                                             return hasUpgrade("up", 31)
@@ -142,7 +144,7 @@ addLayer("up", {
                                                                                                                                         },
                                                                                                                                         33: { 
                                                                                                                                             title: "More Points III (UP33)",
-                                                                                                                                                    description: "3x Ultra-Points.",
+                                                                                                                                                    description: "1.5x Ultra-Points.",
                                                                                                                                                     cost: new Decimal(25000),
                                                                                                                                                     unlocked() {
                                                                                                                                                         return hasUpgrade("up", 32)
@@ -448,7 +450,7 @@ addLayer("up", {
                                         },       
                                         },                                                                                                                                                                           
             },
-            autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
+            autoUpgrade() { if (hasAchievement("a" , 54)) return true},
     color: "pink",
     requires: new Decimal(2.5e7), // Can be a function that takes requirement increases into account
     resource: "Ultra-Points", // Name of prestige currency
@@ -458,13 +460,14 @@ addLayer("up", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.25, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasUpgrade('sp', 25)) mult = mult.times(2)
         if (hasUpgrade('p', 52)) mult = mult.times(1.5)
         if (hasUpgrade('up', 22)) mult = mult.times(3)
         if (hasUpgrade('sp', 41)) mult = mult.times(1.5)
         if (hasUpgrade('up', 25)) mult = mult.times(1.5)
-        if (hasUpgrade('up', 33)) mult = mult.times(3)
+        if (hasUpgrade('up', 32)) mult = mult.times(3)
+        if (hasUpgrade('up', 33)) mult = mult.times(1.5)
         if (hasUpgrade('p', 61)) mult = mult.times(5)
         if (hasUpgrade('hp', 11)) mult = mult.times(upgradeEffect('hp', 11))
         if (hasUpgrade('sp', 43)) mult = mult.times(upgradeEffect('sp', 43))

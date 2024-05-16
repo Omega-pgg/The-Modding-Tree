@@ -55,7 +55,7 @@ effectDescription(){
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 1e-308,    
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasUpgrade('ai', 11)) mult = mult.times(upgradeEffect('ai', 11))
         if (hasUpgrade('e', 11)) mult = mult.times(3)
         if (hasUpgrade('mp', 73)) mult = mult.times(upgradeEffect('mp', 73))

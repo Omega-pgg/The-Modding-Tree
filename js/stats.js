@@ -58,7 +58,7 @@ addLayer("stat", {
         },
         21: {
             title: "Hyper Stage 1",
-            display: "First Hyper Milestone",
+            display: "1 Googol Points",
             canClick: true,
             onClick() {
                 if (!confirm("Your current progress will not be saved!"))

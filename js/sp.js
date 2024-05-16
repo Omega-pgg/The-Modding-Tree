@@ -10,6 +10,8 @@ addLayer("sp", {
     passiveGeneration() {
         if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
         if (hasMilestone("hp", 6)) return (hasMilestone("hp", 6)?1:0)
+        if (hasAchievement("a", 124)) return (hasAchievement("a", 51)?1:0)
+        if (hasAchievement("a", 51)) return (hasAchievement("a", 51)?0.05:0)
         },
     tabFormat: [
         "main-display",
@@ -386,7 +388,7 @@ unlocked() {
         },
         81: { 
             title: "Risk (SP81)",
-                    description: "50x Hyper-Points, 20x Super-Points but divide point gain by 20.",
+                    description: "50x Ultra-Points, 20x Super-Points but divide point gain by 20.",
                     cost: new Decimal(1e271),
                     unlocked() {
                         return hasUpgrade("sp", 75)
@@ -479,8 +481,8 @@ unlocked() {
                                         effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }, // Add formatting to the effect
                                         },
             },
-            autoUpgrade() { if (hasMilestone("hp" , 1)) return true},
-    color: "red",
+            autoUpgrade() { if (hasAchievement("a" , 54)) return true},
+            color: "red",
     requires: new Decimal(1e7), // Can be a function that takes requirement increases into account
     resource: "Super-Points", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
@@ -489,7 +491,7 @@ unlocked() {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.333333333333333333, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasUpgrade('p', 42)) mult = mult.times(upgradeEffect('p', 42))
         if (hasUpgrade('p', 43)) mult = mult.times(3)
         if (hasUpgrade('sp', 21)) mult = mult.times(3)

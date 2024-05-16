@@ -32,7 +32,7 @@ addLayer("st", {
                         if (hasUpgrade('cp', 41)) dis = dis + " (Charged)"  
                         return dis},
                     effectDescription() {
-                        dis = "10x Leaf Points, 250x everything else (Except PP) and always have the first leaf upgrade"
+                        dis = "10x Leaf Points, 250x everything else (Except PP)"
                         if (hasUpgrade('cp', 41)) dis = dis + "<br>Charge effect: Energy boosts Charge Power & Leaf Points.<br>Currently: " + format(upgradeEffect('cp', 41)) + "x"
                         return dis},
                     done() { return player.st.points.gte(1) },
@@ -42,7 +42,7 @@ addLayer("st", {
                     requirementDescription(){des = "[2] Super Tier 2"
                         if (hasUpgrade('cp', 53)) des = des + " (Charged)"
                         return des},
-                    effectDescription() {des = "10x Leaf Points and 100,000,000,000x Time Power, Cells, Sacrifice Points, Energy, Light and Mega-Points."
+                    effectDescription() {des = "10x Leaf Points and 100,000,000,000x Time Power, Cells, Sacrifice Points, Energy, Light, Mega-Points and always have the first leaf upgrade."
                     if (hasUpgrade('cp', 53)) des = des + "<br> Charge effect: ^1.1 Time Power and ^1.05 Leaf Points."
                     return des},
                     done() { return player.st.points.gte(2) },
@@ -94,8 +94,8 @@ addLayer("st", {
                     requirementDescription(){des = "[7] Super Tier 8"
                         if (hasUpgrade('dp', 43)) des = des + " (Charged)"
                         return des},
-                    effectDescription() {des = "Automate Leaf Buyables & Upgrades and 1,000,000,000x Charge Power."
-                    if (hasUpgrade('dp', 43)) des = des + "<br> Charge effect: ^1.125 Leaf Points."
+                    effectDescription() {des = "Automate Leaf Upgrades and 1,000,000,000x Charge Power."
+                    if (hasUpgrade('dp', 43)) des = des + "<br> Charge effect: ^1.25 Leaf Points."
                     return des},
                     done() { return player.st.points.gte(8) },
                     style(){if (hasUpgrade('dp', 43)) return{'background-color':'#ffad00'}}

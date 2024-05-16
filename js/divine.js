@@ -134,7 +134,7 @@ addLayer("dp", {
                                                                 23: { 
                                                                     title: "Point Chain IV (DP23)",
                                                                             description: "Super Tier boosts Divine Points",
-                                                                            cost: new Decimal(250),
+                                                                            cost: new Decimal(125),
                                                                             unlocked() {
                                                                                 return hasUpgrade("dp", 22)
                                                                             
@@ -147,7 +147,7 @@ addLayer("dp", {
                                                                             24: { 
                                                                                 title: "Divine Unlocker (DP24)",
                                                                                         description: "Unlocks more charge power upgrades",
-                                                                                        cost: new Decimal(1e4),
+                                                                                        cost: new Decimal(5e3),
                                                                                         unlocked() {
                                                                                             return hasUpgrade("dp", 23)
                                                                                         
@@ -199,21 +199,21 @@ addLayer("dp", {
                                                                                                                                         },
                                                                                                                                         34: { 
                                                                                                                                             title: "Divine Increaser II (DP34)",
-                                                                                                                                                    description: "Log(1e10) Energy boosts Divine Perks.",
+                                                                                                                                                    description: "Log(1e1,000) Points boosts Divine Perks.",
                                                                                                                                                     cost: new Decimal(5e19),
                                                                                                                                                     unlocked() {
                                                                                                                                                         return hasUpgrade("dp", 33)
                                                                                                                                                     
                                                                                                                                                     },
                                                                                                                                                     effect() {
-                                                                                                                                                        return player.e.points.max(1).log("1e10")
+                                                                                                                                                        return player.points.max(1).log("1e1000")
                                                                                                                                                     },
                                                                                                                                                     effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
                                                                                                                                                     },
                                                                                                                                                     35: { 
                                                                                                                                                         title: "Divine Charger (DP35)",
                                                                                                                                                                 description: "Charge the 7th mega-point milestone",
-                                                                                                                                                                cost: new Decimal(2e23),
+                                                                                                                                                                cost: new Decimal(1e23),
                                                                                                                                                                 unlocked() {
                                                                                                                                                                     return hasUpgrade("dp", 34)
                                                                                                                                                                 
@@ -238,13 +238,13 @@ addLayer("dp", {
                                                                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                                                                     currencyInternalName: "perks",
                                                                                                                                                                     currencyLayer: "dp",
-                                                                                                                                                                    cost: new Decimal(2.5e33),
+                                                                                                                                                                    cost: new Decimal(2e33),
                                                                                                                                                                     unlocked() {return hasUpgrade('dp', 41)},
                                                                                                                                                                 },
                                                                                                                                                                 43: { 
                                                                                                                                                                     title: "Divine Charger IV (DP43)",
                                                                                                                                                                             description: "Charge the 7th super tier milestone and unlock a new layer. (Next Update)",
-                                                                                                                                                                            cost: new Decimal(2e25),
+                                                                                                                                                                            cost: new Decimal(1e25),
                                                                                                                                                                             unlocked() {
                                                                                                                                                                                 return hasUpgrade("dp", 42)
                                                                                                                                                                             
@@ -265,7 +265,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(50),
+                                                                                                                    cost: new Decimal(10),
                                                                                                                     canAfford() {
                                                                                                                         if (hasUpgrade('dp', 151) || hasMilestone('dp', 4)) return true
                                                                                                                         else if (hasUpgrade('dp', 112)) return false
@@ -279,7 +279,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(500),
+                                                                                                                    cost: new Decimal(250),
                                                                                                                     canAfford() {
                                                                                                                         if (hasUpgrade('dp', 151) || hasMilestone('dp', 4)) return true
                                                                                                                         else if (hasUpgrade('dp', 111)) return false
@@ -293,7 +293,7 @@ addLayer("dp", {
                                                                                                                 },
                                                                                                                 121: {
                                                                                                                     title: "Divine Choice III (DUT31)",
-                                                                                                                    description: "1e150x Leaf Points but lock DUT32",
+                                                                                                                    description: "5x Divine Points but lock DUT32",
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
@@ -311,7 +311,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(5e4),
+                                                                                                                    cost: new Decimal(1.5e4),
                                                                                                                     canAfford() {
                                                                                                                         if (hasUpgrade('dp', 161) || hasMilestone('dp', 4)) return true
                                                                                                                         else if (hasUpgrade('dp', 121)) return false
@@ -325,7 +325,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(1e5),
+                                                                                                                    cost: new Decimal(3e4),
                                                                                                                     unlocked() {return hasUpgrade('dp', 121) || hasUpgrade('dp', 122)},
                                                                                                                 },
                                                                                                                 141: {
@@ -379,7 +379,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(2e10),
+                                                                                                                    cost: new Decimal(1e10),
                                                                                                                     unlocked() {return hasUpgrade('dp', 151)},
                                                                                                                 },
                                                                                                                 171: {
@@ -422,7 +422,7 @@ addLayer("dp", {
                                                                                                                     currencyDisplayName: "Divine Perks",
                                                                                                                     currencyInternalName: "perks",
                                                                                                                     currencyLayer: "dp",
-                                                                                                                    cost: new Decimal(5e10),
+                                                                                                                    cost: new Decimal(2e10),
                                                                                                                     canAfford() {
                                                                                                                         if (hasUpgrade('dp', 1521) || hasMilestone('dp', 4)) return true
                                                                                                                         else if (hasUpgrade('dp', 171)) return false
@@ -497,7 +497,7 @@ addLayer("dp", {
         },
         buy() {
             let cost = new Decimal ("1e3")
-            player.dp.perks = player.dp.perks.sub(this.cost().sub(cost))
+            player.dp.perks = player.dp.perks.sub(this.cost().div(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -530,17 +530,17 @@ addLayer("dp", {
         11: {
                 name: "Currencies Degrader",
                 challengeDescription: "You can't gain Sacrifice Tier, Time Power and Cells.",
-                goalDescription: "1e695,750 Points",
+                goalDescription: "1e157,000 Points",
                 rewardDescription: "2x Divine Points and ^1.01 to Charge Power & Leaf Points.",
-                canComplete: function() {return player.points.gte("1e695750")},
+                canComplete: function() {return player.points.gte("e157000")},
                 unlocked() { return (hasUpgrade('dp', 25)) },
         },
         12: {
             name: "Uncharged",
             challengeDescription: "You can't gain Leaf Points & Charge Power.",
-            goalDescription: "1e783,000 Points",
+            goalDescription: "1e215,000 Points",
             rewardDescription: "2x Divine Points and ^1.01 to Charge Power & Leaf Points again.",
-            canComplete: function() {return player.points.gte("e783000")},
+            canComplete: function() {return player.points.gte("e215000")},
             unlocked() { return (hasChallenge('dp', 11)) },
     },
     },
@@ -565,6 +565,7 @@ addLayer("dp", {
                                 if (hasUpgrade('dp', 122)) mult = mult.times(3)
                                 mult = mult.times(buyableEffect('dp', 11))
                                 if (hasUpgrade('dp', 33)) mult = mult.times(10)
+                                    if (hasUpgrade('dp', 121)) mult = mult.times(5)
                                 if (hasUpgrade('dp', 171)) mult = mult.times(upgradeEffect('dp',171))
                                 if (hasUpgrade('dp', 35)) mult = mult.pow(0.9)
                                 if (hasUpgrade('dp', 42)) mult = mult.pow(1.1)

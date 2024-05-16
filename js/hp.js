@@ -101,9 +101,9 @@ addLayer("hp", {
 41: {
     name: "Point-less 2",
     challengeDescription: "Points gain is decreased to ^0.01!",
-    goalDescription: "250,000 Points",
+    goalDescription: "100,000 Points",
     rewardDescription: "4x Hyper-Point Gain, ^1.02 Super-Points",
-    canComplete: function() {return player.points.gte("250000")},
+    canComplete: function() {return player.points.gte("1e5")},
     unlocked() { return (hasChallenge('hp', 32)) },
 },
 42: {
@@ -586,7 +586,7 @@ addLayer("hp", {
         let keep = [];
         if (hasMilestone('sa', 10)) keep.push("milestones");
         if (hasMilestone('mp', 3)) keep.push("challenges");
-        if (hasMilestone('sa', 4)) keep.push("challenges");
+        if (hasMilestone('sa', 3)) keep.push("challenges");
         if (hasAchievement('a', 231)) keep.push("challenges");
         if (hasAchievement('a', 231)) keep.push("milestones");
         // Stage 4, do the actual data reset
@@ -595,7 +595,7 @@ addLayer("hp", {
         // Stage 5, add back in the specific subfeatures you saved earlier
         player[this.layer].upgrades.push(...keptUpgrades);
     },  
-    autoUpgrade() { if (hasMilestone("mp" , 5)) return true},
+    autoUpgrade() { if (hasAchievement("a" , 141)) return true},
     color: "white",
     requires: new Decimal(2e22), // Can be a function that takes requirement increases into account
     resource: "Hyper-Points", // Name of prestige currency
@@ -605,7 +605,7 @@ addLayer("hp", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.0625, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasUpgrade('hp', 51)) mult = mult.times(3)
         if (hasUpgrade('sp', 63)) mult = mult.times(1.2)
         if (hasUpgrade('p', 75)) mult = mult.times(1.2)
@@ -617,6 +617,7 @@ addLayer("hp", {
         if (hasUpgrade('up', 63)) mult = mult.times(3)
         if (hasUpgrade('up', 64)) mult = mult.times(3)
         if (hasUpgrade('up', 65)) mult = mult.times(2)
+        if (hasMilestone('hp', 15)) mult = mult.times("2")
         if (hasChallenge('hp', 21)) mult = mult.times(2)
         if (hasUpgrade('sp', 83)) mult = mult.times(3)
         if (hasChallenge('hp', 22)) mult = mult.times(2)
@@ -667,6 +668,8 @@ addLayer("hp", {
     passiveGeneration() {
         if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
         if (hasMilestone("sa", 5)) return (hasMilestone("sa", 5)?1:0)
+        if (hasAchievement("a", 181)) return (hasAchievement("a", 181)?0.05:0)
+
         },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
@@ -678,23 +681,23 @@ addLayer("hp", {
     layerShown(){return (hasUpgrade("p", 61) || player[this.layer].unlocked)},
     milestones: {
         1: {
-            requirementDescription(){des = "[1] 1e100 Points"
+            requirementDescription(){des = "[1] 1e80 Points"
                 if (hasUpgrade('cp', 24)) des = des + " (Charged)"
                 return des},
-            effectDescription() {des = "Automatically buy upgrades below Hyper-Points. (Except PP)"
+            effectDescription() {des = "Gain 100% of Prestige Points on reset per second & automatically buys super-point and ultra-point upgrades."
             if (hasUpgrade('cp', 24)) des = des + "<br> Charge effect: ^1.1 Mega-Points"
             return des},
-            done() { return player.points.gte(1e100) },
+            done() { return player.points.gte(1e80) },
             style(){if (hasUpgrade('cp', 24)) return{'background-color':'#ffad00'}}
         },
         2: {
-            requirementDescription(){des = "[2] 100,000 Hyper-Points"
+            requirementDescription(){des = "[2] 5,000 Hyper-Points"
                 if (hasUpgrade('cp', 51)) des = des + " (Charged)"
                 return des},
             effectDescription() {des = "You can buy max Points-1, Points-2 and Points-3."
             if (hasUpgrade('cp', 51)) des = des + "<br> Charge effect: Light & Cell Effect softcaps are weaker."
             return des},
-            done() { return player.hp.points.gte(1e5) },
+            done() { return player.hp.points.gte(5e3) },
             style(){if (hasUpgrade('cp', 51)) return{'background-color':'#ffad00'}}
         },
         3: {
@@ -724,7 +727,7 @@ addLayer("hp", {
         done() { return player.hp.points.gte(4.5e8) }
 },
 6: {requirementDescription: "[6] Finish Hyper Challenge 12",
-             effectDescription: "Finally, gain 100% of prestige points and super-points gain per second",
+             effectDescription: "Gain 100% of super-points on reset per second",
                 done() {return hasChallenge("hp",12)}},
     7: {
         requirementDescription: "[7] 5,000,000,000 Hyper-Points",
@@ -774,7 +777,7 @@ addLayer("hp", {
         },
         15: {
             requirementDescription: "[15] 1e500 Points",
-            effectDescription: "Automatically buys prestige point upgrades",
+            effectDescription: "2x Hyper-Points",
             done() { return player.points.gte("1e500") }
     },
     16: {
@@ -813,7 +816,7 @@ done() { return player.hp.points.gte(1e36) }
     },
     22: {
         requirementDescription: "[22] 1e38 Hyper-Points",
-        effectDescription: "+1% Point Gain",
+        effectDescription: "HB11 is cheaper.",
         done() { return player.hp.points.gte(1e38) }
     },
     23: {
@@ -859,7 +862,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e500")
-            player.points = player.points.sub(this.cost().sub(cost))
+            player.points = player.points.sub(this.cost().div(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -892,7 +895,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e900")
-            player.sp.points = player.sp.points.sub(this.cost().sub(cost))
+            player.sp.points = player.sp.points.sub(this.cost().div(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -921,7 +924,7 @@ buyables: {
         },
         buy() {
             let cost = new Decimal ("1e2000")
-            player.points = player.points.sub(this.cost().sub(cost))
+            player.points = player.points.sub(this.cost().div(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {

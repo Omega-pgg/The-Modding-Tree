@@ -44,7 +44,9 @@ addLayer("mp", {
     
 },
 passiveGeneration() {
+    if (hasAchievement("a", 262)) return (hasAchievement("a", 262)?1:0)
     if (hasMilestone("le", 2)) return (hasMilestone("le", 2)?1:0)
+    if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?0.05:0)
     },
     upgrades: {
         11: {
@@ -215,7 +217,7 @@ passiveGeneration() {
                                                                             44: { 
                                                                                 title: "Mega Booster III (MP44)",
                                                                                         description: "+75% Mega-Points again",
-                                                                                        cost: new Decimal(3500),
+                                                                                        cost: new Decimal(1750),
                                                                                         unlocked() {
                                                                                             return hasUpgrade("mp", 43)
                                                                                         
@@ -224,7 +226,7 @@ passiveGeneration() {
                                                                                         45: { 
                                                                                             title: "Unstable Points VII (MP45)",
                                                                                                     description: "^1.02 Super-Points",
-                                                                                                    cost: new Decimal(7500),
+                                                                                                    cost: new Decimal(3500),
                                                                                                     unlocked() {
                                                                                                         return hasUpgrade("mp", 44)
                                                                                                     
@@ -242,7 +244,7 @@ passiveGeneration() {
                                                                                                                 52: { 
                                                                                                                     title: "Unstable Points VIII (MP52)",
                                                                                                                             description: "1e150x Points!",
-                                                                                                                            cost: new Decimal(15000),
+                                                                                                                            cost: new Decimal(7500),
                                                                                                                             unlocked() {
                                                                                                                                 return hasUpgrade("mp", 51)
                                                                                                                             
@@ -529,13 +531,13 @@ passiveGeneration() {
             style(){if (hasUpgrade('cp', 65)) return{'background-color':'#ffad00'}}
         },
         5: {
-            requirementDescription(){des = "[5] 250 Total Mega-Points"
+            requirementDescription(){des = "[5] 100 Total Mega-Points"
                 if (hasUpgrade('cp', 74)) des = des + " (Charged)"
                 return des},
             effectDescription() {des = "Automatically buys Hyper-Point Upgrades."
             if (hasUpgrade('cp', 74)) des = des + "<br> Charge effect: ^1.075 Hyper-Points & Super-Points"
             return des},
-            done() { return player.mp.total.gte(250) },
+            done() { return player.mp.total.gte(100) },
             style(){if (hasUpgrade('cp', 74)) return{'background-color':'#ffad00'}}
         },
         6: {
@@ -573,7 +575,7 @@ doReset(sa) {
 
     // Stage 3, track which main features you want to keep - milestones
     let keep = [];
-    if (hasMilestone('sa', 7)) keep.push("challenges");
+    if (hasMilestone('sa', 6)) keep.push("challenges");
     if (hasMilestone('sa', 11)) keep.push("milestones");
     if (hasAchievement('a', 231)) keep.push("milestones");
     if (hasMilestone('le', 6)) keep.push("challenges");
@@ -588,9 +590,9 @@ doReset(sa) {
         11: {
                 name: "Ultra-less",
                 challengeDescription: "You can not get any Ultra-Points and Points-1, Points-2 and Points-3 scales much quicker.",
-                goalDescription: "1e318 Points",
+                goalDescription: "1e315 Points",
                 rewardDescription: "Double Mega-Point Gain and reach a milestone.",
-                canComplete: function() {return player.points.gte("1e318")},
+                canComplete: function() {return player.points.gte("1e315")},
                 unlocked() { return (hasUpgrade('mp', 31)) },
         },
         12: {
@@ -604,9 +606,9 @@ doReset(sa) {
     21: {
         name: "Disable Layers",
         challengeDescription: "You can't gain any resources below Mega-Points.",
-        goalDescription: "1e400,000 Points",
+        goalDescription: "1e395,000 Points",
         rewardDescription: "^1.01 Mega Points and 1,000,000,000x Charge Power.",
-        canComplete: function() {return player.points.gte("e400000")},
+        canComplete: function() {return player.points.gte("e395000")},
         unlocked() { return (hasUpgrade('cp', 61)) },
 },
     },
@@ -619,7 +621,7 @@ doReset(sa) {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.00075, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(1.4)
         if (hasUpgrade('hp', 64)) mult = mult.times(1.15)
         if (hasChallenge('mp', 11)) mult = mult.times(2)
         if (hasUpgrade('mp', 34)) mult = mult.times(1.75)
@@ -696,7 +698,7 @@ doReset(sa) {
                                                                 if (hasUpgrade('dp', 41)) mult = mult.times(upgradeEffect('dp', 41))
                                                                 return mult
     },
-                autoUpgrade() { if (hasMilestone("sa" , 15)) return true},
+                autoUpgrade() { if (hasAchievement("a" , 195)) return true},
 
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)

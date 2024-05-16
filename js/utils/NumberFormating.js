@@ -154,7 +154,7 @@ function standard(decimal, precision){
 		m = new Decimal(1)
 		illion = illion.add(1)
 	}
-	if (decimal.log10().lt(1e9)) m = m.toStringWithDecimalPlaces(precision)+' '
+	if (decimal.log10().lt(1e12)) m = m.toStringWithDecimalPlaces(precision)+' '
 	else m = ''
 	let t2illion = illion.max(1).log10().div(3).floor()
 	let t3illion = t2illion.max(1).log10().div(3).floor()
@@ -281,7 +281,7 @@ function formatSciEng(decimal, precision) {
 		else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(4) + "F" + commaFormat(slog.floor(), 0)
 	} else if (decimal.layer > 2 || (Math.abs(decimal.mag) > 308 && decimal.layer == 2)) {
 		return "e" + format(decimal.log10(), precision)
-	} else if (decimal.layer > 1 || (Math.abs(decimal.mag) >= 1e9 && decimal.layer == 1)) {
+	} else if (decimal.layer > 1 || (Math.abs(decimal.mag) >= 1e12 && decimal.layer == 1)) {
 		return "e" + format(decimal.log10(), 3)
 	} else if (decimal.layer > 0 || decimal.mag >= 1e9) {
 		return exponentialFormat(decimal, precision)

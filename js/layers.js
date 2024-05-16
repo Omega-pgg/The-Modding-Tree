@@ -15,7 +15,8 @@ addLayer("p", {
       },
     passiveGeneration() {
         if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?2:0)
-        if (hasMilestone("hp", 6)) return (hasMilestone("hp", 6)?1:0)
+        if (hasAchievement("a", 54)) return (hasAchievement("a", 54)?1:0)
+        if (hasAchievement("a", 31)) return (hasAchievement("a", 31)?0.05:0)
         },
     tabFormat: [
         "main-display",
@@ -613,7 +614,7 @@ addLayer("p", {
         // Stage 5, add back in the specific subfeatures you saved earlier
         player[this.layer].upgrades.push(...keptUpgrades);
     },  
-    autoUpgrade() { if (hasMilestone("hp" , 15)) return true},
+    autoUpgrade() { if (hasAchievement("a" , 35)) return true},
     color: "blue",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "Prestige Points", // Name of prestige currency
@@ -622,7 +623,7 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (inChallenge("hp", 22)) mult = mult.pow(0.2)
         if (inChallenge("mp", 12)) mult = mult.div("1e123123")
         if (inChallenge("sa", 11)) mult = mult.div("10^^308")

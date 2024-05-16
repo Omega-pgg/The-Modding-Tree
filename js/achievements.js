@@ -116,7 +116,7 @@ addLayer("a", {
             done() {
                 return player.up.points.gte(1)
             },
-            tooltip: "Perform a Ultra-Point reset.",
+            tooltip: "Perform a Ultra-Point reset.<br> Reward: Gain 5% of Prestige Points per second forever",
             onComplete() {
             },
         },
@@ -152,7 +152,7 @@ addLayer("a", {
             done() {
                 return player.pb3.points.gte(1)
             },
-            tooltip: "Get 1 Points-3.<br> Reward: 2x Points",
+            tooltip: "Get 1 Points-3.<br> Reward: 2x Points and Automaticallly buys Prestige Point Upgrades forever.",
             onComplete() {
             },
         },
@@ -207,7 +207,7 @@ addLayer("a", {
             done() {
                 return player.hp.points.gte(1)
             },
-            tooltip: "Perform a Hyper-Point reset.",
+            tooltip: "Perform a Hyper-Point reset.<br> Reward: Gain 5% of Super-Points per second.",
             onComplete() {
             },
         },
@@ -234,7 +234,7 @@ addLayer("a", {
             done() {
                 return player.points.gte(1e80)
             },
-            tooltip: "Get 1e80 Points.",
+            tooltip: "Get 1e80 Points.<br> Reward: Gain 100% of Prestige Points on reset per second and automatically buys Super-Point & Ultra-Point upgrades forever.",
             onComplete() {
             },
         },
@@ -288,7 +288,7 @@ addLayer("a", {
             done() {
                 return player.hp.points.gte(25000)
             },
-            tooltip: "Get 25,000 Hyper-Points.<br> Reward: 2x Points and Super-Points.",
+            tooltip: "Get 25,000 Hyper-Points.<br> Reward: 2x Points & Super-Points.",
             onComplete() {
             },
         },
@@ -523,7 +523,7 @@ addLayer("a", {
             done() {
                 return player.mp.points.gte("1")
             },
-            tooltip: "Get 1 Mega-Point.",
+            tooltip: "Get 1 Mega-Point.<br> Reward: Gain 5% of Ultra-Points per second.",
             onComplete() {
             },
         },
@@ -550,7 +550,7 @@ addLayer("a", {
             done() {
                 return player.hp.points.gte("1e100")
             },
-            tooltip: "Get 1e100 Hyper-Points.",
+            tooltip: "Get 1e100 Hyper-Points.<br> Reward: Always gain 100% of Super-Points",
             onComplete() {
             },
         },
@@ -613,7 +613,7 @@ addLayer("a", {
             done() {
                 return player.mp.total.gte("100")
             },
-            tooltip: "Get 100 Mega-Points in total.",
+            tooltip: "Get 100 Mega-Points in total.<br> Reward: Automatically buys Hyper-Point upgrades",
             onComplete() {
             },
         },
@@ -793,7 +793,7 @@ addLayer("a", {
             done() {
                 return player.sa.points.gte("1")
             },
-            tooltip: "Reach Sacrifice Tier 1.",
+            tooltip: "Reach Sacrifice Tier 1.<br> Reward: Gain 5% of Hyper-Points on reset per second.",
             onComplete() {
             },
         },
@@ -838,7 +838,7 @@ addLayer("a", {
             done() {
                 return player.sa.points.gte("5")
             },
-            tooltip: "Reach Sacrifice Tier 5.",
+            tooltip: "Reach Sacrifice Tier 5.<br> Reward: Always gain 100% of Ultra-Points",
             onComplete() {
             },
         },
@@ -874,7 +874,7 @@ addLayer("a", {
             done() {
                 return player.sa.points.gte("10")
             },
-            tooltip: "Reach Sacrifice Tier 10.",
+            tooltip: "Reach Sacrifice Tier 10.<br> Reward: Automatically buys Mega-Point upgrades.",
             onComplete() {
             },
         },
@@ -910,7 +910,7 @@ addLayer("a", {
             done() {
                 return player.points.gte("1e50000")
             },
-            tooltip: "Get 1e50,000 Points.",
+            tooltip: "Get 1e50,000 Points.<br> Reward: Automatically buy Energy Upgrades",
             onComplete() {
             },
         },
@@ -1018,7 +1018,7 @@ addLayer("a", {
             done() {
                 return player.le.points.gte("1")
             },
-            tooltip: "Get 1 Leaf Points.<br> Reward: Row 1 to Row 3 Layers are automated forever.",
+            tooltip: "Get 1 Leaf Points.<br> Reward: Gain 5% of Mega-Points, Sacrifice Points and Time Power on reset per second.",
             onComplete() {
             },
         },
@@ -1036,7 +1036,7 @@ addLayer("a", {
             done() {
                  if (hasMilestone("le", 4))
                 return true            },
-            tooltip: "Reach 4th leaf milestone.",
+            tooltip: "Reach 4th leaf milestone.<br> Reward: Automatically buys Sacrifice & Time Upgrades",
             onComplete() {
             },
         },
@@ -1153,7 +1153,7 @@ addLayer("a", {
             done() {
                 return player.cp.points.gte("1")
             },            
-            tooltip: "Get 1 Charge Power.<br> Reward: Automatically buy Leaf Buyables. (except the last one)",
+            tooltip: "Get 1 Charge Power.<br> Reward: Automatically buy Leaf Buyables. (except the last one) + Autobuy Leaf Upgrades",
             onComplete() {
             },
         },
@@ -1162,7 +1162,7 @@ addLayer("a", {
             done() {
                 return player.points.gte("e1e6")
             },            
-            tooltip: "Get 1e1,000,000 Points.",
+            tooltip: "Get 1e1,000,000 Points.<br> Reward: Always gain 100% of Mega-Points, Sacrifice Points and Time Power",
             onComplete() {
             },
         },
@@ -1225,7 +1225,7 @@ addLayer("a", {
             done() {
                 return player.dp.points.gte("1")
             },            
-            tooltip: "Get 1 Divine Point.<br> Reward: Automatically buys the last leaf buyable",
+            tooltip: "Get 1 Divine Point.<br> Reward: Automatically buys the last leaf buyable and gain 5% leaf points on reset per second",
             onComplete() {
             },
         },

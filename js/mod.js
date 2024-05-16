@@ -12,10 +12,16 @@ let modInfo = {
 }
 // Set your version in num and name
 let VERSION = {
-	num: "2.0.0: Update 10",
-	name: "The Big One",
+	num: "2.0.1: Update 10.1",
+	name: "Rebalance",
 }
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v2.0.1: Rebalance (15/05/2024)</h3><br>
+		- Small Update 3.<br>
+		- Rebalanced everything.<br>
+		- Bug Fixes.<br>
+		- Added more QOL's.<br>
+		- Made The Omega Tree more easier.<br><br>
 <h3>v2.0.0: Update 10 (13/04/2024)</h3><br>
 		- The First Big Update is here!<br>
 		- You can now change notations in settings.<br>
@@ -149,9 +155,9 @@ function canGenPoints(){
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
-		return new Decimal(1)
+		return new Decimal(5)
 
-	let gain = new Decimal(1).mul(tmp["e"].effect)
+	let gain = new Decimal(5).mul(tmp["e"].effect)
 	if (hasMilestone('hp', 22)) gain = gain.times(1.01)
 	if (hasUpgrade('p', 12)) gain = gain.times("2")
 	if (hasUpgrade('p', 13)) gain = gain.times("3")

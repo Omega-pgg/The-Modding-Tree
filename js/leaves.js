@@ -69,6 +69,7 @@ addLayer("le", {
         },
         passiveGeneration() {
             if (hasMilestone("dp", 1)) return (hasMilestone("dp", 1)?1:0)
+                if (hasAchievement("a", 274)) return (hasAchievement("a", 274)?0.05:0)
             },
         buyables: {
             11: {
@@ -88,7 +89,7 @@ addLayer("le", {
                 },
                 buy() {
                     let cost = new Decimal ("1e600")
-                    player.mp.points = player.mp.points.sub(this.cost().sub(cost))
+                    player.mp.points = player.mp.points.sub(this.cost().div(cost))
                     setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
                 },
                 effect(x) {
@@ -118,7 +119,7 @@ addLayer("le", {
                 },
                 buy() {
                     let cost = new Decimal ("1e2900")
-                    player.e.points = player.e.points.sub(this.cost().sub(cost))
+                    player.e.points = player.e.points.sub(this.cost().div(cost))
                     setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
                 },
                 effect(x) {
@@ -148,7 +149,7 @@ addLayer("le", {
                 },
                 buy() {
                     let cost = new Decimal ("1e13")
-                    player.le.points = player.le.points.sub(this.cost().sub(cost))
+                    player.le.points = player.le.points.sub(this.cost().div(cost))
                     setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
                 },
                 effect(x) {
@@ -176,7 +177,7 @@ addLayer("le", {
                 },
                 buy() {
                     let cost = new Decimal ("e1e4")
-                    player.e.points = player.e.points.sub(this.cost().sub(cost))
+                    player.e.points = player.e.points.sub(this.cost().div(cost))
                     setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
                 },
                 effect(x) {
@@ -559,14 +560,14 @@ addLayer("le", {
                 2: {
                     requirementDescription() {
                         dis = "[2] 2 Total Leaf Points"
-                        if (hasUpgrade('cp', 31)) dis = dis + " (Charged)"  
+                        if (hasUpgrade('cp', 54)) dis = dis + " (Charged)"  
                         return dis},
                     effectDescription() {
                         dis = "Gain 100% Mega-Points on reset per second."
-                        if (hasUpgrade('cp', 31)) dis = dis + "<br>Charge effect: Sacrifice Points boosts Charge Power.<br>Currently: " + format(upgradeEffect('cp', 54)) + "x"
+                        if (hasUpgrade('cp', 54)) dis = dis + "<br>Charge effect: Sacrifice Points boosts Charge Power.<br>Currently: " + format(upgradeEffect('cp', 54)) + "x"
                         return dis},
                     done() { return player.le.total.gte(2) },
-                    style(){if (hasUpgrade('cp', 31)) return{'background-color':'#ffad00'}}
+                    style(){if (hasUpgrade('cp', 54)) return{'background-color':'#ffad00'}}
                 },
                 3: {
                     requirementDescription(){des = "[3] 10 Total Leaf Points"
@@ -641,7 +642,7 @@ addLayer("le", {
         // Stage 5, add back in the specific subfeatures you saved earlier
         player[this.layer].upgrades.push(...keptUpgrades);
     },
-    autoUpgrade() { if (hasMilestone("st" , 7)) return true},
+    autoUpgrade() { if (hasAchievement("a" , 261)) return true},
     color: "#66FF00",
     requires: new Decimal("e410"), // Can be a function that takes requirement increases into account
     resource: "Leaf Points", // Name of prestige currency
@@ -694,8 +695,7 @@ addLayer("le", {
         if (hasChallenge('dp', 11)) mult = mult.pow(1.01)
         if (inChallenge('dp', 12)) mult = mult.div(Infinity)
                                                 if (hasChallenge('dp', 12)) mult = mult.pow(1.01)
-                                                if (hasUpgrade('dp', 121)) mult = mult.times(1e150)
-                                                if (hasUpgrade('dp', 43)) mult = mult.pow(1.125)
+                                                if (hasUpgrade('dp', 43)) mult = mult.pow(1.25)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

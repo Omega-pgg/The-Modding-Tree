@@ -77,7 +77,7 @@ automate() {
             },
             buy() {
                 let cost = new Decimal ("1e64000")
-                player.points = player.points.sub(this.cost().sub(cost))
+                player.points = player.points.sub(this.cost().div(cost))
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
             effect(x) {
@@ -107,7 +107,7 @@ automate() {
           },
           buy() {
               let cost = new Decimal ("1e9")
-              player.c.points = player.c.points.sub(this.cost().sub(cost))
+              player.c.points = player.c.points.sub(this.cost().div(cost))
               setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
           },
           effect(x) {
@@ -137,7 +137,7 @@ automate() {
         },
         buy() {
             let cost = new Decimal ("1e12")
-            player.c.points = player.c.points.sub(this.cost().sub(cost))
+            player.c.points = player.c.points.sub(this.cost().div(cost))
             setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
         },
         effect(x) {
@@ -161,7 +161,7 @@ automate() {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 1e-308,    
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasUpgrade('scp', 95)) mult = mult.times(2)
         if (hasUpgrade('scp', 101)) mult = mult.times(2)
         if (hasUpgrade('scp', 102)) mult = mult.times(3)

@@ -7,7 +7,9 @@ addLayer("scp", {
 		points: new Decimal(0),
     }},
     passiveGeneration() {
+        if (hasAchievement("a", 262)) return (hasAchievement("a", 262)?1:0)
         if (hasMilestone("le", 3)) return (hasMilestone("le", 3)?1:0)
+        if (hasAchievement("a", 231)) return (hasAchievement("a", 231)?0.05:0)
         },
     tabFormat: [
         "main-display",
@@ -30,7 +32,7 @@ addLayer("scp", {
                 },
             },
         },
-        autoUpgrade() { if (hasMilestone("le" , 4)) return true},
+        autoUpgrade() { if (hasAchievement("a" , 233)) return true},
         upgrades: {
             11: {
                 title: "The Sacrificer I (SAP11)",
@@ -587,7 +589,7 @@ addLayer("scp", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: "eee1e-3008",    
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         if (hasMilestone('sa', 11)) mult = mult.times(milestoneEffect('sa', 11))
         if (hasUpgrade('scp', 22)) mult = mult.times(1.4)
         if (hasUpgrade('scp', 31)) mult = mult.times(1.5)
