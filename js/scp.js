@@ -682,6 +682,7 @@ addLayer("scp", {
                                                                                                                                         if (hasAchievement('a', 275)) mult = mult.times("1e8")
                                                                                                                                                 if (hasUpgrade('cp', 81)) mult = mult.pow(1.2)
                                                                                                                                                 if (hasUpgrade('dp', 41)) mult = mult.times(upgradeEffect('dp', 41))
+                                                                                                                                                    if (hasUpgrade('rp', 12)) mult = mult.pow(4)
     return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

@@ -1279,7 +1279,142 @@ addLayer("a", {
             done() {
                 if (hasUpgrade("dp", 31))
                 return true            },
-            tooltip: "Unlock the upgrade tree tab with Divine Perks.",
+            tooltip: "Unlock the upgrade tree tab with Divine Perks.<br> Reward: Automatically buys Charge Power Upgrades",
+            onComplete() {
+            },
+        },
+        291: {
+            name: "More Divine Perks than Divine Points???",
+            done() {
+                return player.dp.perks.gte("1e33")
+            },            
+            tooltip: "Get 1e33 Divine Perks.",
+            onComplete() {
+            },
+        },
+        292: {
+            name: "Ten Million Digits",
+            done() {
+                return player.points.gte("e1e7")
+            },            
+            tooltip: "Get 1e10,000,000 Points.",
+            onComplete() {
+            },
+        },
+        293: {
+            name: "Reset yet again!!!",
+            done() {
+                return player.rp.total.gte("1")
+            },            
+            tooltip: "Get 1 Rebirth Points.<br> Reward: Gain 100,000,000x LP, CP and Keep Row 5-7 Content + always have the 2nd divine point upgrade.",
+            onComplete() {
+            },
+        },
+        294: {
+            name: "More Inflation",
+            done() {
+                return player.points.gte("e2e7")
+            },            
+            tooltip: "Get 1e20,000,000 Points.",
+            onComplete() {
+            },
+        },
+        295: {
+            name: "Clicker game???",
+            done() {
+                return player.rp.power.gte("1")
+            },            
+            tooltip: "Get 1 Rebirth Power.",
+            onComplete() {
+            },
+        },
+        301: {
+            name: "More Tree Upgrades",
+            done() {
+                return player.dp.perks.gte("1e70")
+            },            
+            tooltip: "Get 1e70 Divine Perks.",
+            onComplete() {
+            },
+        },
+        302: {
+            name: "Googol Divine Points",
+            done() {
+                return player.dp.points.gte("1e100")
+            },            
+            tooltip: "Get 1e100 Divine Points.",
+            onComplete() {
+            },
+        },
+        303: {
+            name: "MORE INFLATIONESS",
+            done() {
+                return player.rp.power.gte("1e50")
+            },            
+            tooltip: "Get 1e50 Rebirth Power.",
+            onComplete() {
+            },
+        },
+        304: {
+            name: "Rebirth Grindness",
+            done() {
+                return player.rp.points.gte("1e6")
+            },            
+            tooltip: "Get 1,000,000 Rebirth Points.<br>Reward: Automatically buy Divine Perk buyable.",
+            onComplete() {
+            },
+        },
+        305: {
+            name: "Once more inflation...",
+            done() {
+                return player.points.gte("e5e7")
+            },            
+            tooltip: "Get 1e50,000,000 Points.",
+            onComplete() {
+            },
+        },
+        311: {
+            name: "Overgrind Player",
+            done() {
+                return player.dp.points.gte("1.80e308")
+            },            
+            tooltip: "Get 1.80e308 Divine Points.",
+            onComplete() {
+            },
+        },
+        312: {
+            name: "Energy Liver",
+            done() {
+                return player.e.points.gte("e1e6")
+            },            
+            tooltip: "Get 1e1,000,000 Energy.",
+            onComplete() {
+            },
+        },
+        313: {
+            name: "Sacrificer Overfarm",
+            done() {
+                return player.sa.points.gte("2.5e4")
+            },            
+            tooltip: "Reach Sacrifice Tier 25,000.",
+            onComplete() {
+            },
+        },
+        314: {
+            name: "Rebirth Crazy",
+            done() {
+                return player.rp.points.gte("1e20")
+            },            
+            tooltip: "Get 1e20 Rebirth Points.",
+            onComplete() {
+            },
+        },
+        315: {
+            name: "Charged^2?",
+            done() {
+                if (hasUpgrade("rp", 44))
+                return true            },
+            tooltip: "Make the 1st leaf charge effect better.",
             onComplete() {
             },
         },

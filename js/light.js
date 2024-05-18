@@ -131,12 +131,12 @@ effectDescription(){
         if (hasUpgrade('le', 73)) mult = mult.times(upgradeEffect('le',73))
         if (hasUpgrade('cp', 72)) mult = mult.pow(1.05)
         if (hasUpgrade('cp', 84)) mult = mult.pow(1.2)
-
+          if (hasUpgrade('rp', 11)) mult = mult.div(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
     row: 4, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return (hasUpgrade("mp", 61) || player[this.layer].unlocked)},
-})
+    layerShown(){if (hasUpgrade("rp", 11)) return false
+    else return (hasUpgrade("mp", 61) || player[this.layer].unlocked)},})

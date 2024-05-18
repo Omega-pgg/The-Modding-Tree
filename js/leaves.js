@@ -10,7 +10,7 @@ addLayer("le", {
     update(t) {
         tick = new Decimal(0.05)
         if (hasUpgrade('cp', 33) && player[this.layer].opmtime.lt(3600)) player[this.layer].opmtime = player[this.layer].opmtime.add(tick)
-    },
+        },
     tabFormat: [
         "main-display",
         "prestige-button",
@@ -548,14 +548,16 @@ addLayer("le", {
                 1: {
                     requirementDescription() {
                         dis = "[1] 1 Leaf Points"
-                        if (hasUpgrade('cp', 33)) dis = dis + " (Charged)"
+                        if (hasUpgrade('rp', 44)) dis = dis + " (Charged)"
+                        else if (hasUpgrade('cp', 33)) dis = dis + " (Charged)"
                         return dis},
                     effectDescription() {
                         dis = "3x Time Power, 10x Cells and 25x Sacrifice Points."
-                        if (hasUpgrade('cp', 33)) dis = dis + "<br>Charge effect: 1,000,000,000x Charge Power and Points is boosted based on time since you charged this milestone. (hardcap at 1h) <br>Time: "+formatTime(player[this.layer].opmtime)+" Currently: " + format(upgradeEffect('cp', 33)) + "x"
+                        if (hasUpgrade('rp', 44)) dis = dis + "<br>Charge effect: Points is boosted by even more based on time since you charged this milestone. (hardcap at 1h) <br>Time: "+formatTime(player[this.layer].opmtime)+" Currently: " + format(upgradeEffect('rp', 44)) + "x"
+                        else if (hasUpgrade('cp', 33)) dis = dis + "<br>Charge effect: 1,000,000,000x Charge Power and Points is boosted based on time since you charged this milestone. (hardcap at 1h) <br>Time: "+formatTime(player[this.layer].opmtime)+" Currently: " + format(upgradeEffect('cp', 33)) + "x"
                         return dis},
                     done() { return player.le.points.gte(1) },
-                    style(){if (hasUpgrade('cp', 33)) return{'background-color':'#ffad00'}}
+                    style(){if (hasUpgrade('cp', 33)) return{'background-color':'orange'}}
                 },
                 2: {
                     requirementDescription() {
@@ -636,6 +638,7 @@ addLayer("le", {
         let keep = [];
         if (hasMilestone('st', 8)) keep.push("milestones");
         if (hasMilestone('dp', 1)) keep.push("milestones");
+        if (hasAchievement('a', 293)) keep.push("milestones");
         // Stage 4, do the actual data reset
         layerDataReset(this.layer, keep);
     
@@ -692,10 +695,11 @@ addLayer("le", {
         if (hasUpgrade('dp', 14)) mult = mult.times(upgradeEffect('dp',14))
         if (hasUpgrade('dp', 22)) mult = mult.times(1e9)
         if (hasUpgrade('cp', 84)) mult = mult.times(1e9)
-        if (hasChallenge('dp', 11)) mult = mult.pow(1.01)
-        if (inChallenge('dp', 12)) mult = mult.div(Infinity)
-                                                if (hasChallenge('dp', 12)) mult = mult.pow(1.01)
-                                                if (hasUpgrade('dp', 43)) mult = mult.pow(1.25)
+            if (hasChallenge('dp', 11)) mult = mult.pow(1.02)
+                if (hasUpgrade('dp', 43)) mult = mult.pow(1.25)
+                                                                                                                                                            if (hasAchievement('a', 293)) mult = mult.times("1e8")
+                                                                                                                                                                if (hasUpgrade('rp', 11)) mult = mult.pow(1.05)
+                                                                                                                                                                    if (hasUpgrade('rp', 32)) mult = mult.pow(1.1)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

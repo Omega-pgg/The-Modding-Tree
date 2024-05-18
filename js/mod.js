@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "Points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js", "cp.js", "divine.js", "pa.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js", "cp.js", "divine.js", "pa.js", "rp.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -12,10 +12,22 @@ let modInfo = {
 }
 // Set your version in num and name
 let VERSION = {
-	num: "2.0.1: Update 10.1",
-	name: "Rebalance",
+	num: "2.1.0: Update 11",
+	name: "",
 }
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v2.1.0: Update 11 (17/05/2024)</h3><br>
+		- The 11th Update is here!<br>
+		- Added 1 new notation in settings.<br>
+		- Added 2 more save banks.<br>
+		- Added many new upgrades.<br>
+		- Added a new feature.<br>
+		- Added more achievements.<br>
+		- Added more milestones.<br>
+		- Added 1 new layer.<br>
+		- Added 3 new buyables.<br>
+		- Removed 1 challenge.<br>
+		- Endgame: 1.00e74,000,000 Points.<br><br>
 <h3>v2.0.1: Rebalance (15/05/2024)</h3><br>
 		- Small Update 3.<br>
 		- Rebalanced everything.<br>
@@ -335,6 +347,9 @@ function getPointGen() {
 		if (hasUpgrade('le', 65)) gain = gain.times(upgradeEffect('le', 65))
 		if (hasUpgrade('cp', 33)) gain = gain.times(upgradeEffect('cp', 33))
 		if (hasUpgrade('cp', 55)) gain = gain.pow(1.01)
+			if (hasUpgrade('rp', 25)) gain = gain.pow(1.2)
+				if (hasUpgrade('rp', 35)) gain = gain.times(upgradeEffect('rp', 35))
+					if (hasUpgrade('rp', 44)) gain = gain.times(upgradeEffect('rp', 44))
 	return gain
 }
 
@@ -383,7 +398,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e1.3e7"))
+	return player.points.gte(new Decimal("e7.4e7"))
 }
 
 

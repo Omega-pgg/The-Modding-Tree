@@ -119,6 +119,7 @@ addLayer("st", {
     autoPrestige() {
         return hasAchievement("a", 273)
     },
+    canBuyMax() { return hasMilestone("rp", 7) },
     resetsNothing() {return hasAchievement("a", 273)},
     doReset(dp) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -130,6 +131,7 @@ addLayer("st", {
         // Stage 3, track which main features you want to keep - milestones
         let keep = [];
         if (hasMilestone('dp', 2)) keep.push("milestones");
+        if (hasAchievement('a', 293)) keep.push("milestones");
         // Stage 4, do the actual data reset
         layerDataReset(this.layer, keep);
     
@@ -143,7 +145,8 @@ addLayer("st", {
     baseAmount() {return player.le.points}, // Get the current amount of baseResource
     branches: ["le"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent() {if (hasUpgrade("le", 72)) return new Decimal(2.25)
+    exponent() {if (hasUpgrade("rp", 33)) return new Decimal(2)
+        else if (hasUpgrade("le", 72)) return new Decimal("2.25")
     else if (hasUpgrade("le", 55)) return new Decimal("2.85")
     else return new Decimal(3)},    gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)

@@ -66,6 +66,7 @@ automate() {
                 let exp2 = 1.2
                 if (hasUpgrade('scp', 104)) exp2 = 1.125
                 if (hasUpgrade('scp', 112)) exp2 = 1.1
+                if (hasUpgrade('rp', 12)) exp2 = 1e308
                 return new Decimal("1e64000").mul(Decimal.pow(35, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
             },
             display() {
@@ -96,6 +97,7 @@ automate() {
           cost(x) {
               let exp2 = 1.1
               if (hasMilestone('sa', 21)) exp2 = 1.05
+              if (hasUpgrade('rp', 12)) exp2 = 1e308
               return new Decimal("1e9").mul(Decimal.pow(2, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
           },
           display() {
@@ -127,6 +129,7 @@ automate() {
             let exp2 = 1.1
             if (hasMilestone('sa', 21)) exp2 = 1.05
             if (hasUpgrade('le', 53)) exp2 = 1.04
+            if (hasUpgrade('rp', 12)) exp2 = 1e308
             return new Decimal("1e12").mul(Decimal.pow(2, x)).mul(Decimal.pow(x , Decimal.pow(exp2 , x))).floor()
         },
         display() {
@@ -204,6 +207,7 @@ if (hasUpgrade('le', 73)) mult = mult.times(upgradeEffect('le',73))
 if (hasUpgrade('cp', 72)) mult = mult.pow(1.05)
 if (hasUpgrade('cp', 82)) mult = mult.pow(1.2)
 if (inChallenge('dp', 11)) mult = mult.div(Infinity)
+    if (hasUpgrade('rp', 12)) mult = mult.div(Infinity)
 return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -213,5 +217,5 @@ return mult
     hotkeys: [
         {key: "C", description: "C: Reset for Cells", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return (hasChallenge("sa", 11) || player[this.layer].unlocked)},
-})
+    layerShown(){if (hasUpgrade("rp", 12)) return false
+    else return (hasChallenge("sa", 11) || player[this.layer].unlocked)},})

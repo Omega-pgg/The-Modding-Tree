@@ -1,7 +1,7 @@
 addLayer("sa", {
     name: "sa", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "Sac", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -238,9 +238,11 @@ doReset(le) {
     // Stage 3, track which main features you want to keep - milestones
     let keep = [];
     if (hasMilestone('le', 7)) keep.push("challenges");
+    if (hasAchievement('a', 293)) keep.push("challenges");
     if (hasMilestone('le', 7)) keep.push("milestones");
     if (hasMilestone('st', 3)) keep.push("challenges");
     if (hasMilestone('st', 3)) keep.push("milestones");
+    if (hasAchievement('a', 293)) keep.push("milestones");
     // Stage 4, do the actual data reset
     layerDataReset(this.layer, keep);
 
@@ -277,7 +279,8 @@ canBuyMax() { return hasMilestone("le", 5) },
     baseAmount() {return player.mp.points}, // Get the current amount of baseResource
     branches: ["mp"],
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent() {if (hasUpgrade("cp", 44)) return new Decimal(1.6)
+    exponent() {if (hasUpgrade("rp", 12)) return new Decimal(1.5)
+        else if (hasUpgrade("cp", 44)) return new Decimal("1.6")
     else if (hasUpgrade("le", 55)) return new Decimal("1.8")
     else return new Decimal(2)},        gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)

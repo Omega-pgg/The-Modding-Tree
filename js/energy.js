@@ -506,7 +506,7 @@ microtabs: {
         if (hasUpgrade('le', 73)) mult = mult.times(upgradeEffect('le',73))
         if (hasUpgrade('cp', 72)) mult = mult.pow(1.05)
         if (hasUpgrade('cp', 85)) mult = mult.pow(1.2)
-
+            if (hasUpgrade('rp', 11)) mult = mult.pow(3)
         return mult
     
     },

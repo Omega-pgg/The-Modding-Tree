@@ -515,6 +515,7 @@ addLayer("tp", {
                                                                 if (hasUpgrade('cp', 53)) mult = mult.pow(1.1)
 if (hasUpgrade('cp', 83)) mult = mult.pow(1.2)
         if (inChallenge('dp', 11)) mult = mult.div(Infinity)
+    if (hasUpgrade('rp', 12)) mult = mult.div(Infinity)
 
                                                                                                                                 return mult
     },
@@ -525,5 +526,6 @@ if (hasUpgrade('cp', 83)) mult = mult.pow(1.2)
     hotkeys: [
         {key: "T", description: "T: Reset for Time Power", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return (hasChallenge("sa", 12) || player[this.layer].unlocked)},
-})
+    layerShown(){if (hasUpgrade("rp", 12)) return false
+    else return (hasChallenge("sa", 12) || player[this.layer].unlocked)},})
+

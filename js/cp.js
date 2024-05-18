@@ -8,7 +8,7 @@ addLayer("cp", {
 		    points: new Decimal(0),
         }
     },
-    autoUpgrade() { if (hasMilestone("dp" , 3)) return true},
+    autoUpgrade() { if (hasAchievement("a" , 285)) return true},
     automate() {
         if (hasAchievement('a', 281)) {
             if (layers.cp.buyables[11].canAfford()) {
@@ -603,10 +603,10 @@ addLayer("cp", {
         if (hasUpgrade('cp', 71)) mult = mult.times(upgradeEffect('cp',71))
         if (hasUpgrade('dp', 14)) mult = mult.times(upgradeEffect('dp',14))
         if (hasUpgrade('dp', 22)) mult = mult.times(1e9)
-                                        if (hasChallenge('dp', 11)) mult = mult.pow(1.01)
-                                        if (inChallenge('dp', 12)) mult = mult.div(Infinity)
-                                        if (hasChallenge('dp', 12)) mult = mult.pow(1.01)
+                                        if (hasChallenge('dp', 11)) mult = mult.pow(1.02)
                                         if (hasUpgrade('dp', 122)) mult = mult.pow(1.15)
+                                                                                                        if (hasAchievement('a', 293)) mult = mult.times("1e8")
+                                                                                                            if (hasUpgrade('rp', 11)) mult = mult.pow(1.05)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

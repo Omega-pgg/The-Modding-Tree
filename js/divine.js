@@ -14,6 +14,30 @@ addLayer("dp", {
         ["microtabs", "stuff"],
         ["blank", "25px"],
     ],
+    automate() {
+        if (hasAchievement('a', 304)) {
+            if (layers.dp.buyables[11].canAfford()) {
+                layers.dp.buyables[11].buy();
+            };
+        };
+    },
+    doReset(rp) {
+        // Stage 1, almost always needed, makes resetting this layer not delete your progress
+        if (layers[rp].row <= this.row) return;
+    
+        // Stage 2, track which specific subfeatures you want to keep, e.g. Upgrade 21, Milestones
+        let keptUpgrades = [];
+        if (hasAchievement('a', 293)) keptUpgrades.push(12);
+        // Stage 3, track which main features you want to keep - milestones
+        let keep = [];
+        if (hasMilestone('rp', 6)) keep.push("milestones");
+        if (hasMilestone('rp', 6)) keep.push("challenges");
+        // Stage 4, do the actual data reset
+        layerDataReset(this.layer, keep);
+    
+        // Stage 5, add back in the specific subfeatures you saved earlier
+        player[this.layer].upgrades.push(...keptUpgrades);
+    },
     tooltip(){
         return "<h3>Divine</h3><br>" + format(player.dp.points) + " DP"
       },
@@ -47,7 +71,7 @@ addLayer("dp", {
                     ["blank", "15px"],
                     ["display-text", () => "You have <h2 style='color: #00008b; text-shadow: 0 0 10px #00008b'>" + format(player.dp.perks) + "</h2> Divine Perks."],
                     "clickables",
-                    ["upgrades", [10,11,12,13,14,15,16,17,18,19]]
+                    ["upgrades", [10,11,12,13,14,15,16,17,18,19,20,21]]
                 ]    
             },
     "Buyables": {
@@ -155,10 +179,10 @@ addLayer("dp", {
                                                                                         },
                                                                                         25: { 
                                                                                             title: "Point Chain V (DP25)",
-                                                                                                    description: "Divine Points boosts itself and unlocks 2 challenges.",
+                                                                                                    description: "Divine Points boosts itself and unlocks a challenge.",
                                                                                                     cost: new Decimal(5e9),
                                                                                                     unlocked() {
-                                                                                                        return hasUpgrade("dp", 24)
+                                                                                                        return hasUpgrade("cp", 91)
                                                                                                     
                                                                                                     },
                                                                                                     effect() {
@@ -243,7 +267,7 @@ addLayer("dp", {
                                                                                                                                                                 },
                                                                                                                                                                 43: { 
                                                                                                                                                                     title: "Divine Charger IV (DP43)",
-                                                                                                                                                                            description: "Charge the 7th super tier milestone and unlock a new layer. (Next Update)",
+                                                                                                                                                                            description: "Charge the 7th super tier milestone and unlock a new layer.",
                                                                                                                                                                             cost: new Decimal(1e25),
                                                                                                                                                                             unlocked() {
                                                                                                                                                                                 return hasUpgrade("dp", 42)
@@ -267,7 +291,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(10),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 151) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 151)) return true
                                                                                                                         else if (hasUpgrade('dp', 112)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -281,7 +305,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(250),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 151) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 151)) return true
                                                                                                                         else if (hasUpgrade('dp', 111)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -299,7 +323,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(2500),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 161) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 161)) return true
                                                                                                                         else if (hasUpgrade('dp', 122)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -313,7 +337,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(1.5e4),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 161) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 161)) return true
                                                                                                                         else if (hasUpgrade('dp', 121)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -336,7 +360,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(5e5),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 181) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 181)) return true
                                                                                                                         else if (hasUpgrade('dp', 142)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -354,7 +378,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(1e9),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 181) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 181)) return true
                                                                                                                         else if (hasUpgrade('dp', 141)) return false
                                                                                                                         else return true
                                                                                                                     },
@@ -390,7 +414,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(7.5e12),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 1521) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 201)) return true
                                                                                                                         else if (hasUpgrade('dp', 172)) return false
                                                                                                                         else if (hasUpgrade('dp', 173)) return false
                                                                                                                         else return true
@@ -409,7 +433,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(1e16),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 1521) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 201)) return true
                                                                                                                         else if (hasUpgrade('dp', 171)) return false
                                                                                                                         else if (hasUpgrade('dp', 173)) return false
                                                                                                                         else return true
@@ -424,7 +448,7 @@ addLayer("dp", {
                                                                                                                     currencyLayer: "dp",
                                                                                                                     cost: new Decimal(2e10),
                                                                                                                     canAfford() {
-                                                                                                                        if (hasUpgrade('dp', 1521) || hasMilestone('dp', 4)) return true
+                                                                                                                        if (hasUpgrade('dp', 201)) return true
                                                                                                                         else if (hasUpgrade('dp', 171)) return false
                                                                                                                         else if (hasUpgrade('dp', 172)) return false
                                                                                                                         else return true
@@ -440,6 +464,56 @@ addLayer("dp", {
                                                                                                                     cost: new Decimal(1e20),
                                                                                                                     unlocked() {return hasUpgrade('dp', 171) || hasUpgrade('dp', 172)|| hasUpgrade('dp', 173)},
                                                                                                                 },
+                                                                                                                191: {
+                                                                                                                    title: "Divine Choice X (DUT101)",
+                                                                                                                    description: "Log(Log(10)) Points boosts Rebirth Points",
+                                                                                                                    currencyDisplayName: "Divine Perks",
+                                                                                                                    currencyInternalName: "perks",
+                                                                                                                    currencyLayer: "dp",
+                                                                                                                    cost: new Decimal(1e40),
+                                                                                                                    canAfford() {
+                                                                                                                        if (hasUpgrade('dp', 211)) return true
+                                                                                                                        else if (hasUpgrade('dp', 192)) return false
+                                                                                                                        else return true
+                                                                                                                    },
+                                                                                                                effect() {
+                                                                                                                    return player.points.add(1).log(10).log(10)
+                                                                                                                        },
+                                                                                                                effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+                                                                                                                    unlocked() {return hasMilestone('rp', 4)},
+                                                                                                                },
+                                                                                                                192: {
+                                                                                                                    title: "Divine Choice XI (DUT102)",
+                                                                                                                    description: "2x Rebirth Points",
+                                                                                                                    currencyDisplayName: "Divine Perks",
+                                                                                                                    currencyInternalName: "perks",
+                                                                                                                    currencyLayer: "dp",
+                                                                                                                    cost: new Decimal(1e40),
+                                                                                                                    canAfford() {
+                                                                                                                        if (hasUpgrade('dp', 211)) return true
+                                                                                                                        else if (hasUpgrade('dp', 191)) return false
+                                                                                                                        else return true
+                                                                                                                    },
+                                                                                                                    unlocked() {return hasMilestone('rp', 4)},
+                                                                                                                },
+                                                                                                                201: {
+                                                                                                                    title: "Divine Locker IV (DUT111)",
+                                                                                                                    description: "You can buy all three DUT81, DUT82 and DUT83.",
+                                                                                                                    currencyDisplayName: "Divine Perks",
+                                                                                                                    currencyInternalName: "perks",
+                                                                                                                    currencyLayer: "dp",
+                                                                                                                    cost: new Decimal(1e70),
+                                                                                                                    unlocked() {return hasUpgrade('dp', 191) || hasUpgrade('dp', 192)},
+                                                                                                                },
+                                                                                                                211: {
+                                                                                                                    title: "Divine Locker V (DUT121)",
+                                                                                                                    description: "You can buy both DUT101 and DUT102.",
+                                                                                                                    currencyDisplayName: "Divine Perks",
+                                                                                                                    currencyInternalName: "perks",
+                                                                                                                    currencyLayer: "dp",
+                                                                                                                    cost: new Decimal(1e75),
+                                                                                                                    unlocked() {return hasUpgrade('dp', 201)},
+                                                                                                                },
     },
     update(multP) {
         multP = new Decimal(0.05)
@@ -453,6 +527,9 @@ addLayer("dp", {
         if (hasUpgrade('dp', 173)) multP = multP.times(120)
         if (hasUpgrade('dp', 34)) multP = multP.times(upgradeEffect('dp', 34))
         if (hasUpgrade('dp', 35)) multP = multP.pow(1.3)
+            if (hasUpgrade('rp', 11)) multP = multP.times(20)
+                if (hasUpgrade('rp', 23)) multP = multP.times(upgradeEffect('rp', 23))
+                    if (hasUpgrade('rp', 42)) multP = multP.times(upgradeEffect('rp', 42))
         if (hasUpgrade('dp', 101)) player.dp.perks = player.dp.perks.add(multP)
     },
     clickables: {
@@ -522,7 +599,7 @@ addLayer("dp", {
 },
 3: {
     requirementDescription: "[3] 10,000,000,000 Total Divine Points",
-    effectDescription: "Automatically buy Charge Power Upgrades.",
+    effectDescription: "1.5x Divine Points.",
     done() { return player.dp.total.gte("1e10") }
 },
     },
@@ -531,18 +608,10 @@ addLayer("dp", {
                 name: "Currencies Degrader",
                 challengeDescription: "You can't gain Sacrifice Tier, Time Power and Cells.",
                 goalDescription: "1e157,000 Points",
-                rewardDescription: "2x Divine Points and ^1.01 to Charge Power & Leaf Points.",
+                rewardDescription: "5x Divine Points and ^1.02 to Charge Power & Leaf Points.",
                 canComplete: function() {return player.points.gte("e157000")},
                 unlocked() { return (hasUpgrade('dp', 25)) },
         },
-        12: {
-            name: "Uncharged",
-            challengeDescription: "You can't gain Leaf Points & Charge Power.",
-            goalDescription: "1e215,000 Points",
-            rewardDescription: "2x Divine Points and ^1.01 to Charge Power & Leaf Points again.",
-            canComplete: function() {return player.points.gte("e215000")},
-            unlocked() { return (hasChallenge('dp', 11)) },
-    },
     },
     color: "#00008b",
     requires: new Decimal("1.80e308"), // Can be a function that takes requirement increases into account
@@ -560,8 +629,8 @@ addLayer("dp", {
                                 if (hasUpgrade('cp', 75)) mult = mult.times(upgradeEffect('cp',75))
                                 if (hasUpgrade('cp', 91)) mult = mult.pow(1.3)
                                 if (hasUpgrade('dp', 25)) mult = mult.times(upgradeEffect('dp',25))
-                                if (hasChallenge('dp', 11)) mult = mult.times(2)
-                                if (hasChallenge('dp', 12)) mult = mult.times(2)
+                                if (hasChallenge('dp', 11)) mult = mult.times(5)
+                                    if (hasMilestone('dp', 3)) mult = mult.times(1.5)
                                 if (hasUpgrade('dp', 122)) mult = mult.times(3)
                                 mult = mult.times(buyableEffect('dp', 11))
                                 if (hasUpgrade('dp', 33)) mult = mult.times(10)
@@ -569,7 +638,12 @@ addLayer("dp", {
                                 if (hasUpgrade('dp', 171)) mult = mult.times(upgradeEffect('dp',171))
                                 if (hasUpgrade('dp', 35)) mult = mult.pow(0.9)
                                 if (hasUpgrade('dp', 42)) mult = mult.pow(1.1)
-                                                                return mult
+                                    if (hasUpgrade('dp', 42)) mult = mult.pow(1.1)
+                                        if (hasUpgrade('rp', 11)) mult = mult.times(20)
+                                            if (hasAchievement('a', 294)) mult = mult.times(player.rp.power.max(1).pow(0.333333333333333333333333333333333))
+                                                if (hasUpgrade('rp', 21)) mult = mult.times(upgradeEffect('rp',21))                
+                                                    if (hasUpgrade('rp', 43)) mult = mult.times(upgradeEffect('rp',43))
+                                                    return mult
     },
 
     gainExp() { // Calculate the exponent on main currency from bonuses

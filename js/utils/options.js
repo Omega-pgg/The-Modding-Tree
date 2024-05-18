@@ -17,7 +17,7 @@ function getStartOptions() {
 	}
 }
 
-let notations = ['Scientific','Engineering','Standard','Mixed Scientific','Mixed Engineering']
+let notations = ['Scientific','Engineering','Standard','Mixed Scientific','Mixed Engineering','Hyper-E']
 
 function changeNotation() {
 	player.notation = notations[(notations.indexOf(player.notation) + 1) % notations.length]
