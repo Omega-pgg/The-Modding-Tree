@@ -640,7 +640,7 @@ addLayer("dp", {
                                 if (hasUpgrade('dp', 42)) mult = mult.pow(1.1)
                                     if (hasUpgrade('dp', 42)) mult = mult.pow(1.1)
                                         if (hasUpgrade('rp', 11)) mult = mult.times(20)
-                                            if (hasAchievement('a', 294)) mult = mult.times(player.rp.power.max(1).pow(0.333333333333333333333333333333333))
+                                            if (hasAchievement('a', 295)) mult = mult.times(player.rp.power.max(1).pow(0.333333333333333333333333333333333))
                                                 if (hasUpgrade('rp', 21)) mult = mult.times(upgradeEffect('rp',21))                
                                                     if (hasUpgrade('rp', 43)) mult = mult.times(upgradeEffect('rp',43))
                                                     return mult
