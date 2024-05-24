@@ -1268,9 +1268,9 @@ addLayer("a", {
         284: {
             name: "Pure Pain!",
             done() {
-                if (hasChallenge("dp", 12))
+                if (hasChallenge("dp", 11))
                 return true            },
-            tooltip: "Complete the 2nd divine challenge.",
+            tooltip: "Complete the divine challenge.",
             onComplete() {
             },
         },
