@@ -546,6 +546,7 @@ addLayer("up", {
                          if (hasMilestone('st', 1)) mult = mult.times(250)
                          if (hasUpgrade('cp', 52)) mult = mult.pow("1.05")
                          if (inChallenge("mp", 21)) mult = mult.div("10^^308")
+                                     if (inChallenge("rp", 12)) mult = mult.div("10^^308")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

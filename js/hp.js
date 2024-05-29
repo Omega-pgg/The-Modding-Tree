@@ -663,6 +663,7 @@ addLayer("hp", {
         if (hasUpgrade('cp', 52)) mult = mult.pow("1.5")
         if (inChallenge("mp", 21)) mult = mult.div("10^^308")
         if (hasUpgrade('cp', 74)) mult = mult.pow("1.075")
+            if (inChallenge("rp", 12)) mult = mult.div("10^^308")
         return mult
     },
     passiveGeneration() {

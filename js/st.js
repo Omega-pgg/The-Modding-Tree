@@ -1,7 +1,7 @@
 addLayer("st", {
     name: "Super Tier", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "ST", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -94,27 +94,48 @@ addLayer("st", {
                     requirementDescription(){des = "[7] Super Tier 8"
                         if (hasUpgrade('dp', 43)) des = des + " (Charged)"
                         return des},
-                    effectDescription() {des = "Automate Leaf Upgrades and 1,000,000,000x Charge Power."
+                    effectDescription() {des = "1,000,000,000x Charge Power."
                     if (hasUpgrade('dp', 43)) des = des + "<br> Charge effect: ^1.25 Leaf Points."
                     return des},
                     done() { return player.st.points.gte(8) },
                     style(){if (hasUpgrade('dp', 43)) return{'background-color':'#ffad00'}}
                 },
-8: {
-    requirementDescription: "[8] Super Tier 10 ",
-    effectDescription: "Keep Leaf Milestones on reset.",
-    done() { return player.st.points.gte(10) }
-},
-9: {
-    requirementDescription: "[9] Super Tier 18 ",
-    effectDescription: "LB21 adds free levels to LB13.",
-    done() { return player.st.points.gte(18) }
-},
-10: {
-    requirementDescription: "[10] Super Tier 21 ",
-    effectDescription: "^1.05 Energy & Light, Cells and Charge Power",
-    done() { return player.st.points.gte(21) }
-},
+                8: {
+                    requirementDescription() {
+                        dis = "[8] Super Tier 10"
+                        if (hasUpgrade('cp', 95)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "Keep Leaf Milestones on reset."                        
+                        if (hasUpgrade('cp', 95)) dis = dis + "<br>Charge effect: Mega Points boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 95)) + "x"
+                        return dis},
+                    done() { return player.st.points.gte(10) },
+                    style(){if (hasUpgrade('cp', 95)) return{'background-color':'#ffad00'}}
+                },
+                9: {
+                    requirementDescription() {
+                        dis = "[9] Super Tier 18"
+                        if (hasUpgrade('cp', 102)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "LB21 adds free levels to LB13."                        
+                        if (hasUpgrade('cp', 102)) dis = dis + "<br>Charge effect: Hyper Points boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 102)) + "x"
+                        return dis},
+                    done() { return player.st.points.gte(18) },
+                    style(){if (hasUpgrade('cp', 102)) return{'background-color':'#ffad00'}}
+                },
+                10: {
+                    requirementDescription() {
+                        dis = "[10] Super Tier 21"
+                        if (hasUpgrade('cp', 104)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "^1.05 Energy & Light, Cells and Charge Power."
+                        if (hasUpgrade('cp', 104)) dis = dis + "<br>Charge effect: Super Charge Power boosts Rebirth Points.<br>Currently: " + format(upgradeEffect('cp', 104)) + "x"
+                        return dis},
+                    done() { return player.st.points.gte(21) },
+                    style(){if (hasUpgrade('cp', 104)) return{'background-color':'#ffad00'}}
+                },
     },
     autoPrestige() {
         return hasAchievement("a", 273)
@@ -151,6 +172,7 @@ addLayer("st", {
     else return new Decimal(3)},    gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('le', 52)) mult = mult.div(upgradeEffect('le', 52))
+            if (inChallenge('rp', 11)) mult = mult.times(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

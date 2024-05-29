@@ -1,7 +1,7 @@
 addLayer("mp", {
     name: "mega-points", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "MP", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -560,11 +560,18 @@ passiveGeneration() {
             done() { return player.l.points.gte(1) },
             style(){if (hasUpgrade('dp', 35)) return{'background-color':'#ffad00'}}
         },
-    8: {
-        requirementDescription: "[8] 1 Cell",
-        effectDescription: "Gain 100% of Cells gained on reset per second",
-        done() { return player.c.points.gte(1) }
-    },
+        8: {
+            requirementDescription() {
+                dis = "[8] 1 Cell"
+                if (hasUpgrade('cp', 92)) dis = dis + " (Charged)"  
+                return dis},
+            effectDescription() {
+                dis = "Gain 100% of Cells gained on reset per second."
+                if (hasUpgrade('cp', 92)) dis = dis + "<br>Charge effect: Divine Points boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 92)) + "x"
+                return dis},
+            done() { return player.c.points.gte(1) },
+            style(){if (hasUpgrade('cp', 92)) return{'background-color':'#ffad00'}}
+        },
 },
 doReset(sa) {
     // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -696,7 +703,8 @@ doReset(sa) {
                                                                 if (hasAchievement('a', 275)) mult = mult.times("1e8")
                                                                 if (hasChallenge('mp', 21)) mult = mult.pow(1.01)
                                                                 if (hasUpgrade('dp', 41)) mult = mult.times(upgradeEffect('dp', 41))
-                                                                return mult
+                                                                    if (inChallenge("rp", 12)) mult = mult.div("10^^308")
+                                                                    return mult
     },
                 autoUpgrade() { if (hasAchievement("a" , 195)) return true},
 

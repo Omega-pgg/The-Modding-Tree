@@ -1,7 +1,7 @@
 addLayer("sa", {
     name: "sa", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "Sac", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -114,21 +114,42 @@ milestones: {
         done() { return player.sa.points.gte(7) },
         style(){if (hasUpgrade('dp', 41)) return{'background-color':'#ffad00'}}
     },
-8: {
-    requirementDescription: "[8] Sacrifice Tier 8",
-    effectDescription: "1,000,000,000x Points again, Super-Points, Ultra-Points and Hyper-Points.",
-    done() { return player.sa.points.gte(8) }
-},
-9: {
-    requirementDescription: "[9] Sacrifice Tier 9",
-    effectDescription: "20x Everything below Sac (Except PP)",
-    done() { return player.sa.points.gte(9) }
-},
-10: {
-    requirementDescription: "[10] Sacrifice Tier 10",
-    effectDescription: "Unlock a new sub-layer + 7.5x Everything below Sac (Except PP) and keep Hyper-Point milestones on reset",
-    done() { return player.sa.points.gte(10) }
-},
+    8: {
+        requirementDescription() {
+            dis = "[8] Sacrifice Tier 8"
+            if (hasUpgrade('cp', 93)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "1,000,000,000x Points again, Super-Points, Ultra-Points and Hyper-Points."
+            if (hasUpgrade('cp', 93)) dis = dis + "<br>Charge effect: Leaf Points boosts Super Charge Points.<br>Currently: " + format(upgradeEffect('cp', 93)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(8) },
+        style(){if (hasUpgrade('cp', 93)) return{'background-color':'#ffad00'}}
+    },
+    9: {
+        requirementDescription() {
+            dis = "[9] Sacrifice Tier 9"
+            if (hasUpgrade('cp', 101)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "20x Everything below Sac (Except PP)"
+            if (hasUpgrade('cp', 101)) dis = dis + "<br>Charge effect: Energy boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 101)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(9) },
+        style(){if (hasUpgrade('cp', 101)) return{'background-color':'#ffad00'}}
+    },
+    10: {
+        requirementDescription() {
+            dis = "[10] Sacrifice Tier 10"
+            if (hasUpgrade('cp', 103)) dis = dis + " (Charged)"  
+            return dis},
+        effectDescription() {
+            dis = "Unlock a new sub-layer + 7.5x Everything below Sac (Except PP) and keep Hyper-Point milestones on reset"
+            if (hasUpgrade('cp', 103)) dis = dis + "<br>Charge effect: Ultra-Points boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 103)) + "x"
+            return dis},
+        done() { return player.sa.points.gte(10) },
+        style(){if (hasUpgrade('cp', 103)) return{'background-color':'#ffad00'}}
+    },
 11: {
     requirementDescription: "[11] Sacrifice Tier 11",
     effect() {
@@ -286,6 +307,7 @@ canBuyMax() { return hasMilestone("le", 5) },
         mult = new Decimal(1)
         if (hasUpgrade('e', 45)) mult = mult.div(upgradeEffect('e',45))
         if (inChallenge('dp', 11)) mult = mult.times(Infinity)
+            if (inChallenge('rp', 11)) mult = mult.times(Infinity)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

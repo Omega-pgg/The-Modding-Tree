@@ -8,6 +8,10 @@ addLayer("dp", {
         perks: new Decimal(0),
         auto: false,
     }},
+    passiveGeneration() {
+        if (hasMilestone("cp2", 21311)) return (hasMilestone("cp2", 213121311)?1:0)
+            if (hasAchievement("a", 321)) return (hasAchievement("a", 321)?0.05:0)
+        },
     tabFormat: [
         "main-display",
         "prestige-button",
@@ -21,6 +25,8 @@ addLayer("dp", {
             };
         };
     },
+    autoUpgrade() { if (hasAchievement("a" , 322)) return true},
+
     doReset(rp) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
         if (layers[rp].row <= this.row) return;
@@ -61,7 +67,7 @@ addLayer("dp", {
                     unlocked() {return (hasUpgrade("dp", 25))},
             content: [
                 ["blank", "15px"],
-                ["challenges", [1,2]]
+                ["challenges", [1]]
                 
             ]
         },
@@ -618,7 +624,7 @@ addLayer("dp", {
     resource: "Divine Points", // Name of prestige currency
     baseResource: "Charge Power", // Name of resource prestige is based on
     baseAmount() {return player.cp.points}, // Get the current amount of baseResource
-    branches: ["cp"],
+    branches: ["cp", "st", "le"],
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.001, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -643,7 +649,10 @@ addLayer("dp", {
                                             if (hasAchievement('a', 295)) mult = mult.times(player.rp.power.max(1).pow(0.333333333333333333333333333333333))
                                                 if (hasUpgrade('rp', 21)) mult = mult.times(upgradeEffect('rp',21))                
                                                     if (hasUpgrade('rp', 43)) mult = mult.times(upgradeEffect('rp',43))
-                                                    return mult
+                                                        mult = mult.times(buyableEffect('cp2', 12))
+                                if (hasAchievement('a', 325)) mult = mult.times("1e9")                        
+                                    if (hasChallenge('rp', 11)) mult = mult.pow(1.2)
+                                    return mult
     },
 
     gainExp() { // Calculate the exponent on main currency from bonuses

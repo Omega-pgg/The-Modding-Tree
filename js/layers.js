@@ -628,6 +628,7 @@ addLayer("p", {
         if (inChallenge("mp", 12)) mult = mult.div("1e123123")
         if (inChallenge("sa", 11)) mult = mult.div("10^^308")
         if (inChallenge("mp", 21)) mult = mult.div("10^^308")
+            if (inChallenge("rp", 12)) mult = mult.div("10^^308")
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

@@ -3,7 +3,7 @@ let modInfo = {
 	id: "2",
 	author: "Omega",
 	pointsName: "Points",
-	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js", "cp.js", "divine.js", "pa.js", "rp.js"],
+	modFiles: ["layers.js", "tree.js", "sp.js", "up.js", "sbp.js", "sbp2.js", "sbp3.js", "hp.js", "achievements.js", "stats.js", "mega.js", "sbp4.js", "sbp5.js", "air.js", "energy.js", "light.js", "sbp6.js", "sac.js", "scp.js", "cell.js", "tp.js", "leaves.js", "st.js", "cp.js", "divine.js", "pa.js", "rp.js", "cp2.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -12,10 +12,22 @@ let modInfo = {
 }
 // Set your version in num and name
 let VERSION = {
-	num: "2.1.2: Update 11.2",
+	num: "2.2.0: Update 12",
 	name: "",
 }
 let changelog = `<h1>Changelog:</h1><br>
+<h3>v2.2.0: Update 12 (29/05/2024)</h3><br>
+		- The 12th Update is here!<br>
+		- Added 1 more save banks.<br>
+		- Added many new upgrades.<br>
+		- Added more achievements.<br>
+		- Added more milestones.<br>
+		- Added more charged milestones.<br>
+		- Added 1 new sub layer.<br>
+		- Added 2 new buyables.<br>
+		- Added 2 new challenges.<br>
+		- Some Changes.<br>
+		- Endgame: 1.00e340,000,000 Points.<br><br>
 <h3>v2.1.2: Update 11.2 (24/05/2024)</h3><br>
 		- Small Update 5.<br>
 		- Bug Fixes again.<br><br>
@@ -404,7 +416,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e7.4e7"))
+	return player.points.gte(new Decimal("e3.4e8"))
 }
 
 

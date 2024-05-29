@@ -1418,6 +1418,96 @@ addLayer("a", {
             onComplete() {
             },
         },
+        321: {
+            name: "Charged^3???",
+            done() {
+                return player.cp2.points.gte("1")
+            },  
+            tooltip: "Get 1 Super Charge Power.<br> Reward: Gain 5% of Divine Points on reset per second.",
+            onComplete() {
+            },
+        },
+        322: {
+            name: "Super Charge > Charge",
+            done() {
+                return player.cp2.points.gte("1e12")
+            },  
+            tooltip: "Get 1e12 Super Charge Power.<br> Reward: Automatically buys Divine Upgrades.",
+            onComplete() {
+            },
+        },
+        323: {
+            name: "One Hundred Million Digits",
+            done() {
+                return player.points.gte("e1e8")
+            },            
+            tooltip: "Get 1e100,000,000 Points.",
+            onComplete() {
+            },
+        },
+        324: {
+            name: "Mastered Charge?",
+            done() {
+                if (hasUpgrade("cp", 104))
+                return true            },
+            tooltip: "Buy all charge power upgrades.",
+            onComplete() {
+            },
+        },
+        325: {
+            name: "Googol Clicks",
+            done() {
+                return player.rp.power.gte("1e100")
+            },            
+            tooltip: "Get 1e100 Rebirth Power.<br> Reward: 1,000,000,000x DP.",
+            onComplete() {
+            },
+        },
+        331: {
+            name: "Ultra Charge?",
+            done() {
+                return player.cp2.points.gte("1e123")
+            },  
+            tooltip: "Get 1e123 Super Charge Power.",
+            onComplete() {
+            },
+        },
+        332: {
+            name: "Fast Pace",
+            done() {
+                return player.dp.points.gte("1e2000")
+            },            
+            tooltip: "Get 1e2,000 Divine Points.",
+            onComplete() {
+            },
+        },
+        333: {
+            name: "Slow Pace",
+            done() {
+                if (hasChallenge("rp", 12))
+                return true            },
+            tooltip: "Complete the 2nd rebirth challenge.",
+            onComplete() {
+            },
+        },
+        334: {
+            name: "1/4 to Maximusbillion",
+            done() {
+                return player.points.gte("e2.5e8")
+            },            
+            tooltip: "Get 1e250,000,000 Points.",
+            onComplete() {
+            },
+        },
+        335: {
+            name: "Tier Spammer",
+            done() {
+                return player.st.points.gte("1e3")
+            },            
+            tooltip: "Reach Super Tier 1,000.",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"

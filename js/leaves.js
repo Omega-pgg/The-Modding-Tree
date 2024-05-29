@@ -1,7 +1,7 @@
 addLayer("le", {
     name: "Leaf", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "LP", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -621,11 +621,18 @@ addLayer("le", {
                     done() { return player.le.total.gte(1e9) },
                     style(){if (hasUpgrade('dp', 42)) return{'background-color':'#ffad00'}}
                 },
-8: {
-    requirementDescription: "[8] 1e13 Total Leaf Points",
-    effectDescription: "Unlock a new sub layer.",
-    done() { return player.le.total.gte(1e13) }
-},
+                8: {
+                    requirementDescription() {
+                        dis = "[8] 1e13 Total Leaf Points"
+                        if (hasUpgrade('cp', 94)) dis = dis + " (Charged)"  
+                        return dis},
+                    effectDescription() {
+                        dis = "Unlock a new layer."
+                        if (hasUpgrade('cp', 94)) dis = dis + "<br>Charge effect: Sacrifice Points boosts Super Charge Power.<br>Currently: " + format(upgradeEffect('cp', 94)) + "x"
+                        return dis},
+                    done() { return player.le.total.gte(1e13) },
+                    style(){if (hasUpgrade('cp', 94)) return{'background-color':'#ffad00'}}
+                },
     },
     doReset(st) {
         // Stage 1, almost always needed, makes resetting this layer not delete your progress
@@ -700,7 +707,12 @@ addLayer("le", {
                                                                                                                                                             if (hasAchievement('a', 293)) mult = mult.times("1e8")
                                                                                                                                                                 if (hasUpgrade('rp', 11)) mult = mult.pow(1.05)
                                                                                                                                                                     if (hasUpgrade('rp', 32)) mult = mult.pow(1.1)
-        return mult
+                                                                                                                                                                        if (hasUpgrade('rp', 54)) mult = mult.pow(1.1)
+                                                                                                                                                                            if (inChallenge("rp", 12)) mult = mult.div("10^^308")
+                                                                                                                                                                                if (hasChallenge('rp', 12)) mult = mult.pow(1.05)
+                                                                                                                                                                                    if (hasUpgrade('rp', 75)) mult = mult.pow(1.05)
+
+                                                                                                                                                                            return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
