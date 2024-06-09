@@ -224,8 +224,13 @@ addLayer("cp2", {
                                                 },
                                                 23: {
                                                     requirementDescription: "[23] 1e300 Super Charge Power",
-                                                    effectDescription: "100,000,000x Super Charge Power and unlock a new layer (Next update)",
+                                                    effectDescription: "100,000,000x Super Charge Power and unlock a new layer.",
                                                     done() { return player.cp2.points.gte("1e300") }
+                                                },
+                                                24: {
+                                                    requirementDescription: "[24] 1.80e308 Super Charge Power",
+                                                    effectDescription: "Start generating Super Energy.",
+                                                    done() { return player.cp2.points.gte("1.80e308") }
                                                 },
 },
     color: "#dce1df",
@@ -330,13 +335,16 @@ addLayer("cp2", {
                                                                                                                                         if (hasMilestone('cp2', 21)) mult = mult.times(1e12)
                                                                                                                                             if (hasUpgrade('rp', 81)) mult = mult.times(2000)
                                                                                                                                                 if (hasMilestone('cp2', 23)) mult = mult.times(1e8)
-                                                                                                                                return mult
+                                                                                                                                                    if (hasUpgrade('se', 12)) mult = mult.times(upgradeEffect('se',12))
+                                                                                                                                                        if (hasUpgrade('rp', 83)) mult = mult.times(1e33)
+                                                                                                                                                            if (hasUpgrade('rp', 94)) mult = mult.times(upgradeEffect('rp',94))
+                                                                                                                                                            return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         let exp = new Decimal(1)
         return exp
     },
-    branches: ["rp", "cp"],
+    branches: ["rp"],
     row: 9, // Row the layer is in on the tree (0 is the first row)
     displayRow: 8, // Row the layer is in on the tree (0 is the first row)
 })

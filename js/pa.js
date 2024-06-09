@@ -37,9 +37,11 @@ addLayer("pa", {
                         return "If you wrote 3 numbers a second, it would take you "+ format(player.points.log(10).div(10800)) + " hours to write down your Points amount."
                         else if (player.points.lte("1e94608000"))
                         return "If you wrote 3 numbers a second, it would take you "+ format(player.points.log(10).div(259200)) + " days to write down your Points amount."
-                        else
-                        return "If you wrote 3 numbers a second, it would take you "+ format(player.points.log(10).div(94608000)) + " years to write down your Points amount."
-                    }],
+                        else if (player.points.lte("e9.4608e10"))
+                            return "If you wrote 3 numbers a second, it would take you "+ format(player.points.log(10).div(94608000)) + " years to write down your Points amount."
+                            else 
+                            return "If you wrote 3 numbers a second, it would take you "+ formatTimeLong(player.points.log(10).div(3)) + " to write down your Cleared Courses amount."
+                        }],
                 ]
             },
         },

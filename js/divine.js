@@ -9,7 +9,7 @@ addLayer("dp", {
         auto: false,
     }},
     passiveGeneration() {
-        if (hasMilestone("cp2", 21311)) return (hasMilestone("cp2", 213121311)?1:0)
+        if (hasAchievement("a", 341)) return (hasAchievement("a", 341)?1:0)
             if (hasAchievement("a", 321)) return (hasAchievement("a", 321)?0.05:0)
         },
     tabFormat: [

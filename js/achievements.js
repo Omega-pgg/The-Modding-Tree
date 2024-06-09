@@ -1508,6 +1508,51 @@ addLayer("a", {
             onComplete() {
             },
         },
+        341: {
+            name: "Combuster Upgraded",
+            done() {
+                return player.se.points.gte("1")
+            },  
+            tooltip: "Get 1 Super Energy.<br> Reward: Gain 5% of Rebirth Points and 100% Divine Points on reset per second.",
+            onComplete() {
+            },
+        },
+        342: {
+            name: "That fast??",
+            done() {
+                return player.se.points.gte("1e60")
+            },  
+            tooltip: "Get 1e60 Super Energy.",
+            onComplete() {
+            },
+        },
+        343: {
+            name: "Halfway to Maximusbillion",
+            done() {
+                return player.points.gte("e5e8")
+            },            
+            tooltip: "Get 1e500,000,000 Points.<br> Reward: Automatically clicks Rebirth Power 20 times a sec.",
+            onComplete() {
+            },
+        },
+        344: {
+            name: "Inflation Power",
+            done() {
+                return player.rp.points.gte("1.80e308")
+            },  
+            tooltip: "Get 1.80e308 Rebirth Points.",
+            onComplete() {
+            },
+        },
+        345: {
+            name: "Maximusbillion!!!",
+            done() {
+                return player.points.gte("e1e9")
+            },            
+            tooltip: "Get e1,000,000,000 Points.",
+            onComplete() {
+            },
+        },
     },
     tabFormat: ["blank", ["display-text", function() {
         return "<h3 style='color: yellow;'>Achievements: " + player.a.achievements.length + "/" + (Object.keys(tmp.a.achievements).length - 2) + "</h4>"
